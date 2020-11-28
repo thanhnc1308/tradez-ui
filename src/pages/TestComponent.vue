@@ -1,5 +1,8 @@
 <template>
-  <div>Test</div>
+  <div>
+    <div>Test</div>
+    <base-alert>Test</base-alert>
+  </div>
 </template>
 
 <script>
