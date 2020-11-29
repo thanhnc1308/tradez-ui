@@ -1,4 +1,4 @@
-import TimeSelect from '../date-picker/src/picker/time-select';
+import TimeSelect from '../_date-picker/src/picker/time-select';
 
 /* istanbul ignore next */
 TimeSelect.install = function(Vue) {

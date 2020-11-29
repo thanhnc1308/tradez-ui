@@ -1,4 +1,4 @@
-import TimePicker from '../date-picker/src/picker/time-picker';
+import TimePicker from '../_date-picker/src/picker/time-picker';
 
 /* istanbul ignore next */
 TimePicker.install = function(Vue) {

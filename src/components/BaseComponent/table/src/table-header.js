@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import { hasClass, addClass, removeClass } from 'element-ui/src/utils/dom';
+import { hasClass, addClass, removeClass } from '@/components/BaseComponent/utils/dom';
 import ElCheckbox from 'element-ui/packages/checkbox';
 import FilterPanel from './filter-panel.vue';
 import LayoutObserver from './layout-observer';

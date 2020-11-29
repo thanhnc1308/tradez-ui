@@ -77,7 +77,7 @@
   import ElInputNumber from 'element-ui/packages/input-number';
   import SliderButton from './button.vue';
   import SliderMarker from './marker';
-  import Emitter from 'element-ui/src/mixins/emitter';
+  import Emitter from '@/components/BaseComponent/mixins/emitter';
 
   export default {
     name: 'ElSlider',

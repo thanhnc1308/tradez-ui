@@ -31,7 +31,7 @@
 <script>
   import Menu from './menu-mixin';
   import ElTooltip from 'element-ui/packages/tooltip';
-  import Emitter from 'element-ui/src/mixins/emitter';
+  import Emitter from '@/components/BaseComponent/mixins/emitter';
 
   export default {
     name: 'ElMenuItem',

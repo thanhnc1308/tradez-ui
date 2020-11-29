@@ -1,7 +1,11 @@
 <template>
   <div>
-    <base-button>Test button</base-button>
-    <base-button-group>Test button group</base-button-group>
+    <base-checkbox></base-checkbox>
+    <base-container>Test container</base-container>
+    <base-collapse>
+      <base-collapse-item>Test collapse 1</base-collapse-item>
+      <base-collapse-item>Test collapse 2</base-collapse-item>
+    </base-collapse>
   </div>
 </template>
 

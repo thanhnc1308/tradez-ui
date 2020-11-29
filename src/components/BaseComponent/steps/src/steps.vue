@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import Migrating from 'element-ui/src/mixins/migrating';
+import Migrating from '@/components/BaseComponent/mixins/migrating';
 
 export default {
   name: 'ElSteps',
