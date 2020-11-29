@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div>Test</div>
-    <base-alert>Test</base-alert>
+    <base-button>Test button</base-button>
+    <base-button-group>Test button group</base-button-group>
   </div>
 </template>
 

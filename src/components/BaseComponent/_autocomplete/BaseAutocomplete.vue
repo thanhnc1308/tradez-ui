@@ -68,7 +68,7 @@
   import Focus from 'element-ui/src/mixins/focus';
 
   export default {
-    name: 'ElAutocomplete',
+    name: 'BaseAutocomplete',
 
     mixins: [Emitter, Focus('input'), Migrating],
 

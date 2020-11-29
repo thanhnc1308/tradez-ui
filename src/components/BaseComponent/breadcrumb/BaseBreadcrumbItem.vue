@@ -12,7 +12,7 @@
 </template>
 <script>
   export default {
-    name: 'ElBreadcrumbItem',
+    name: 'BaseBreadcrumbItem',
     props: {
       to: {},
       replace: Boolean
