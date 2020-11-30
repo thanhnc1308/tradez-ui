@@ -17,7 +17,7 @@
   import Emitter from '@/components/BaseComponent/mixins/emitter';
 
   export default {
-    name: 'ElDropdownItem',
+    name: 'BaseDropdownItem',
 
     mixins: [Emitter],
 
@@ -30,7 +30,7 @@
 
     methods: {
       handleClick(e) {
-        this.dispatch('ElDropdown', 'menu-item-click', [this.command, this]);
+        this.dispatch('BaseDropdown', 'menu-item-click', [this.command, this]);
       }
     }
   };

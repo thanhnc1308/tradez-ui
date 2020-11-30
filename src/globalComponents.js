@@ -17,6 +17,13 @@ import BaseCheckboxGroup from '@/components/BaseComponent/checkbox-group/BaseChe
 import BaseCollapse from '@/components/BaseComponent/collapse/BaseCollapse'
 import BaseCollapseItem from '@/components/BaseComponent/collapse-item/BaseCollapseItem'
 import BaseContainer from '@/components/BaseComponent/container/BaseContainer'
+import BaseDialog from '@/components/BaseComponent/dialog/BaseDialog'
+import BaseDivider from '@/components/BaseComponent/divider/BaseDivider'
+import BaseDrawer from '@/components/BaseComponent/drawer/BaseDrawer'
+import BaseDropdown from '@/components/BaseComponent/dropdown/BaseDropdown'
+import BaseDropdownItem from '@/components/BaseComponent/dropdown-item/BaseDropdownItem'
+import BaseDropdownMenu from '@/components/BaseComponent/dropdown-menu/BaseDropdownMenu'
+import BaseFooter from '@/components/BaseComponent/footer/BaseFooter'
 
 Vue.component(BaseAlert.name, BaseAlert)
 Vue.component(BaseAside.name, BaseAside)
@@ -36,11 +43,11 @@ Vue.component(BaseCheckboxGroup.name, BaseCheckboxGroup)
 Vue.component(BaseCollapse.name, BaseCollapse)
 Vue.component(BaseCollapseItem.name, BaseCollapseItem)
 Vue.component(BaseContainer.name, BaseContainer)
-Vue.component(BaseCheckboxGroup.name, BaseCheckboxGroup)
-Vue.component(BaseCheckboxGroup.name, BaseCheckboxGroup)
-Vue.component(BaseCheckboxGroup.name, BaseCheckboxGroup)
-Vue.component(BaseCheckboxGroup.name, BaseCheckboxGroup)
-Vue.component(BaseCheckboxGroup.name, BaseCheckboxGroup)
-Vue.component(BaseCheckboxGroup.name, BaseCheckboxGroup)
-Vue.component(BaseCheckboxGroup.name, BaseCheckboxGroup)
+Vue.component(BaseDialog.name, BaseDialog)
+Vue.component(BaseDivider.name, BaseDivider)
+Vue.component(BaseDrawer.name, BaseDrawer)
+Vue.component(BaseDropdown.name, BaseDropdown)
+Vue.component(BaseDropdownItem.name, BaseDropdownItem)
+Vue.component(BaseDropdownMenu.name, BaseDropdownMenu)
+Vue.component(BaseFooter.name, BaseFooter)
 Vue.component(BaseCheckboxGroup.name, BaseCheckboxGroup)

@@ -52,7 +52,7 @@ import emitter from '@/components/BaseComponent/mixins/emitter';
 import Utils from '@/components/BaseComponent/utils/aria-utils';
 
 export default {
-  name: 'ElDrawer',
+  name: 'BaseDrawer',
   mixins: [Popup, emitter],
   props: {
     appendToBody: {

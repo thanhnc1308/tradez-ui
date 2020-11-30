@@ -43,7 +43,7 @@
   import emitter from '@/components/BaseComponent/mixins/emitter';
 
   export default {
-    name: 'ElDialog',
+    name: 'BaseDialog',
 
     mixins: [Popup, emitter, Migrating],
 

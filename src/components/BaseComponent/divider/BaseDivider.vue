@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  name: 'ElDivider',
+  name: 'BaseDivider',
   props: {
     direction: {
       type: String,
