@@ -14,9 +14,9 @@
           key={ +this.collapse }
           style={{ backgroundColor: this.backgroundColor || '' }}
           class={{
-            'base-menu--horizontal': this.mode === 'horizontal',
-            'base-menu--collapse': this.collapse,
-            "base-menu": true
+            'el-menu--horizontal': this.mode === 'horizontal',
+            'el-menu--collapse': this.collapse,
+            "el-menu": true
           }}
         >
           { this.$slots.default }
@@ -25,9 +25,9 @@
 
       if (this.collapseTransition) {
         return (
-          <base-menu-collapse-transition>
+          <el-menu-collapse-transition>
             { component }
-          </base-menu-collapse-transition>
+          </el-menu-collapse-transition>
         );
       } else {
         return component;
@@ -45,7 +45,7 @@
     },
 
     components: {
-      'base-menu-collapse-transition': {
+      'el-menu-collapse-transition': {
         functional: true,
         render(createElement, context) {
           const data = {
@@ -70,16 +70,16 @@
               beforeLeave(el) {
                 if (!el.dataset) el.dataset = {};
 
-                if (hasClass(el, 'base-menu--collapse')) {
-                  removeClass(el, 'base-menu--collapse');
+                if (hasClass(el, 'el-menu--collapse')) {
+                  removeClass(el, 'el-menu--collapse');
                   el.dataset.oldOverflow = el.style.overflow;
                   el.dataset.scrollWidth = el.clientWidth;
-                  addClass(el, 'base-menu--collapse');
+                  addClass(el, 'el-menu--collapse');
                 } else {
-                  addClass(el, 'base-menu--collapse');
+                  addClass(el, 'el-menu--collapse');
                   el.dataset.oldOverflow = el.style.overflow;
                   el.dataset.scrollWidth = el.clientWidth;
-                  removeClass(el, 'base-menu--collapse');
+                  removeClass(el, 'el-menu--collapse');
                 }
 
                 el.style.width = el.scrollWidth + 'px';

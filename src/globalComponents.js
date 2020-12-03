@@ -32,6 +32,11 @@ import BaseImage from '@/components/BaseComponent/image/BaseImage'
 import BaseInput from '@/components/BaseComponent/input/BaseInput'
 import BaseInputNumber from '@/components/BaseComponent/input-number/BaseInputNumber'
 import BaseLink from '@/components/BaseComponent/link/BaseLink'
+import BaseMenu from '@/components/BaseComponent/menu/BaseMenu'
+import BaseMain from '@/components/BaseComponent/main/BaseMain'
+import BaseSubmenu from '@/components/BaseComponent/menu/BaseSubmenu'
+import BaseMenuItem from '@/components/BaseComponent/menu-item/BaseMenuItem'
+import BaseMenuItemGroup from '@/components/BaseComponent/menu-item-group/BaseMenuItemGroup'
 
 Vue.component(BaseAlert.name, BaseAlert)
 Vue.component(BaseAside.name, BaseAside)
@@ -65,5 +70,11 @@ Vue.component(BaseIcon.name, BaseIcon)
 Vue.component(BaseImage.name, BaseImage)
 Vue.component(BaseInput.name, BaseInput)
 Vue.component(BaseInputNumber.name, BaseInputNumber)
+Vue.component(BaseLink.name, BaseLink)
+Vue.component(BaseMain.name, BaseMain)
+Vue.component(BaseMenu.name, BaseMenu)
+Vue.component(BaseSubmenu.name, BaseSubmenu)
+Vue.component(BaseMenuItem.name, BaseMenuItem)
+Vue.component(BaseMenuItemGroup.name, BaseMenuItemGroup)
 Vue.component(BaseLink.name, BaseLink)
 

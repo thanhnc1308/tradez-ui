@@ -1,5 +1,5 @@
 <template>
-  <li class="base-menu-item"
+  <li class="el-menu-item"
     role="menuitem"
     tabindex="-1"
     :style="[paddingStyle, itemStyle, { backgroundColor }]"

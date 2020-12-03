@@ -284,13 +284,13 @@
           <div
             ref="menu"
             v-show={opened}
-            class={[`base-menu--${mode}`, popperClass]}
+            class={[`el-menu--${mode}`, popperClass]}
             on-mouseenter={($event) => this.handleMouseenter($event, 100)}
             on-mouseleave={() => this.handleMouseleave(true)}
             on-focus={($event) => this.handleMouseenter($event, 100)}>
             <ul
               role="menu"
-              class={['base-menu base-menu--popup', `base-menu--popup-${currentPlacement}`]}
+              class={['el-menu el-menu--popup', `el-menu--popup-${currentPlacement}`]}
               style={{ backgroundColor: rootMenu.backgroundColor || '' }}>
               {$slots.default}
             </ul>
@@ -302,7 +302,7 @@
         <el-collapse-transition>
           <ul
             role="menu"
-            class="base-menu base-menu--inline"
+            class="el-menu el-menu--inline"
             v-show={opened}
             style={{ backgroundColor: rootMenu.backgroundColor || '' }}>
             {$slots.default}
@@ -318,7 +318,7 @@
       return (
         <li
           class={{
-            'base-submenu': true,
+            'el-submenu': true,
             'is-active': active,
             'is-opened': opened,
             'is-disabled': disabled
