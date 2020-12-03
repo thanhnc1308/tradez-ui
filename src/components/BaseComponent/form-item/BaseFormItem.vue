@@ -45,9 +45,9 @@
   import { noop, getPropByPath } from '@/components/BaseComponent/utils/util';
   import LabelWrap from './label-wrap';
   export default {
-    name: 'ElFormItem',
+    name: 'BaseFormItem',
 
-    componentName: 'ElFormItem',
+    componentName: 'BaseFormItem',
 
     mixins: [emitter],
 
@@ -130,8 +130,8 @@
       form() {
         let parent = this.$parent;
         let parentName = parent.$options.componentName;
-        while (parentName !== 'ElForm') {
-          if (parentName === 'ElFormItem') {
+        while (parentName !== 'BaseForm') {
+          if (parentName === 'BaseFormItem') {
             this.isNested = true;
           }
           parent = parent.$parent;
@@ -299,7 +299,7 @@
     },
     mounted() {
       if (this.prop) {
-        this.dispatch('ElForm', 'el.form.addField', [this]);
+        this.dispatch('BaseForm', 'el.form.addField', [this]);
 
         let initialValue = this.fieldValue;
         if (Array.isArray(initialValue)) {
@@ -313,7 +313,7 @@
       }
     },
     beforeDestroy() {
-      this.dispatch('ElForm', 'el.form.removeField', [this]);
+      this.dispatch('BaseForm', 'el.form.removeField', [this]);
     }
   };
 </script>

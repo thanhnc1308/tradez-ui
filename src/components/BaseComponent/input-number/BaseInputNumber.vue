@@ -51,7 +51,7 @@
   import RepeatClick from '@/components/BaseComponent/directives/repeat-click';
 
   export default {
-    name: 'ElInputNumber',
+    name: 'BaseInputNumber',
     mixins: [Focus('input')],
     inject: {
       elForm: {

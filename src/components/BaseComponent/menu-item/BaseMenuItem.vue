@@ -1,5 +1,5 @@
 <template>
-  <li class="el-menu-item"
+  <li class="base-menu-item"
     role="menuitem"
     tabindex="-1"
     :style="[paddingStyle, itemStyle, { backgroundColor }]"
@@ -13,15 +13,15 @@
     @blur="onMouseLeave"
     @mouseleave="onMouseLeave"
   >
-    <el-tooltip
-      v-if="parentMenu.$options.componentName === 'ElMenu' && rootMenu.collapse && $slots.title"
+    <base-tooltip
+      v-if="parentMenu.$options.componentName === 'BaseMenu' && rootMenu.collapse && $slots.title"
       effect="dark"
       placement="right">
       <div slot="content"><slot name="title"></slot></div>
       <div style="position: absolute;left: 0;top: 0;height: 100%;width: 100%;display: inline-block;box-sizing: border-box;padding: 0 20px;">
         <slot></slot>
       </div>
-    </el-tooltip>
+    </base-tooltip>
     <template v-else>
       <slot></slot>
       <slot name="title"></slot>
@@ -29,18 +29,18 @@
   </li>
 </template>
 <script>
-  import Menu from './menu-mixin';
-  import ElTooltip from 'element-ui/packages/tooltip';
+  import Menu from '@/components/BaseComponent/menu/menu-mixin';
+  import BaseTooltip from '@/components/BaseComponent/tooltip/index';
   import Emitter from '@/components/BaseComponent/mixins/emitter';
 
   export default {
-    name: 'ElMenuItem',
+    name: 'BaseMenuItem',
 
-    componentName: 'ElMenuItem',
+    componentName: 'BaseMenuItem',
 
     mixins: [Menu, Emitter],
 
-    components: { ElTooltip },
+    components: { BaseTooltip },
 
     props: {
       index: {
@@ -95,7 +95,7 @@
       },
       handleClick() {
         if (!this.disabled) {
-          this.dispatch('ElMenu', 'item-click', this);
+          this.dispatch('BaseMenu', 'item-click', this);
           this.$emit('click', this);
         }
       }

@@ -115,9 +115,9 @@
   import {isKorean} from '@/components/BaseComponent/utils/shared';
 
   export default {
-    name: 'ElInput',
+    name: 'BaseInput',
 
-    componentName: 'ElInput',
+    componentName: 'BaseInput',
 
     mixins: [emitter, Migrating],
 

@@ -1,6 +1,6 @@
 <script>
   import ElCollapseTransition from '@/components/BaseComponent/transitions/collapse-transition';
-  import menuMixin from './menu-mixin';
+  import menuMixin from '@/components/BaseComponent/menu/menu-mixin';
   import Emitter from '@/components/BaseComponent/mixins/emitter';
   import Popper from '@/components/BaseComponent/utils/vue-popper';
 
@@ -21,9 +21,9 @@
   };
 
   export default {
-    name: 'ElSubmenu',
+    name: 'BaseSubmenu',
 
-    componentName: 'ElSubmenu',
+    componentName: 'BaseSubmenu',
 
     mixins: [menuMixin, Emitter, poperMixins],
 
@@ -137,7 +137,7 @@
         let isFirstLevel = true;
         let parent = this.$parent;
         while (parent && parent !== this.rootMenu) {
-          if (['ElSubmenu', 'ElMenuItemGroup'].indexOf(parent.$options.componentName) > -1) {
+          if (['BaseSubmenu', 'ElMenuItemGroup'].indexOf(parent.$options.componentName) > -1) {
             isFirstLevel = false;
             break;
           } else {
@@ -176,7 +176,7 @@
         ) {
           return;
         }
-        this.dispatch('ElMenu', 'submenu-click', this);
+        this.dispatch('BaseMenu', 'submenu-click', this);
       },
       handleMouseenter(event, showTimeout = this.showTimeout) {
 
@@ -191,7 +191,7 @@
         ) {
           return;
         }
-        this.dispatch('ElSubmenu', 'mouse-enter-child');
+        this.dispatch('BaseSubmenu', 'mouse-enter-child');
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
           this.rootMenu.openMenu(this.index, this.indexPath);
@@ -209,14 +209,14 @@
         ) {
           return;
         }
-        this.dispatch('ElSubmenu', 'mouse-leave-child');
+        this.dispatch('BaseSubmenu', 'mouse-leave-child');
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
           !this.mouseInChild && this.rootMenu.closeMenu(this.index);
         }, this.hideTimeout);
 
         if (this.appendToBody && deepDispatch) {
-          if (this.$parent.$options.name === 'ElSubmenu') {
+          if (this.$parent.$options.name === 'BaseSubmenu') {
             this.$parent.handleMouseleave(true);
           }
         }
@@ -284,13 +284,13 @@
           <div
             ref="menu"
             v-show={opened}
-            class={[`el-menu--${mode}`, popperClass]}
+            class={[`base-menu--${mode}`, popperClass]}
             on-mouseenter={($event) => this.handleMouseenter($event, 100)}
             on-mouseleave={() => this.handleMouseleave(true)}
             on-focus={($event) => this.handleMouseenter($event, 100)}>
             <ul
               role="menu"
-              class={['el-menu el-menu--popup', `el-menu--popup-${currentPlacement}`]}
+              class={['base-menu base-menu--popup', `base-menu--popup-${currentPlacement}`]}
               style={{ backgroundColor: rootMenu.backgroundColor || '' }}>
               {$slots.default}
             </ul>
@@ -302,7 +302,7 @@
         <el-collapse-transition>
           <ul
             role="menu"
-            class="el-menu el-menu--inline"
+            class="base-menu base-menu--inline"
             v-show={opened}
             style={{ backgroundColor: rootMenu.backgroundColor || '' }}>
             {$slots.default}
@@ -318,7 +318,7 @@
       return (
         <li
           class={{
-            'el-submenu': true,
+            'base-submenu': true,
             'is-active': active,
             'is-opened': opened,
             'is-disabled': disabled

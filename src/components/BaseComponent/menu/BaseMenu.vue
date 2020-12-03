@@ -5,7 +5,7 @@
   import { addClass, removeClass, hasClass } from '@/components/BaseComponent/utils/dom';
 
   export default {
-    name: 'ElMenu',
+    name: 'BaseMenu',
 
     render (h) {
       const component = (
@@ -14,9 +14,9 @@
           key={ +this.collapse }
           style={{ backgroundColor: this.backgroundColor || '' }}
           class={{
-            'el-menu--horizontal': this.mode === 'horizontal',
-            'el-menu--collapse': this.collapse,
-            "el-menu": true
+            'base-menu--horizontal': this.mode === 'horizontal',
+            'base-menu--collapse': this.collapse,
+            "base-menu": true
           }}
         >
           { this.$slots.default }
@@ -25,16 +25,16 @@
 
       if (this.collapseTransition) {
         return (
-          <el-menu-collapse-transition>
+          <base-menu-collapse-transition>
             { component }
-          </el-menu-collapse-transition>
+          </base-menu-collapse-transition>
         );
       } else {
         return component;
       }
     },
 
-    componentName: 'ElMenu',
+    componentName: 'BaseMenu',
 
     mixins: [emitter, Migrating],
 
@@ -45,7 +45,7 @@
     },
 
     components: {
-      'el-menu-collapse-transition': {
+      'base-menu-collapse-transition': {
         functional: true,
         render(createElement, context) {
           const data = {
@@ -70,16 +70,16 @@
               beforeLeave(el) {
                 if (!el.dataset) el.dataset = {};
 
-                if (hasClass(el, 'el-menu--collapse')) {
-                  removeClass(el, 'el-menu--collapse');
+                if (hasClass(el, 'base-menu--collapse')) {
+                  removeClass(el, 'base-menu--collapse');
                   el.dataset.oldOverflow = el.style.overflow;
                   el.dataset.scrollWidth = el.clientWidth;
-                  addClass(el, 'el-menu--collapse');
+                  addClass(el, 'base-menu--collapse');
                 } else {
-                  addClass(el, 'el-menu--collapse');
+                  addClass(el, 'base-menu--collapse');
                   el.dataset.oldOverflow = el.style.overflow;
                   el.dataset.scrollWidth = el.clientWidth;
-                  removeClass(el, 'el-menu--collapse');
+                  removeClass(el, 'base-menu--collapse');
                 }
 
                 el.style.width = el.scrollWidth + 'px';
@@ -154,7 +154,7 @@
 
       collapse(value) {
         if (value) this.openedMenus = [];
-        this.broadcast('ElSubmenu', 'toggle-collapse', value);
+        this.broadcast('BaseSubmenu', 'toggle-collapse', value);
       }
     },
     methods: {

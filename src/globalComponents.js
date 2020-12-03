@@ -24,6 +24,14 @@ import BaseDropdown from '@/components/BaseComponent/dropdown/BaseDropdown'
 import BaseDropdownItem from '@/components/BaseComponent/dropdown-item/BaseDropdownItem'
 import BaseDropdownMenu from '@/components/BaseComponent/dropdown-menu/BaseDropdownMenu'
 import BaseFooter from '@/components/BaseComponent/footer/BaseFooter'
+import BaseForm from '@/components/BaseComponent/form/BaseForm'
+import BaseFormItem from '@/components/BaseComponent/form-item/BaseFormItem'
+import BaseHeader from '@/components/BaseComponent/header/BaseHeader'
+import BaseIcon from '@/components/BaseComponent/icon/BaseIcon'
+import BaseImage from '@/components/BaseComponent/image/BaseImage'
+import BaseInput from '@/components/BaseComponent/input/BaseInput'
+import BaseInputNumber from '@/components/BaseComponent/input-number/BaseInputNumber'
+import BaseLink from '@/components/BaseComponent/link/BaseLink'
 
 Vue.component(BaseAlert.name, BaseAlert)
 Vue.component(BaseAside.name, BaseAside)
@@ -50,4 +58,12 @@ Vue.component(BaseDropdown.name, BaseDropdown)
 Vue.component(BaseDropdownItem.name, BaseDropdownItem)
 Vue.component(BaseDropdownMenu.name, BaseDropdownMenu)
 Vue.component(BaseFooter.name, BaseFooter)
-Vue.component(BaseCheckboxGroup.name, BaseCheckboxGroup)
+Vue.component(BaseForm.name, BaseForm)
+Vue.component(BaseFormItem.name, BaseFormItem)
+Vue.component(BaseHeader.name, BaseHeader)
+Vue.component(BaseIcon.name, BaseIcon)
+Vue.component(BaseImage.name, BaseImage)
+Vue.component(BaseInput.name, BaseInput)
+Vue.component(BaseInputNumber.name, BaseInputNumber)
+Vue.component(BaseLink.name, BaseLink)
+

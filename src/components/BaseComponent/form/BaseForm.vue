@@ -10,9 +10,9 @@
   import objectAssign from '@/components/BaseComponent/utils/merge';
 
   export default {
-    name: 'ElForm',
+    name: 'BaseForm',
 
-    componentName: 'ElForm',
+    componentName: 'BaseForm',
 
     provide() {
       return {

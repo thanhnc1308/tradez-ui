@@ -41,7 +41,7 @@
   let prevOverflow = '';
 
   export default {
-    name: 'ElImage',
+    name: 'BaseImage',
 
     mixins: [Locale],
     inheritAttrs: false,
