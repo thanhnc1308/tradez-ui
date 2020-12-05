@@ -9,6 +9,7 @@ import BaseBreadcrumb from '@/components/BaseComponent/breadcrumb/BaseBreadcrumb
 import BaseBreadcrumbItem from '@/components/BaseComponent/breadcrumb/BaseBreadcrumbItem'
 import BaseButton from '@/components/BaseComponent/button/BaseButton'
 import BaseButtonGroup from '@/components/BaseComponent/button-group/BaseButtonGroup'
+import BaseCalendar from '@/components/BaseComponent/calendar/BaseCalendar'
 import BaseCard from '@/components/BaseComponent/card/BaseCard'
 import BaseCarousel from '@/components/BaseComponent/carousel/BaseCarousel'
 import BaseCarouselItem from '@/components/BaseComponent/carousel-item/BaseCarouselItem'
@@ -81,6 +82,7 @@ Vue.component(BaseBreadcrumb.name, BaseBreadcrumb)
 Vue.component(BaseBreadcrumbItem.name, BaseBreadcrumbItem)
 Vue.component(BaseButton.name, BaseButton)
 Vue.component(BaseButtonGroup.name, BaseButtonGroup)
+Vue.component(BaseCalendar.name, BaseCalendar)
 Vue.component(BaseCard.name, BaseCard)
 Vue.component(BaseCarousel.name, BaseCarousel)
 Vue.component(BaseCarouselItem.name, BaseCarouselItem)
