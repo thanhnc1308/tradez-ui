@@ -7,7 +7,7 @@ import Bar from './bar';
 
 /* istanbul ignore next */
 export default {
-  name: 'ElScrollbar',
+  name: 'BaseScrollbar',
 
   components: { Bar },
 

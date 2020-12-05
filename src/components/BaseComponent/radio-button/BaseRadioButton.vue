@@ -38,7 +38,7 @@
   import Emitter from '@/components/BaseComponent/mixins/emitter';
 
   export default {
-    name: 'ElRadioButton',
+    name: 'BaseRadioButton',
 
     mixins: [Emitter],
 

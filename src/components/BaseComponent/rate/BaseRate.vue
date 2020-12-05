@@ -38,7 +38,7 @@
   import Migrating from '@/components/BaseComponent/mixins/migrating';
 
   export default {
-    name: 'ElRate',
+    name: 'BaseRate',
 
     mixins: [Migrating],
 

@@ -28,7 +28,7 @@ import { addClass, removeClass } from '@/components/BaseComponent/utils/dom';
 import { generateId } from '@/components/BaseComponent/utils/util';
 
 export default {
-  name: 'ElPopover',
+  name: 'BasePopover',
 
   mixins: [Popper],
 

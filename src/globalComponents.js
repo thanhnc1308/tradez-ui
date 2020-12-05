@@ -44,6 +44,15 @@ import Notification from '@/components/BaseComponent/notification/index'
 import BaseOptionGroup from '@/components/BaseComponent/option-group/BaseOptionGroup'
 import BasePageHeader from '@/components/BaseComponent/page-header/BasePageHeader'
 // import BasePagination from '@/components/BaseComponent/pagination/pagination'
+import BasePopconfirm from '@/components/BaseComponent/popconfirm/BasePopconfirm'
+import BasePopover from '@/components/BaseComponent/popover/BasePopover'
+import BaseProgress from '@/components/BaseComponent/progress/BaseProgress'
+import BaseRadio from '@/components/BaseComponent/radio/BaseRadio'
+import BaseRadioButton from '@/components/BaseComponent/radio-button/BaseRadioButton'
+import BaseRadioGroup from '@/components/BaseComponent/radio-group/BaseRadioGroup'
+import BaseRate from '@/components/BaseComponent/rate/BaseRate'
+import BaseRow from '@/components/BaseComponent/row/row'
+import BaseScrollbar from '@/components/BaseComponent/scrollbar/scrollbar'
 
 Vue.component(BaseAlert.name, BaseAlert)
 Vue.component(BaseAside.name, BaseAside)
@@ -90,3 +99,13 @@ Vue.component(Notification.name, Notification)
 Vue.component(BaseOptionGroup.name, BaseOptionGroup)
 Vue.component(BasePageHeader.name, BasePageHeader)
 // Vue.component(BasePagination.name, BasePagination)
+Vue.component(BasePopconfirm.name, BasePopconfirm)
+Vue.component(BasePopover.name, BasePopover)
+Vue.component(BaseProgress.name, BaseProgress)
+Vue.component(BaseRadio.name, BaseRadio)
+Vue.component(BaseRadioButton.name, BaseRadioButton)
+Vue.component(BaseRadioGroup.name, BaseRadioGroup)
+Vue.component(BaseRate.name, BaseRate)
+Vue.component(BaseRow.name, BaseRow)
+Vue.component(BaseScrollbar.name, BaseScrollbar)
+Vue.component(BasePageHeader.name, BasePageHeader)

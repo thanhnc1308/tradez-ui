@@ -50,9 +50,10 @@
     </div>
   </div>
 </template>
+
 <script>
   export default {
-    name: 'ElProgress',
+    name: 'BaseProgress',
     props: {
       type: {
         type: String,

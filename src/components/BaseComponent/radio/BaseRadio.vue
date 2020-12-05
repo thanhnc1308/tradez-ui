@@ -46,7 +46,7 @@
   import Emitter from '@/components/BaseComponent/mixins/emitter';
 
   export default {
-    name: 'ElRadio',
+    name: 'BaseRadio',
 
     mixins: [Emitter],
 
@@ -60,7 +60,7 @@
       }
     },
 
-    componentName: 'ElRadio',
+    componentName: 'BaseRadio',
 
     props: {
       value: {},

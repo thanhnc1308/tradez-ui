@@ -38,10 +38,10 @@
 <script>
 import ElPopover from 'element-ui/packages/popover';
 import ElButton from 'element-ui/packages/button';
-import {t} from 'element-ui/src/locale';
+import {t} from '@/components/BaseComponent/locale';
 
 export default {
-  name: 'ElPopconfirm',
+  name: 'BasePopconfirm',
   props: {
     title: {
       type: String

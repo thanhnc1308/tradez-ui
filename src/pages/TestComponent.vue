@@ -1,6 +1,6 @@
 <template>
   <div>
-    <base-option-group>Test</base-option-group>
+    <base-scrollbar></base-scrollbar>
   </div>
 </template>
 

@@ -18,9 +18,9 @@
     DOWN: 40
   });
   export default {
-    name: 'ElRadioGroup',
+    name: 'BaseRadioGroup',
 
-    componentName: 'ElRadioGroup',
+    componentName: 'BaseRadioGroup',
 
     inject: {
       elFormItem: {
