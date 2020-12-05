@@ -1,8 +1,6 @@
 <template>
   <div>
-    <base-menu>
-      <base-menu-item>1</base-menu-item>
-    </base-menu>
+    <base-option-group>Test</base-option-group>
   </div>
 </template>
 

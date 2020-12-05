@@ -37,6 +37,13 @@ import BaseMain from '@/components/BaseComponent/main/BaseMain'
 import BaseSubmenu from '@/components/BaseComponent/menu/BaseSubmenu'
 import BaseMenuItem from '@/components/BaseComponent/menu-item/BaseMenuItem'
 import BaseMenuItemGroup from '@/components/BaseComponent/menu-item-group/BaseMenuItemGroup'
+// import Message from '@/components/BaseComponent/message/index'
+// import MessageBox from '@/components/BaseComponent/message-box/index'
+import Notification from '@/components/BaseComponent/notification/index'
+// import BaseOption from '@/components/BaseComponent/option/BaseOption'
+import BaseOptionGroup from '@/components/BaseComponent/option-group/BaseOptionGroup'
+import BasePageHeader from '@/components/BaseComponent/page-header/BasePageHeader'
+// import BasePagination from '@/components/BaseComponent/pagination/pagination'
 
 Vue.component(BaseAlert.name, BaseAlert)
 Vue.component(BaseAside.name, BaseAside)
@@ -76,5 +83,10 @@ Vue.component(BaseMenu.name, BaseMenu)
 Vue.component(BaseSubmenu.name, BaseSubmenu)
 Vue.component(BaseMenuItem.name, BaseMenuItem)
 Vue.component(BaseMenuItemGroup.name, BaseMenuItemGroup)
-Vue.component(BaseLink.name, BaseLink)
-
+// Vue.component(Message.name, Message)
+// Vue.component(MessageBox.name, MessageBox)
+Vue.component(Notification.name, Notification)
+// Vue.component(BaseOption.name, BaseOption)
+Vue.component(BaseOptionGroup.name, BaseOptionGroup)
+Vue.component(BasePageHeader.name, BasePageHeader)
+// Vue.component(BasePagination.name, BasePagination)

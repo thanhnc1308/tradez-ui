@@ -6,7 +6,7 @@ import Locale from '@/components/BaseComponent/mixins/locale';
 import { valueEquals } from '@/components/BaseComponent/utils/util';
 
 export default {
-  name: 'ElPagination',
+  name: 'BasePagination',
 
   props: {
     pageSize: {
