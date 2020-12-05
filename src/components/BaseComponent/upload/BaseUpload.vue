@@ -1,5 +1,5 @@
 <script>
-import UploadList from './upload-list';
+import BaseUploadList from './BaseUploadList';
 import Upload from './upload';
 import ElProgress from 'element-ui/packages/progress';
 import Migrating from '@/components/BaseComponent/mixins/migrating';
@@ -7,13 +7,13 @@ import Migrating from '@/components/BaseComponent/mixins/migrating';
 function noop() {}
 
 export default {
-  name: 'ElUpload',
+  name: 'BaseUpload',
 
   mixins: [Migrating],
 
   components: {
     ElProgress,
-    UploadList,
+    BaseUploadList,
     Upload
   },
 
@@ -270,7 +270,7 @@ export default {
 
     if (this.showFileList) {
       uploadList = (
-        <UploadList
+        <BaseUploadList
           disabled={this.uploadDisabled}
           listType={this.listType}
           files={this.uploadFiles}
@@ -285,7 +285,7 @@ export default {
               }
             }
           }
-        </UploadList>
+        </BaseUploadList>
       );
     }
 

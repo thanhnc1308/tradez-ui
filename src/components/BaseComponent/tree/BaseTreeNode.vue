@@ -78,9 +78,9 @@
   import { getNodeKey } from './model/util';
 
   export default {
-    name: 'ElTreeNode',
+    name: 'BaseTreeNode',
 
-    componentName: 'ElTreeNode',
+    componentName: 'BaseTreeNode',
 
     mixins: [emitter],
 
@@ -216,7 +216,7 @@
       },
 
       handleChildNodeExpand(nodeData, node, instance) {
-        this.broadcast('ElTreeNode', 'tree-node-expand', node);
+        this.broadcast('BaseTreeNode', 'tree-node-expand', node);
         this.tree.$emit('node-expand', nodeData, node, instance);
       },
 

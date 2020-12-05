@@ -30,7 +30,7 @@
 </template>
 <script>
   import Menu from '@/components/BaseComponent/menu/menu-mixin';
-  import BaseTooltip from '@/components/BaseComponent/tooltip/index';
+  import BaseTooltip from '@/components/BaseComponent/tooltip/tooltip';
   import Emitter from '@/components/BaseComponent/mixins/emitter';
 
   export default {

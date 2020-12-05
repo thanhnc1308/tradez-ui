@@ -1,11 +1,11 @@
 <script>
 import ajax from './ajax';
-import UploadDragger from './upload-dragger.vue';
+import BaseUploadDragger from './BaseUploadDragger.vue';
 
 export default {
   inject: ['uploader'],
   components: {
-    UploadDragger
+    BaseUploadDragger
   },
   props: {
     type: String,
@@ -200,7 +200,7 @@ export default {
       <div {...data} tabindex="0" >
         {
           drag
-            ? <upload-dragger disabled={disabled} on-file={uploadFiles}>{this.$slots.default}</upload-dragger>
+            ? <base-upload-dragger disabled={disabled} on-file={uploadFiles}>{this.$slots.default}</base-upload-dragger>
             : this.$slots.default
         }
         <input class="el-upload__input" type="file" ref="input" name={name} on-change={handleChange} multiple={multiple} accept={accept}></input>

@@ -1,6 +1,6 @@
 <template>
   <div class="el-transfer">
-    <transfer-panel
+    <base-transfer-panel
       v-bind="$props"
       ref="leftPanel"
       :data="sourceData"
@@ -9,7 +9,7 @@
       :placeholder="filterPlaceholder || t('el.transfer.filterPlaceholder')"
       @checked-change="onSourceCheckedChange">
       <slot name="left-footer"></slot>
-    </transfer-panel>
+    </base-transfer-panel>
     <div class="el-transfer__buttons">
       <el-button
         type="primary"
@@ -28,7 +28,7 @@
         <i class="el-icon-arrow-right"></i>
       </el-button>
     </div>
-    <transfer-panel
+    <base-transfer-panel
       v-bind="$props"
       ref="rightPanel"
       :data="targetData"
@@ -37,7 +37,7 @@
       :placeholder="filterPlaceholder || t('el.transfer.filterPlaceholder')"
       @checked-change="onTargetCheckedChange">
       <slot name="right-footer"></slot>
-    </transfer-panel>
+    </base-transfer-panel>
   </div>
 </template>
 
@@ -45,16 +45,16 @@
   import ElButton from 'element-ui/packages/button';
   import Emitter from '@/components/BaseComponent/mixins/emitter';
   import Locale from '@/components/BaseComponent/mixins/locale';
-  import TransferPanel from './transfer-panel.vue';
+  import BaseTransferPanel from './BaseTransferPanel.vue';
   import Migrating from '@/components/BaseComponent/mixins/migrating';
 
   export default {
-    name: 'ElTransfer',
+    name: 'BaseTransfer',
 
     mixins: [Emitter, Locale, Migrating],
 
     components: {
-      TransferPanel,
+      BaseTransferPanel,
       ElButton
     },
 

@@ -1,5 +1,7 @@
 <template>
   <div>
+    Test
+    <base-upload></base-upload>
   </div>
 </template>
 

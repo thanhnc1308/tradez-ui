@@ -63,6 +63,12 @@ import BaseTag from '@/components/BaseComponent/tag/BaseTag'
 import BaseTabPane from '@/components/BaseComponent/tabs/BaseTabPane'
 import BaseTabs from '@/components/BaseComponent/tabs/BaseTabs'
 // import BaseTable from '@/components/BaseComponent/table/BaseTable'
+import BaseTimeline from '@/components/BaseComponent/timeline/BaseTimeline'
+import BaseTimelineItem from '@/components/BaseComponent/timeline/BaseTimelineItem'
+import BaseTooltip from '@/components/BaseComponent/tooltip/tooltip'
+import BaseTransfer from '@/components/BaseComponent/transfer/BaseTransfer'
+import BaseTree from '@/components/BaseComponent/tree/BaseTree'
+// import BaseUpload from '@/components/BaseComponent/upload/BaseUpload'
 
 Vue.component(BaseAlert.name, BaseAlert)
 Vue.component(BaseAside.name, BaseAside)
@@ -128,3 +134,9 @@ Vue.component(BaseSwitch.name, BaseSwitch)
 Vue.component(BaseTag.name, BaseTag)
 Vue.component(BaseTabPane.name, BaseTabPane)
 Vue.component(BaseTabs.name, BaseTabs)
+Vue.component(BaseTimeline.name, BaseTimeline)
+Vue.component(BaseTimelineItem.name, BaseTimelineItem)
+Vue.component(BaseTooltip.name, BaseTooltip)
+Vue.component(BaseTransfer.name, BaseTransfer)
+Vue.component(BaseTree.name, BaseTree)
+// Vue.component(BaseUpload.name, BaseUpload)

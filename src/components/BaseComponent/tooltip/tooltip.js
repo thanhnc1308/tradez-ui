@@ -5,7 +5,7 @@ import { generateId } from '@/components/BaseComponent/utils/util';
 import Vue from 'vue';
 
 export default {
-  name: 'ElTooltip',
+  name: 'BaseTooltip',
 
   mixins: [Popper],
 

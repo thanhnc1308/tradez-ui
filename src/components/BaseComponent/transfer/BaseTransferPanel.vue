@@ -60,9 +60,9 @@
   export default {
     mixins: [Locale],
 
-    name: 'ElTransferPanel',
+    name: 'BaseTransferPanel',
 
-    componentName: 'ElTransferPanel',
+    componentName: 'BaseTransferPanel',
 
     components: {
       ElCheckboxGroup,
@@ -74,7 +74,7 @@
         },
         render(h) {
           const getParent = vm => {
-            if (vm.$options.componentName === 'ElTransferPanel') {
+            if (vm.$options.componentName === 'BaseTransferPanel') {
               return vm;
             } else if (vm.$parent) {
               return getParent(vm.$parent);

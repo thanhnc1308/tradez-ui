@@ -68,7 +68,7 @@
 
   export default {
 
-    name: 'ElUploadList',
+    name: 'BaseUploadList',
 
     mixins: [Locale],
 

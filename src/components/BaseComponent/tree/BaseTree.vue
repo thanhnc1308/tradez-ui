@@ -9,7 +9,7 @@
     }"
     role="tree"
   >
-    <el-tree-node
+    <base-tree-node
       v-for="child in root.childNodes"
       :node="child"
       :props="props"
@@ -18,7 +18,7 @@
       :key="getNodeKey(child)"
       :render-content="renderContent"
       @node-expand="handleNodeExpand">
-    </el-tree-node>
+    </base-tree-node>
     <div class="el-tree__empty-block" v-if="isEmpty">
       <span class="el-tree__empty-text">{{ emptyText }}</span>
     </div>
@@ -33,18 +33,18 @@
 <script>
   import TreeStore from './model/tree-store';
   import { getNodeKey, findNearestComponent } from './model/util';
-  import ElTreeNode from './tree-node.vue';
+  import BaseTreeNode from './BaseTreeNode.vue';
   import {t} from 'element-ui/src/locale';
   import emitter from '@/components/BaseComponent/mixins/emitter';
   import { addClass, removeClass } from '@/components/BaseComponent/utils/dom';
 
   export default {
-    name: 'ElTree',
+    name: 'BaseTree',
 
     mixins: [emitter],
 
     components: {
-      ElTreeNode
+      BaseTreeNode
     },
 
     data() {
@@ -271,7 +271,7 @@
       },
 
       handleNodeExpand(nodeData, node, instance) {
-        this.broadcast('ElTreeNode', 'tree-node-expand', node);
+        this.broadcast('BaseTreeNode', 'tree-node-expand', node);
         this.$emit('node-expand', nodeData, node, instance);
       },
 
@@ -293,7 +293,7 @@
 
       handleKeydown(ev) {
         const currentItem = ev.target;
-        if (currentItem.className.indexOf('el-tree-node') === -1) return;
+        if (currentItem.className.indexOf('base-tree-node') === -1) return;
         const keyCode = ev.keyCode;
         this.treeItems = this.$el.querySelectorAll('.is-focusable[role=treeitem]');
         const currentIndex = this.treeItemArray.indexOf(currentItem);
@@ -359,7 +359,7 @@
       });
 
       this.$on('tree-node-drag-over', (event, treeNode) => {
-        const dropNode = findNearestComponent(event.target, 'ElTreeNode');
+        const dropNode = findNearestComponent(event.target, 'BaseTreeNode');
         const oldDropNode = dragState.dropNode;
         if (oldDropNode && oldDropNode !== dropNode) {
           removeClass(oldDropNode.$el, 'is-drop-inner');
