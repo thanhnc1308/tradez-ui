@@ -13,7 +13,7 @@
 import Migrating from '@/components/BaseComponent/mixins/migrating';
 
 export default {
-  name: 'ElSteps',
+  name: 'BaseSteps',
 
   mixins: [Migrating],
 

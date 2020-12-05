@@ -16,25 +16,25 @@
     @keydown.down.prevent="onLeftKeyDown"
     @keydown.up.prevent="onRightKeyDown"
   >
-    <el-tooltip
+    <base-tooltip
       placement="top"
       ref="tooltip"
       :popper-class="tooltipClass"
       :disabled="!showTooltip">
       <span slot="content">{{ formatValue }}</span>
       <div class="el-slider__button" :class="{ 'hover': hovering, 'dragging': dragging }"></div>
-    </el-tooltip>
+    </base-tooltip>
   </div>
 </template>
 
 <script>
-  import ElTooltip from 'element-ui/packages/tooltip';
+  import BaseTooltip from '@/components/BaseComponent/tooltip/tooltip';
 
   export default {
-    name: 'ElSliderButton',
+    name: 'BaseSliderButton',
 
     components: {
-      ElTooltip
+      BaseTooltip
     },
 
     props: {

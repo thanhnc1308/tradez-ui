@@ -53,7 +53,7 @@
   import ElScrollbar from 'element-ui/packages/scrollbar';
 
   export default {
-    name: 'ElTableFilterPanel',
+    name: 'BaseTableFilterPanel',
 
     mixins: [Popper, Locale],
 

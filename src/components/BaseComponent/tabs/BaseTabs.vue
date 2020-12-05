@@ -2,7 +2,7 @@
   import TabNav from './tab-nav';
 
   export default {
-    name: 'ElTabs',
+    name: 'BaseTabs',
 
     components: {
       TabNav

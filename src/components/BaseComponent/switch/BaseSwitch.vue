@@ -41,7 +41,7 @@
   import Migrating from '@/components/BaseComponent/mixins/migrating';
 
   export default {
-    name: 'ElSwitch',
+    name: 'BaseSwitch',
     mixins: [Focus('input'), Migrating, emitter],
     inject: {
       elForm: {

@@ -7,7 +7,7 @@
 </template>
 <script>
   export default {
-    name: 'ElSpinner',
+    name: 'BaseSpinner',
     props: {
       type: String,
       radius: {

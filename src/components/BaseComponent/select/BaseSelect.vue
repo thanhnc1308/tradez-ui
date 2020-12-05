@@ -154,9 +154,9 @@
   export default {
     mixins: [Emitter, Locale, Focus('reference'), NavigationMixin],
 
-    name: 'ElSelect',
+    name: 'BaseSelect',
 
-    componentName: 'ElSelect',
+    componentName: 'BaseSelect',
 
     inject: {
       elForm: {

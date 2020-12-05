@@ -53,6 +53,16 @@ import BaseRadioGroup from '@/components/BaseComponent/radio-group/BaseRadioGrou
 import BaseRate from '@/components/BaseComponent/rate/BaseRate'
 import BaseRow from '@/components/BaseComponent/row/row'
 import BaseScrollbar from '@/components/BaseComponent/scrollbar/scrollbar'
+// import BaseSelect from '@/components/BaseComponent/select/BaseSelect'
+// import BaseSlider from '@/components/BaseComponent/select/BaseSlider'
+import BaseSpinner from '@/components/BaseComponent/spinner/BaseSpinner'
+import BaseStep from '@/components/BaseComponent/steps/BaseStep'
+import BaseSteps from '@/components/BaseComponent/steps/BaseSteps'
+import BaseSwitch from '@/components/BaseComponent/switch/BaseSwitch'
+import BaseTag from '@/components/BaseComponent/tag/BaseTag'
+import BaseTabPane from '@/components/BaseComponent/tabs/BaseTabPane'
+import BaseTabs from '@/components/BaseComponent/tabs/BaseTabs'
+// import BaseTable from '@/components/BaseComponent/table/BaseTable'
 
 Vue.component(BaseAlert.name, BaseAlert)
 Vue.component(BaseAside.name, BaseAside)
@@ -108,4 +118,13 @@ Vue.component(BaseRadioGroup.name, BaseRadioGroup)
 Vue.component(BaseRate.name, BaseRate)
 Vue.component(BaseRow.name, BaseRow)
 Vue.component(BaseScrollbar.name, BaseScrollbar)
-Vue.component(BasePageHeader.name, BasePageHeader)
+// Vue.component(BaseSelect.name, BaseSelect)
+// Vue.component(BaseSlider.name, BaseSlider)
+Vue.component(BaseSpinner.name, BaseSpinner)
+Vue.component(BaseStep.name, BaseStep)
+Vue.component(BaseSteps.name, BaseSteps)
+Vue.component(BaseSwitch.name, BaseSwitch)
+// Vue.component(BaseTable.name, BaseTable)
+Vue.component(BaseTag.name, BaseTag)
+Vue.component(BaseTabPane.name, BaseTabPane)
+Vue.component(BaseTabs.name, BaseTabs)

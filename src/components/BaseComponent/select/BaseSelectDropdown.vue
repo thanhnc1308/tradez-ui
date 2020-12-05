@@ -11,9 +11,9 @@
   import Popper from '@/components/BaseComponent/utils/vue-popper';
 
   export default {
-    name: 'ElSelectDropdown',
+    name: 'BaseSelectDropdown',
 
-    componentName: 'ElSelectDropdown',
+    componentName: 'BaseSelectDropdown',
 
     mixins: [Popper],
 

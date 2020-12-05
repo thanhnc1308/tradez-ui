@@ -80,7 +80,7 @@
   import Emitter from '@/components/BaseComponent/mixins/emitter';
 
   export default {
-    name: 'ElSlider',
+    name: 'BaseSlider',
 
     mixins: [Emitter],
 

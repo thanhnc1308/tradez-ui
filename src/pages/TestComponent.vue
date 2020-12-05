@@ -1,6 +1,5 @@
 <template>
   <div>
-    <base-scrollbar></base-scrollbar>
   </div>
 </template>
 
