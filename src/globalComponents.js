@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import BaseAlert from '@/components/BaseComponent/alert/BaseAlert'
+import BaseAutocomplete from '@/components/BaseComponent/autocomplete/BaseAutocomplete'
 import BaseAside from '@/components/BaseComponent/aside/BaseAside'
 import BaseAvatar from '@/components/BaseComponent/avatar/BaseAvatar'
 import BaseBacktop from '@/components/BaseComponent/backtop/BaseBacktop'
@@ -72,6 +73,7 @@ import BaseTree from '@/components/BaseComponent/tree/BaseTree'
 
 Vue.component(BaseAlert.name, BaseAlert)
 Vue.component(BaseAside.name, BaseAside)
+Vue.component(BaseAutocomplete.name, BaseAutocomplete)
 Vue.component(BaseAvatar.name, BaseAvatar)
 Vue.component(BaseBacktop.name, BaseBacktop)
 Vue.component(BaseBadge.name, BaseBadge)

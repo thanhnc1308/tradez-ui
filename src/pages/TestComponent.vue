@@ -1,7 +1,6 @@
 <template>
   <div>
-    Test
-    <base-upload></base-upload>
+    <base-autocomplete></base-autocomplete>
   </div>
 </template>
 
