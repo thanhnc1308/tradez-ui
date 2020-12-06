@@ -1,19 +1,17 @@
 <script>
-import ElScrollbar from 'element-ui/packages/scrollbar';
-import CascaderNode from './cascader-node.vue';
+import BaseCascaderNode from './BaseCascaderNode.vue';
 import Locale from '@/components/BaseComponent/mixins/locale';
 import { generateId } from '@/components/BaseComponent/utils/util';
 
 export default {
-  name: 'ElCascaderMenu',
+  name: 'BaseCascaderMenu',
 
   mixins: [Locale],
 
   inject: ['panel'],
 
   components: {
-    ElScrollbar,
-    CascaderNode
+    BaseCascaderNode
   },
 
   props: {
@@ -91,13 +89,13 @@ export default {
       const nodes = this.nodes.map((node, index) => {
         const { hasChildren } = node;
         return (
-          <cascader-node
+          <base-cascader-node
             key={ node.uid }
             node={ node }
             node-id={ `${menuId}-${index}` }
             aria-haspopup={ hasChildren }
             aria-owns = { hasChildren ? menuId : null }
-            { ...events }></cascader-node>
+            { ...events }></base-cascader-node>
         );
       });
 
@@ -119,7 +117,7 @@ export default {
     }
 
     return (
-      <el-scrollbar
+      <base-scrollbar
         tag="ul"
         role="menu"
         id={ menuId }
@@ -131,7 +129,7 @@ export default {
         }}
         { ...events }>
         { isEmpty ? this.renderEmptyText(h) : this.renderNodeList(h) }
-      </el-scrollbar>
+      </base-scrollbar>
     );
   }
 };

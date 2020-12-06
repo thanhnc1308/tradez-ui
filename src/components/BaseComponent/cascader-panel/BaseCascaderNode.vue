@@ -1,17 +1,10 @@
 <script>
-  import ElCheckbox from 'element-ui/packages/checkbox';
-  import ElRadio from 'element-ui/packages/radio';
   import { isEqual } from '@/components/BaseComponent/utils/util';
 
   const stopPropagation = e => e.stopPropagation();
 
   export default {
     inject: ['panel'],
-
-    components: {
-      ElCheckbox,
-      ElRadio
-    },
 
     props: {
       node: {
@@ -130,12 +123,12 @@
         }
 
         return (
-          <el-checkbox
+          <base-checkbox
             value={ node.checked }
             indeterminate={ node.indeterminate }
             disabled={ isDisabled }
             { ...events }
-          ></el-checkbox>
+          ></base-checkbox>
         );
       },
 
@@ -148,7 +141,7 @@
         }
 
         return (
-          <el-radio
+          <base-radio
             value={ checkedValue }
             label={ value }
             disabled={ isDisabled }
@@ -156,7 +149,7 @@
             nativeOnClick={ stopPropagation }>
             {/* add an empty element to avoid render label */}
             <span></span>
-          </el-radio>
+          </base-radio>
         );
       },
 

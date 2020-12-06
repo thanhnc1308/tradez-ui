@@ -13,6 +13,7 @@ import BaseCalendar from '@/components/BaseComponent/calendar/BaseCalendar'
 import BaseCard from '@/components/BaseComponent/card/BaseCard'
 import BaseCarousel from '@/components/BaseComponent/carousel/BaseCarousel'
 import BaseCarouselItem from '@/components/BaseComponent/carousel-item/BaseCarouselItem'
+import BaseCascader from '@/components/BaseComponent/cascader/BaseCascader'
 import BaseCheckbox from '@/components/BaseComponent/checkbox/BaseCheckbox'
 import BaseCheckboxButton from '@/components/BaseComponent/checkbox-button/BaseCheckboxButton'
 import BaseCheckboxGroup from '@/components/BaseComponent/checkbox-group/BaseCheckboxGroup'
@@ -86,6 +87,7 @@ Vue.component(BaseCalendar.name, BaseCalendar)
 Vue.component(BaseCard.name, BaseCard)
 Vue.component(BaseCarousel.name, BaseCarousel)
 Vue.component(BaseCarouselItem.name, BaseCarouselItem)
+Vue.component(BaseCascader.name, BaseCascader)
 Vue.component(BaseCheckbox.name, BaseCheckbox)
 Vue.component(BaseCheckboxButton.name, BaseCheckboxButton)
 Vue.component(BaseCheckboxGroup.name, BaseCheckboxGroup)

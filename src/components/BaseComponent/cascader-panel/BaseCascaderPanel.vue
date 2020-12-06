@@ -5,17 +5,17 @@
       border && 'is-bordered'
     ]"
     @keydown="handleKeyDown">
-    <cascader-menu
+    <base-cascader-menu
       ref="menu"
       v-for="(menu, index) in menus"
       :index="index"
       :key="index"
-      :nodes="menu"></cascader-menu>
+      :nodes="menu"></base-cascader-menu>
   </div>
 </template>
 
 <script>
-import CascaderMenu from './cascader-menu';
+import BaseCascaderMenu from './BaseCascaderMenu';
 import Store from './store';
 import merge from '@/components/BaseComponent/utils/merge';
 import AriaUtils from '@/components/BaseComponent/utils/aria-utils';
@@ -80,10 +80,10 @@ const checkNode = el => {
 };
 
 export default {
-  name: 'ElCascaderPanel',
+  name: 'BaseCascaderPanel',
 
   components: {
-    CascaderMenu
+    BaseCascaderMenu
   },
 
   props: {

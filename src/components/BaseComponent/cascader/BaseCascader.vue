@@ -12,7 +12,7 @@
     @click="() => toggleDropDownVisible(readonly ? undefined : true)"
     @keydown="handleKeyDown">
 
-    <el-input
+    <base-input
       ref="input"
       v-model="multiple ? presentText : inputValue"
       :size="realSize"
@@ -40,10 +40,10 @@
           ]"
           @click.stop="toggleDropDownVisible()"></i>
       </template>
-    </el-input>
+    </base-input>
 
     <div v-if="multiple" class="el-cascader__tags">
-      <el-tag
+      <base-tag
         v-for="(tag, index) in presentTags"
         :key="tag.key"
         type="info"
@@ -53,7 +53,7 @@
         disable-transitions
         @close="deleteTag(index)">
         <span>{{ tag.text }}</span>
-      </el-tag>
+      </base-tag>
       <input
         v-if="filterable && !isDisabled"
         v-model.trim="inputValue"
@@ -70,7 +70,7 @@
         v-show="dropDownVisible"
         ref="popper"
         :class="['el-popper', 'el-cascader__dropdown', popperClass]">
-        <el-cascader-panel
+        <base-cascader-panel
           ref="panel"
           v-show="!filtering"
           v-model="checkedValue"
@@ -79,8 +79,8 @@
           :border="false"
           :render-label="$scopedSlots.default"
           @expand-change="handleExpandChange"
-          @close="toggleDropDownVisible(false)"></el-cascader-panel>
-        <el-scrollbar
+          @close="toggleDropDownVisible(false)"></base-cascader-panel>
+        <base-scrollbar
           ref="suggestionPanel"
           v-if="filterable"
           v-show="filtering"
@@ -105,7 +105,7 @@
           <slot v-else name="empty">
             <li class="el-cascader__empty-text">{{ t('el.cascader.noMatch') }}</li>
           </slot>
-        </el-scrollbar>
+        </base-scrollbar>
       </div>
     </transition>
   </div>
@@ -117,12 +117,9 @@ import Clickoutside from '@/components/BaseComponent/utils/clickoutside';
 import Emitter from '@/components/BaseComponent/mixins/emitter';
 import Locale from '@/components/BaseComponent/mixins/locale';
 import Migrating from '@/components/BaseComponent/mixins/migrating';
-import ElInput from 'element-ui/packages/input';
-import ElTag from 'element-ui/packages/tag';
-import ElScrollbar from 'element-ui/packages/scrollbar';
-import ElCascaderPanel from 'element-ui/packages/cascader-panel';
+import BaseCascaderPanel from '@/components/BaseComponent/cascader-panel/BaseCascaderPanel';
 import AriaUtils from '@/components/BaseComponent/utils/aria-utils';
-import { t } from 'element-ui/src/locale';
+import { t } from '@/components/BaseComponent/locale';
 import { isEqual, isEmpty, kebabCase } from '@/components/BaseComponent/utils/util';
 import { isUndefined, isFunction } from '@/components/BaseComponent/utils/types';
 import { isDef } from '@/components/BaseComponent/utils/shared';
@@ -189,10 +186,7 @@ export default {
   },
 
   components: {
-    ElInput,
-    ElTag,
-    ElScrollbar,
-    ElCascaderPanel
+    BaseCascaderPanel
   },
 
   props: {
