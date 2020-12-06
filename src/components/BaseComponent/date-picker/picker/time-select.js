@@ -4,9 +4,9 @@ import Panel from '../panel/time-select';
 export default {
   mixins: [Picker],
 
-  name: 'ElTimeSelect',
+  name: 'BaseTimeSelect',
 
-  componentName: 'ElTimeSelect',
+  componentName: 'BaseTimeSelect',
 
   props: {
     type: {

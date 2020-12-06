@@ -1,5 +1,5 @@
 <template>
-  <el-input
+  <base-input
     class="el-date-editor"
     :class="'el-date-editor--' + type"
     :readonly="!editable || readonly || type === 'dates' || type === 'week'"
@@ -30,7 +30,7 @@
       :class="[showClose ? '' + clearIcon : '']"
       v-if="haveTrigger">
     </i>
-  </el-input>
+  </base-input>
   <div
     class="el-date-editor el-range-editor el-input__inner"
     :class="[
@@ -89,7 +89,6 @@ import Clickoutside from '@/components/BaseComponent/utils/clickoutside';
 import { formatDate, parseDate, isDateObject, getWeekNumber } from '@/components/BaseComponent/utils/date-util';
 import Popper from '@/components/BaseComponent/utils/vue-popper';
 import Emitter from '@/components/BaseComponent/mixins/emitter';
-import ElInput from 'element-ui/packages/input';
 import merge from '@/components/BaseComponent/utils/merge';
 
 const NewPopper = {
@@ -390,8 +389,6 @@ export default {
       default: true
     }
   },
-
-  components: { ElInput },
 
   directives: { Clickoutside },
 

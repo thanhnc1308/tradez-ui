@@ -21,6 +21,9 @@ import BaseCollapse from '@/components/BaseComponent/collapse/BaseCollapse'
 import BaseCollapseItem from '@/components/BaseComponent/collapse-item/BaseCollapseItem'
 import BaseColorPicker from '@/components/BaseComponent/color-picker/BaseColorPicker'
 import BaseContainer from '@/components/BaseComponent/container/BaseContainer'
+import BaseDatePicker from '@/components/BaseComponent/date-picker/picker/date-picker'
+import BaseTimePicker from '@/components/BaseComponent/date-picker/picker/time-picker'
+import BaseTimeSelect from '@/components/BaseComponent/date-picker/picker/time-select'
 import BaseDialog from '@/components/BaseComponent/dialog/BaseDialog'
 import BaseDivider from '@/components/BaseComponent/divider/BaseDivider'
 import BaseDrawer from '@/components/BaseComponent/drawer/BaseDrawer'
@@ -96,6 +99,9 @@ Vue.component(BaseCollapse.name, BaseCollapse)
 Vue.component(BaseCollapseItem.name, BaseCollapseItem)
 Vue.component(BaseColorPicker.name, BaseColorPicker)
 Vue.component(BaseContainer.name, BaseContainer)
+Vue.component(BaseDatePicker.name, BaseDatePicker)
+Vue.component(BaseTimePicker.name, BaseTimePicker)
+Vue.component(BaseTimeSelect.name, BaseTimeSelect)
 Vue.component(BaseDialog.name, BaseDialog)
 Vue.component(BaseDivider.name, BaseDivider)
 Vue.component(BaseDrawer.name, BaseDrawer)
