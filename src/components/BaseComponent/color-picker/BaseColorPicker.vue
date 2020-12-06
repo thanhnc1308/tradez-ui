@@ -32,12 +32,12 @@
 
 <script>
   import Color from './color';
-  import PickerDropdown from './components/picker-dropdown.vue';
+  import PickerDropdown from './components/PickerDropdown.vue';
   import Clickoutside from '@/components/BaseComponent/utils/clickoutside';
   import Emitter from '@/components/BaseComponent/mixins/emitter';
 
   export default {
-    name: 'ElColorPicker',
+    name: 'BaseColorPicker',
 
     mixins: [Emitter],
 

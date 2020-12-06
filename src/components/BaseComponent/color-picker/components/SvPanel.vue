@@ -19,7 +19,7 @@
   import draggable from '../draggable';
 
   export default {
-    name: 'el-sl-panel',
+    name: 'SvPanel',
 
     props: {
       color: {

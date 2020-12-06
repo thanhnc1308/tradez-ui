@@ -19,6 +19,7 @@ import BaseCheckboxButton from '@/components/BaseComponent/checkbox-button/BaseC
 import BaseCheckboxGroup from '@/components/BaseComponent/checkbox-group/BaseCheckboxGroup'
 import BaseCollapse from '@/components/BaseComponent/collapse/BaseCollapse'
 import BaseCollapseItem from '@/components/BaseComponent/collapse-item/BaseCollapseItem'
+import BaseColorPicker from '@/components/BaseComponent/color-picker/BaseColorPicker'
 import BaseContainer from '@/components/BaseComponent/container/BaseContainer'
 import BaseDialog from '@/components/BaseComponent/dialog/BaseDialog'
 import BaseDivider from '@/components/BaseComponent/divider/BaseDivider'
@@ -93,6 +94,7 @@ Vue.component(BaseCheckboxButton.name, BaseCheckboxButton)
 Vue.component(BaseCheckboxGroup.name, BaseCheckboxGroup)
 Vue.component(BaseCollapse.name, BaseCollapse)
 Vue.component(BaseCollapseItem.name, BaseCollapseItem)
+Vue.component(BaseColorPicker.name, BaseColorPicker)
 Vue.component(BaseContainer.name, BaseContainer)
 Vue.component(BaseDialog.name, BaseDialog)
 Vue.component(BaseDivider.name, BaseDivider)

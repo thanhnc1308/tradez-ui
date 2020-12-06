@@ -11,45 +11,43 @@
       <predefine v-if="predefine" :color="color" :colors="predefine"></predefine>
       <div class="el-color-dropdown__btns">
         <span class="el-color-dropdown__value">
-          <el-input
+          <base-input
             v-model="customInput"
             @keyup.native.enter="handleConfirm"
             @blur="handleConfirm"
             :validate-event="false"
             size="mini">
-          </el-input>
+          </base-input>
         </span>
-        <el-button
+        <base-button
           size="mini"
           type="text"
           class="el-color-dropdown__link-btn"
           @click="$emit('clear')">
           {{ t('el.colorpicker.clear') }}
-        </el-button>
-        <el-button
+        </base-button>
+        <base-button
           plain
           size="mini"
           class="el-color-dropdown__btn"
           @click="confirmValue">
           {{ t('el.colorpicker.confirm') }}
-        </el-button>
+        </base-button>
       </div>
     </div>
   </transition>
 </template>
 
 <script>
-  import SvPanel from './sv-panel';
-  import HueSlider from './hue-slider';
-  import AlphaSlider from './alpha-slider';
-  import Predefine from './predefine';
+  import SvPanel from './SvPanel';
+  import HueSlider from './HueSlider';
+  import AlphaSlider from './AlphaSlider';
+  import Predefine from './Predefine';
   import Popper from '@/components/BaseComponent/utils/vue-popper';
   import Locale from '@/components/BaseComponent/mixins/locale';
-  import ElInput from 'element-ui/packages/input';
-  import ElButton from 'element-ui/packages/button';
 
   export default {
-    name: 'el-color-picker-dropdown',
+    name: 'PickerDropdown',
 
     mixins: [Popper, Locale],
 
@@ -57,8 +55,6 @@
       SvPanel,
       HueSlider,
       AlphaSlider,
-      ElInput,
-      ElButton,
       Predefine
     },
 

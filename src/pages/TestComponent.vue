@@ -1,6 +1,6 @@
 <template>
   <div>
-    <base-cascader></base-cascader>
+    <base-color-picker></base-color-picker>
   </div>
 </template>
 
