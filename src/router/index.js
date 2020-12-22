@@ -77,7 +77,12 @@ export const constantRoutes = [
       {
         path: 'test-component',
         component: () => import('@/pages/TestComponent'),
-        name: 'test'
+        name: 'test-component'
+      },
+      {
+        path: 'test-chart',
+        component: () => import('@/pages/TestChart'),
+        name: 'test-chart'
       }
     ]
   },
