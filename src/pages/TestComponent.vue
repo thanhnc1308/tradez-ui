@@ -1,14 +1,14 @@
 <template>
   <div>
-    <base-time-select></base-time-select>
-    <base-time-picker></base-time-picker>
-    <base-date-picker></base-date-picker>
+    
   </div>
 </template>
 
 <script>
+import BaseBackToTop from '@/components/BaseComponent/back-to-top/BaseBackToTop.vue'
 
 export default {
-  name: 'Test'
+  name: 'Test',
+  components: { BaseBackToTop },
 }
 </script>

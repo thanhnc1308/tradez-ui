@@ -118,18 +118,18 @@
       <div>placeholder</div>
     </div>
     <!-- you can add element-ui's tooltip -->
-    <el-tooltip placement="top" content="tooltip">
-      <back-to-top :custom-style="myBackToTopStyle" :visibility-height="300" :back-position="50" transition-name="fade" />
-    </el-tooltip>
+    <base-tooltip placement="top" content="tooltip">
+      <base-back-to-top :custom-style="myBackToTopStyle" :visibility-height="300" :back-position="50" transition-name="fade" />
+    </base-tooltip>
   </div>
 </template>
 
 <script>
-import BackToTop from '@/components/BackToTop'
+import BaseBackToTop from '@/components/BaseComponent/back-to-top/BaseBackToTop.vue'
 
 export default {
   name: 'BackToTopDemo',
-  components: { BackToTop },
+  components: { BaseBackToTop },
   data() {
     return {
       // customizable button style, show/hide critical point, return position
