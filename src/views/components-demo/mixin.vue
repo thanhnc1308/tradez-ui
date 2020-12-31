@@ -113,7 +113,7 @@
 
 <script>
 import PanThumb from '@/components/PanThumb'
-import MdInput from '@/components/MDinput'
+import MdInput from '@/components/BaseComponent/MDinput/BaseMdInput'
 import Mallki from '@/components/TextHoverEffect/Mallki'
 import DropdownMenu from '@/components/Share/DropdownMenu'
 import waves from '@/directive/waves/index.js' // 水波纹指令

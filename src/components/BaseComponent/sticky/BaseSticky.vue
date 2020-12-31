@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: 'Sticky',
+  name: 'BaseSticky',
   props: {
     stickyTop: {
       type: Number,
