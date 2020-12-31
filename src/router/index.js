@@ -277,19 +277,6 @@ export const asyncRoutes = [
   },
 
   {
-    path: '/error-log',
-    component: Layout,
-    children: [
-      {
-        path: 'log',
-        component: () => import('@/views/error-log/index'),
-        name: 'ErrorLog',
-        meta: { title: 'Error Log', icon: 'bug' }
-      }
-    ]
-  },
-
-  {
     path: '/excel',
     component: Layout,
     redirect: '/excel/export-excel',
