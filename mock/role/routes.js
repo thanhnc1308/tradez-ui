@@ -143,12 +143,6 @@ const asyncRoutes = [
         meta: { title: 'Tinymce' }
       },
       {
-        path: 'split-pane',
-        component: 'views/components-demo/split-pane',
-        name: 'SplitpaneDemo',
-        meta: { title: 'SplitPane' }
-      },
-      {
         path: 'avatar-upload',
         component: 'views/components-demo/avatar-upload',
         name: 'AvatarUploadDemo',
@@ -167,22 +161,10 @@ const asyncRoutes = [
         meta: { title: 'Sticky' }
       },
       {
-        path: 'count-to',
-        component: 'views/components-demo/count-to',
-        name: 'CountToDemo',
-        meta: { title: 'Count To' }
-      },
-      {
         path: 'mixin',
         component: 'views/components-demo/mixin',
         name: 'ComponentMixinDemo',
         meta: { title: 'componentMixin' }
-      },
-      {
-        path: 'back-to-top',
-        component: 'views/components-demo/back-to-top',
-        name: 'BackToTopDemo',
-        meta: { title: 'Back To Top' }
       },
       {
         path: 'drag-dialog',
