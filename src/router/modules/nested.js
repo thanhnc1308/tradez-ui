@@ -60,7 +60,8 @@ const nestedRouter = {
       component: () => import('@/views/nested/menu2/index'),
       meta: { title: 'Menu 2' }
     }
-  ]
+  ],
+  hidden: true
 }
 
 export default nestedRouter

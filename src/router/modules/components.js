@@ -66,7 +66,8 @@ const componentsRouter = {
       name: 'DragKanbanDemo',
       meta: { title: 'Drag Kanban' }
     }
-  ]
+  ],
+  hidden: true
 }
 
 export default componentsRouter
