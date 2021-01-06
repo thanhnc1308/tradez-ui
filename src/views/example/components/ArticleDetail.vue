@@ -77,7 +77,7 @@
 
 <script>
 import Tinymce from '@/components/Reference/Tinymce'
-import Upload from '@/components/Upload/SingleImage3'
+import Upload from '@/components/BaseComponent/upload-image/SingleImage3.vue'
 import MDinput from '@/components/BaseComponent/MDinput/BaseMdInput'
 import Sticky from '@/components/BaseComponent/sticky/BaseSticky'
 import { validURL } from '@/utils/validate'
