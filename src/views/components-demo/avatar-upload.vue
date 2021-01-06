@@ -25,8 +25,8 @@
 </template>
 
 <script>
-import ImageCropper from '@/components/ImageCropper'
-import PanThumb from '@/components/PanThumb'
+import ImageCropper from '@/components/BaseComponent/image-cropper/BaseImageCropper'
+import PanThumb from '@/components/BaseComponent/pan-thumb/BasePanThumb.vue'
 
 export default {
   name: 'AvatarUploadDemo',

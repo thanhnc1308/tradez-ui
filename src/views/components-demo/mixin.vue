@@ -112,10 +112,10 @@
 </template>
 
 <script>
-import PanThumb from '@/components/PanThumb'
+import PanThumb from '@/components/BaseComponent/pan-thumb/BasePanThumb.vue'
 import MdInput from '@/components/BaseComponent/MDinput/BaseMdInput'
 import Mallki from '@/components/TextHoverEffect/Mallki'
-import DropdownMenu from '@/components/Share/DropdownMenu'
+import DropdownMenu from '@/components/BaseComponent/dropdown-menu/BaseDropdownMenu2.vue'
 import waves from '@/directive/waves/index.js' // 水波纹指令
 
 export default {

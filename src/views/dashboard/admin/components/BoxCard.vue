@@ -28,7 +28,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import PanThumb from '@/components/PanThumb'
+import PanThumb from '@/components/BaseComponent/pan-thumb/BasePanThumb.vue'
 import Mallki from '@/components/TextHoverEffect/Mallki'
 
 export default {

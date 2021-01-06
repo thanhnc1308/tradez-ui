@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import DropdownMenu from '@/components/Share/DropdownMenu'
+import DropdownMenu from '@/components/BaseComponent/dropdown-menu/BaseDropdownMenu2.vue'
 
 export default {
   name: 'Documentation',

@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import PanThumb from '@/components/PanThumb'
+import PanThumb from '@/components/BaseComponent/pan-thumb/BasePanThumb.vue'
 
 export default {
   components: { PanThumb },
