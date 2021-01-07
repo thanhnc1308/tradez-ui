@@ -104,6 +104,93 @@ export const constantRoutes = [
  * the routes that need to be dynamically loaded based on user roles
  */
 export const asyncRoutes = [
+  // #region sidebar
+  {
+    path: '/market-info',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/watch-list/WatchList.vue'),
+        name: 'MarketInfo',
+        meta: { title: 'Market Info', icon: 'clipboard' }
+      }
+    ]
+  },
+  {
+    path: '/assets-filter',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/watch-list/WatchList.vue'),
+        name: 'AssetsFilter',
+        meta: { title: 'Assets Filter', icon: 'clipboard' }
+      }
+    ]
+  },
+  {
+    path: '/watch-list',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/watch-list/WatchList.vue'),
+        name: 'WatchList',
+        meta: { title: 'Watch List', icon: 'clipboard' }
+      }
+    ]
+  },
+  {
+    path: '/notifications',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/watch-list/WatchList.vue'),
+        name: 'Notifications',
+        meta: { title: 'Notifications', icon: 'clipboard' }
+      }
+    ]
+  },
+  {
+    path: '/technical-analysis',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/charts/CandlestickCharts.vue'),
+        name: 'CandlestickCharts',
+        meta: { title: 'Candlestick Charts', icon: 'clipboard' }
+      }
+    ]
+  },
+  {
+    path: '/trading-log',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/watch-list/WatchList.vue'),
+        name: 'TradingLog',
+        meta: { title: 'Trading Log', icon: 'clipboard' }
+      }
+    ]
+  },
+  {
+    path: '/risk-management',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/watch-list/WatchList.vue'),
+        name: 'RiskManagement',
+        meta: { title: 'Risk Management', icon: 'clipboard' }
+      }
+    ]
+  },
+  // #endregion sidebar
+
   // #region hidden router
   {
     path: '/test',
