@@ -90,7 +90,7 @@ export const constantRoutes = [
     hidden: true,
     children: [
       {
-        path: 'index',
+        path: '',
         component: () => import('@/views/profile/index'),
         name: 'Profile',
         meta: { title: 'Profile', icon: 'user', noCache: true }
@@ -110,7 +110,7 @@ export const asyncRoutes = [
     component: Layout,
     children: [
       {
-        path: 'index',
+        path: '',
         component: () => import('@/views/watch-list/WatchList.vue'),
         name: 'MarketInfo',
         meta: { title: 'Market Info', icon: 'clipboard' }
@@ -118,14 +118,14 @@ export const asyncRoutes = [
     ]
   },
   {
-    path: '/assets-filter',
+    path: '/stock-screener',
     component: Layout,
     children: [
       {
-        path: 'index',
-        component: () => import('@/views/watch-list/WatchList.vue'),
-        name: 'AssetsFilter',
-        meta: { title: 'Assets Filter', icon: 'clipboard' }
+        path: '',
+        component: () => import('@/views/stock-screener/StockScreener.vue'),
+        name: 'StockScreener',
+        meta: { title: 'Stock Screener', icon: 'clipboard' }
       }
     ]
   },
@@ -134,7 +134,7 @@ export const asyncRoutes = [
     component: Layout,
     children: [
       {
-        path: 'index',
+        path: '',
         component: () => import('@/views/watch-list/WatchList.vue'),
         name: 'WatchList',
         meta: { title: 'Watch List', icon: 'clipboard' }
@@ -142,14 +142,14 @@ export const asyncRoutes = [
     ]
   },
   {
-    path: '/notifications',
+    path: '/notification',
     component: Layout,
     children: [
       {
-        path: 'index',
-        component: () => import('@/views/watch-list/WatchList.vue'),
-        name: 'Notifications',
-        meta: { title: 'Notifications', icon: 'clipboard' }
+        path: '',
+        component: () => import('@/views/notification/ListNotification.vue'),
+        name: 'Notification',
+        meta: { title: 'Notification', icon: 'notification' }
       }
     ]
   },
@@ -158,7 +158,7 @@ export const asyncRoutes = [
     component: Layout,
     children: [
       {
-        path: 'index',
+        path: '',
         component: () => import('@/views/charts/CandlestickCharts.vue'),
         name: 'CandlestickCharts',
         meta: { title: 'Candlestick Charts', icon: 'clipboard' }
@@ -170,7 +170,7 @@ export const asyncRoutes = [
     component: Layout,
     children: [
       {
-        path: 'index',
+        path: '',
         component: () => import('@/views/watch-list/WatchList.vue'),
         name: 'TradingLog',
         meta: { title: 'Trading Log', icon: 'clipboard' }
@@ -182,7 +182,7 @@ export const asyncRoutes = [
     component: Layout,
     children: [
       {
-        path: 'index',
+        path: '',
         component: () => import('@/views/watch-list/WatchList.vue'),
         name: 'RiskManagement',
         meta: { title: 'Risk Management', icon: 'clipboard' }
@@ -296,7 +296,7 @@ export const asyncRoutes = [
     component: Layout,
     children: [
       {
-        path: 'index',
+        path: '',
         component: () => import('@/views/components-demo/tab/index'),
         name: 'Tab',
         meta: { title: 'Tab', icon: 'tab' }
@@ -309,7 +309,7 @@ export const asyncRoutes = [
     component: Layout,
     children: [
       {
-        path: 'index',
+        path: '',
         component: () => import('@/views/components-demo/icons/index'),
         name: 'Icons',
         meta: { title: 'Icons', icon: 'icon', noCache: true }
@@ -348,7 +348,7 @@ export const asyncRoutes = [
     redirect: '/guide/index',
     children: [
       {
-        path: 'index',
+        path: '',
         component: () => import('@/views/components-demo/guide/index'),
         name: 'Guide',
         meta: { title: 'Guide', icon: 'guide', noCache: true }
@@ -419,7 +419,7 @@ export const asyncRoutes = [
     redirect: '/pdf/index',
     children: [
       {
-        path: 'index',
+        path: '',
         component: () => import('@/views/components-demo/pdf/index'),
         name: 'PDF',
         meta: { title: 'PDF', icon: 'pdf' }
@@ -439,7 +439,7 @@ export const asyncRoutes = [
     component: Layout,
     children: [
       {
-        path: 'index',
+        path: '',
         component: () => import('@/views/components-demo/theme/index'),
         name: 'Theme',
         meta: { title: 'Theme', icon: 'theme' }
@@ -453,7 +453,7 @@ export const asyncRoutes = [
     component: Layout,
     children: [
       {
-        path: 'index',
+        path: '',
         component: () => import('@/views/components-demo/clipboard/index'),
         name: 'ClipboardDemo',
         meta: { title: 'Clipboard', icon: 'clipboard' }

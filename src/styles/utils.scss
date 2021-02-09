@@ -1,0 +1,23 @@
+// region flex box
+
+.flex {
+    display: flex;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.flex-between {
+    justify-content: space-between;
+}
+
+.vertical-center {
+    align-items: center;
+}
+
+.horizontal-center {
+    justify-content: center;
+}
+
+// endregion flex box
