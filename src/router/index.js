@@ -105,18 +105,18 @@ export const constantRoutes = [
  */
 export const asyncRoutes = [
   // #region sidebar
-  {
-    path: '/market-info',
-    component: Layout,
-    children: [
-      {
-        path: '',
-        component: () => import('@/views/watch-list/WatchList.vue'),
-        name: 'MarketInfo',
-        meta: { title: 'Market Info', icon: 'clipboard' }
-      }
-    ]
-  },
+  // {
+  //   path: '/market-info',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: '',
+  //       component: () => import('@/views/watch-list/WatchList.vue'),
+  //       name: 'MarketInfo',
+  //       meta: { title: 'Market Info', icon: 'clipboard' }
+  //     }
+  //   ]
+  // },
   {
     path: '/stock-screener',
     component: Layout,
@@ -135,7 +135,7 @@ export const asyncRoutes = [
     children: [
       {
         path: '',
-        component: () => import('@/views/watch-list/WatchList.vue'),
+        component: () => import('@/views/watch-list/ListWatchStock.vue'),
         name: 'WatchList',
         meta: { title: 'Watch List', icon: 'clipboard' }
       }
@@ -149,7 +149,7 @@ export const asyncRoutes = [
         path: '',
         component: () => import('@/views/notification/ListNotification.vue'),
         name: 'Notification',
-        meta: { title: 'Notification', icon: 'notification' }
+        meta: { title: 'Notification', icon: 'clipboard' }
       }
     ]
   },
@@ -166,14 +166,14 @@ export const asyncRoutes = [
     ]
   },
   {
-    path: '/trading-log',
+    path: '/investing-journal',
     component: Layout,
     children: [
       {
         path: '',
-        component: () => import('@/views/watch-list/WatchList.vue'),
-        name: 'TradingLog',
-        meta: { title: 'Trading Log', icon: 'clipboard' }
+        component: () => import('@/views/investing-journal/ListJournal.vue'),
+        name: 'ListJournal',
+        meta: { title: 'Investing Journal', icon: 'clipboard' }
       }
     ]
   },
@@ -183,7 +183,7 @@ export const asyncRoutes = [
     children: [
       {
         path: '',
-        component: () => import('@/views/watch-list/WatchList.vue'),
+        component: () => import('@/views/risk-management/RiskManagement.vue'),
         name: 'RiskManagement',
         meta: { title: 'Risk Management', icon: 'clipboard' }
       }

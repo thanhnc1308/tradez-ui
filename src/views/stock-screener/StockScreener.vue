@@ -116,6 +116,7 @@
       >View</base-button>
     </div>
     <div class="result">Result</div>
+    <div>Add to WatchList</div>
   </div>
 </template>
 
