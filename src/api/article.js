@@ -1,8 +1,18 @@
 import request from '@/utils/request'
+import BaseAPI from '@/api/BaseAPI'
+import HttpClient from '@/api/HttpClient'
+
+class Article extends BaseAPI {
+  prefix = '/vue-element-admin/article'
+}
+
+// const api = new Article()
+
+const service = HttpClient.getInstance()
 
 export function fetchList(query) {
-  return request({
-    url: '/vue-element-admin/article/list',
+  return service({
+    url: '/vue-element-admin/article',
     method: 'get',
     params: query
   })
