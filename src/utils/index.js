@@ -1,11 +1,7 @@
 /**
- * Created by PanJiaChen on 16/11/18.
- */
-
-/**
  * Parse the time to string
  * @param {(Object|string|number)} time
- * @param {string} cFormat
+ * @param {string} cFormat '{y}-{m}-{d} {h}:{i}:{s}'
  * @returns {string | null}
  */
 export function parseTime(time, cFormat) {

@@ -76,6 +76,7 @@ import BaseTooltip from '@/components/BaseComponent/tooltip/tooltip'
 import BaseTransfer from '@/components/BaseComponent/transfer/BaseTransfer'
 import BaseTree from '@/components/BaseComponent/tree/BaseTree'
 // import BaseUpload from '@/components/BaseComponent/upload/BaseUpload'
+import TableViewer from '@/components/table-viewer/TableViewer'
 
 Vue.component(BaseAlert.name, BaseAlert)
 Vue.component(BaseAside.name, BaseAside)
@@ -154,3 +155,4 @@ Vue.component(BaseTooltip.name, BaseTooltip)
 Vue.component(BaseTransfer.name, BaseTransfer)
 Vue.component(BaseTree.name, BaseTree)
 // Vue.component(BaseUpload.name, BaseUpload)
+Vue.component(TableViewer.name, TableViewer)

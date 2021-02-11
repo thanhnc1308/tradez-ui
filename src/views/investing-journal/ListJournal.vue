@@ -33,7 +33,8 @@
       </div>
     </template>
     <template slot="table">
-      <el-table
+      <table-viewer :columns="columnsJournal"></table-viewer>
+      <!-- <el-table
         :key="tableKey"
         v-loading="listLoading"
         :data="list"
@@ -52,7 +53,7 @@
           :class-name="getSortClass('date')"
         >
           <template slot-scope="{ row }">
-            <span>{{ row.date | parseTime("{y}-{m}-{d}") }}</span>
+            <span>{{ row.date | parseTime("{d}-{m}-{y}") }}</span>
           </template>
         </el-table-column>
         <el-table-column label="Symbol" width="120px">
@@ -151,7 +152,7 @@
         :page.sync="listQuery.page"
         :limit.sync="listQuery.limit"
         @pagination="getList"
-      />
+      /> -->
 
       <el-dialog
         :title="textMap[dialogStatus]"
@@ -266,20 +267,13 @@ import StockViewer from '@/views/market-info/StockViewer';
 import ImageViewer from '@/components/image-viewer/ImageViewer';
 import {
   fetchList,
-  fetchPv,
   createArticle,
   updateArticle,
 } from "@/api/article";
 import waves from "@/directive/waves"; // waves directive
 import { parseTime } from "@/utils";
 import Pagination from "@/components/Pagination"; // secondary package based on el-pagination
-
-const calendarTypeOptions = [
-  { key: "CN", display_name: "China" },
-  { key: "US", display_name: "USA" },
-  { key: "JP", display_name: "Japan" },
-  { key: "EU", display_name: "Eurozone" },
-];
+import { columnsJournal } from '@/common/columnConfig';
 
 export default {
   name: "InvestingJournal",
@@ -299,6 +293,7 @@ export default {
     }
   },
   data() {
+    this.columnsJournal = columnsJournal;
     return {
       tableKey: 0,
       list: null,
@@ -365,7 +360,7 @@ export default {
         {
           date: new Date(),
           symbol: 'RAL',
-          buysell: 'buy',
+          type: 'Buy',
           entry: 100000,
           exit: 120000,
           pnl: 20,
