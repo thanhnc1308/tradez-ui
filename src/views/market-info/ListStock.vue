@@ -57,7 +57,7 @@
         </el-table-column>
         <el-table-column label="Symbol" width="120px">
           <template slot-scope="{ row }">
-            <span class="link-type" @click="showStockInfo(row.symbol)">{{
+            <span class="link-type" @click="handleFetchPv(row)">{{
               row.symbol
             }}</span>
           </template>
@@ -89,7 +89,7 @@
             <base-image
               class="c-pointer image-in-row"
               :src="row.screenshot"
-              @click="viewImage(row)"
+              @click="viewImage(row.screenshot)"
               fit="contain">
             </base-image>
           </template>
@@ -262,8 +262,6 @@
  */
 import BaseList from "@/views/base/BaseList.vue";
 import LayoutList from "@/views/base/LayoutList.vue";
-import StockViewer from '@/views/market-info/StockViewer';
-import ImageViewer from '@/components/image-viewer/ImageViewer';
 import {
   fetchList,
   fetchPv,
@@ -375,22 +373,19 @@ export default {
         }
       ];
       fetchList(this.listQuery).then((response) => {
+        // this.list = response.data.items;
+        // this.total = response.data.total;
         this.list = data;
         this.total = data.length;
-        this.listLoading = false;
+
+        // Just to simulate the time of the request
+        setTimeout(() => {
+          this.listLoading = false;
+        }, 1.5 * 1000);
       });
     },
-    showStockInfo(symbol) {
-      StockViewer.show(symbol);
-    },
-    viewImage(row) {
-      let options = {
-        propsData: {
-          title: `${row.symbol} - ${row.date}`,
-          url: row.screenshot
-        }
-      }
-      ImageViewer.show(options);
+    viewImage(url) {
+      console.log(url)
     },
     handleFilter() {
       this.listQuery.page = 1;

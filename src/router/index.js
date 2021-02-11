@@ -105,18 +105,18 @@ export const constantRoutes = [
  */
 export const asyncRoutes = [
   // #region sidebar
-  // {
-  //   path: '/market-info',
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: '',
-  //       component: () => import('@/views/watch-list/WatchList.vue'),
-  //       name: 'MarketInfo',
-  //       meta: { title: 'Market Info', icon: 'clipboard' }
-  //     }
-  //   ]
-  // },
+  {
+    path: '/market-info',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        component: () => import('@/views/market-info/ListStock.vue'),
+        name: 'MarketInfo',
+        meta: { title: 'Market Info', icon: 'clipboard' }
+      }
+    ]
+  },
   {
     path: '/stock-screener',
     component: Layout,

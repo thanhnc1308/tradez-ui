@@ -21,7 +21,7 @@ export default {
       this.close()
     },
     cancel() {
-      this.handleClose(this.close)
+      this.close()
     },
     close() {
       this.isShow = false
