@@ -8,9 +8,7 @@
       :src="url"
     >
     </base-image>
-    <span slot="footer" class="dialog-footer flex flex-end">
-      <el-button @click="cancel">Cancel</el-button>
-    </span>
+    <!-- <img width="100%" :src="url" alt=""> -->
   </base-dialog>
 </template>
 

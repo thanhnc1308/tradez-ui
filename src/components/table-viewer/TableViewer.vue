@@ -25,7 +25,7 @@
           <span
             v-if="column.columnType === EnumColumnType.Link"
             class="link-type"
-            @click="onClickTableRow(row)"
+            @click="onClickTableRow(row, column)"
             >{{ row[column.dataField] | formatData(column.formatType) }}</span
           >
           <span v-else-if="column.columnType === EnumColumnType.DateTime">{{
@@ -42,7 +42,7 @@
             v-else-if="column.columnType === EnumColumnType.Image"
             class="c-pointer image-in-row"
             :src="row[column.dataField]"
-            @click="onClickTableRow(row)"
+            @click="viewImage(row[column.dataField])"
             fit="contain"
           >
           </base-image>
@@ -90,6 +90,7 @@ import {
   createArticle,
   updateArticle,
 } from "@/api/article";
+import ImageViewer from "@/components/image-viewer/ImageViewer";
 
 export default {
   name: "TableViewer",
@@ -148,6 +149,17 @@ export default {
         this.total = data.length;
         this.listLoading = false;
       });
+    },
+    onClickTableRow(row, column) {
+        this.$emit('click', row, column);
+    },
+    viewImage(url) {
+      let options = {
+        propsData: {
+          url
+        },
+      };
+      ImageViewer.show(options);
     },
     handleFilter() {
       this.listQuery.page = 1;
