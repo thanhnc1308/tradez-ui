@@ -61,6 +61,7 @@
       <base-form-item label="Screenshot" prop="screenshot">
         <el-upload
           class="avatar-uploader"
+          v-if="!currentItem.screenshot"
           action="https://jsonplaceholder.typicode.com/posts/"
           :show-file-list="false"
           :on-preview="handlePictureCardPreview"
@@ -69,13 +70,18 @@
           :on-success="handleAvatarSuccess"
           :before-upload="beforeAvatarUpload"
         >
-          <img
+          <!-- <img
             v-if="currentItem.screenshot"
             :src="currentItem.screenshot"
             class="avatar"
-          />
-          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+          /> -->
+          <i class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
+        <base-image
+            v-if="currentItem.screenshot"
+            :src="currentItem.screenshot"
+            fit="cover"
+          />
       </base-form-item>
       <base-form-item label="Comment" prop="comment">
         <base-input

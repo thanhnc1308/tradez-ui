@@ -6,7 +6,7 @@ export default {
   computed: {
     tableContainer() {
       return this.$refs.tableData;
-    }
+    },
   },
   data() {
     return {
@@ -25,8 +25,9 @@ export default {
     },
     create() {
       let DetailForm = this.getDialogDetailForm(),
-        options = this.getCreateOptions();
-      DialogUtil.showDialog(DetailForm, options);
+        options = this.getCreateOptions(),
+        events = this.getDialogHandler();
+      DialogUtil.showDialog(DetailForm, options, events);
     },
     getCreateOptions() {
       return {
@@ -40,7 +41,7 @@ export default {
         options = this.getCreateOptions(row);
       DialogUtil.showDialog(DetailForm, options);
     },
-    getViewOptions() {
+    getViewOptions(row) {
       return {
         propsData: {
           formStatus: "View",
@@ -50,18 +51,29 @@ export default {
     },
     edit(row) {
       let DetailForm = this.getDialogDetailForm(),
-        options = this.getEditOptions(row);
-      DialogUtil.showDialog(DetailForm, options);
+        options = this.getEditOptions(row),
+        events = this.getDialogHandler();
+      DialogUtil.showDialog(DetailForm, options, events);
     },
-    getEditOptions() {
+    getEditOptions(row) {
       return {
         propsData: {
-          formStatus: "View",
+          formStatus: "Edit",
           selectedItem: row,
         },
       };
     },
-    delete(row) {
+    getDialogHandler() {
+      return {
+        "close": this.onDialogClose
+      }
+    },
+    onDialogClose(dialogResult) {
+      if (dialogResult === 'Confirm') {
+        this.tableContainer.doQuery();
+      }
+    },
+    deleteEntity(row) {
       let message = this.getDeleteMessage();
       this.$confirm(message, "Warning", {
         confirmButtonText: "Confirm",
@@ -100,7 +112,7 @@ export default {
         excel.export_json_to_excel({
           header,
           data,
-          filename
+          filename,
         });
         this.downloadLoading = false;
       });
@@ -121,8 +133,8 @@ export default {
      * @override
      */
     getFileNameExcel() {
-      return 'file';
-    }
+      return "file";
+    },
     //#endregion export excel
   },
 };

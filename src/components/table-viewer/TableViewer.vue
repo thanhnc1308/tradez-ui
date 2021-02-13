@@ -25,13 +25,17 @@
           <span
             v-if="column.columnType === EnumColumnType.Link"
             class="link-type"
+            @dblclick="onDblClickTableRow(row, column)"
             @click="onClickTableRow(row, column)"
             >{{ row[column.dataField] | formatData(column.formatType) }}</span
           >
-          <span v-else-if="column.columnType === EnumColumnType.DateTime">{{
-            row[column.dataField] | formatData(column.formatType)
-          }}</span>
+          <span
+            @dblclick="onDblClickTableRow(row, column)"
+            v-else-if="column.columnType === EnumColumnType.DateTime"
+            >{{ row[column.dataField] | formatData(column.formatType) }}</span
+          >
           <base-tag
+            @dblclick="onDblClickTableRow(row, column)"
             v-else-if="column.columnType === EnumColumnType.Tag"
             :type="column.tagTypeFilter(row)"
           >
@@ -45,26 +49,29 @@
             fit="contain"
           >
           </base-image>
-          <span v-else>{{
+          <span @dblclick="onDblClickTableRow(row, column)" v-else>{{
             row[column.dataField] | formatData(column.formatType)
           }}</span>
         </template>
       </el-table-column>
+
       <el-table-column
         label="Actions"
+        v-if="hasActionColumn"
         align="center"
         width="120"
         class-name="small-padding fixed-width"
       >
-        <template slot-scope="{ row, $index }">
-          <el-dropdown split-button type="primary" @click="handleUpdate(row)">
+        <template slot-scope="{ row }">
+          <slot :row="row" name="actions"></slot>
+          <!-- <el-dropdown split-button type="primary" @click="handleUpdate(row)">
             Edit
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item v-if="row.status != 'deleted'">
                 <span @click="handleDelete(row, $index)"> Delete </span>
               </el-dropdown-item>
             </el-dropdown-menu>
-          </el-dropdown>
+          </el-dropdown> -->
         </template>
       </el-table-column>
     </el-table>
@@ -90,7 +97,7 @@ export default {
   name: "TableViewer",
   props: {
     store: {
-      type: Object,
+      type: TableStore,
     },
     columns: {
       type: Array,
@@ -102,6 +109,10 @@ export default {
     autoLoad: {
       type: Boolean,
       default: false,
+    },
+    hasActionColumn: {
+      type: Boolean,
+      default: true,
     },
   },
   components: {
@@ -127,6 +138,7 @@ export default {
   methods: {
     async doQuery() {
       try {
+        console.log('do query');
         this.listLoading = true;
         await this.store.load();
         this.list = this.store.getData();
@@ -138,6 +150,9 @@ export default {
     },
     onClickTableRow(row, column) {
       this.$emit("click", row, column);
+    },
+    onDblClickTableRow(row, column) {
+      this.$emit("dblclick", row, column);
     },
     viewImage(url) {
       let options = {

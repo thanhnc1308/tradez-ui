@@ -155,7 +155,7 @@ export default {
     },
     async validate() {
       return (
-        (await this.validationContainer()) && (await this.validateBusiness())
+        (await this.validateContainer()) && (await this.validateBusiness())
       );
     },
     async validateContainer() {

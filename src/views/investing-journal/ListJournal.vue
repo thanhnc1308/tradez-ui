@@ -29,11 +29,23 @@
       <table-viewer
         ref="tableData"
         @click="onClickTableRow"
+        @dblclick="onDblClickTableRow"
         :store="storeJournal"
         pagination
         autoLoad
         :columns="columnsJournal"
-      ></table-viewer>
+      >
+        <template slot="actions" slot-scope="{ row }">
+          <el-dropdown split-button type="primary" @click="edit(row)">
+            Edit
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item>
+                <span @click="deleteEntity(row)"> Delete </span>
+              </el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+        </template>
+      </table-viewer>
     </template>
   </layout-list>
 </template>
@@ -56,23 +68,9 @@ export default {
     this.columnsJournal = columnsJournal;
     this.storeJournal = new TableStore({
       proxy: {
-        url: 'test',
-        type: 'remote'
+        url: "test",
+        type: "remote",
       }
-      // data: [
-      //   {
-      //     date: new Date(),
-      //     symbol: "RAL",
-      //     type: "Buy",
-      //     entry: 100000,
-      //     exit: 120000,
-      //     pnl: 20,
-      //     status: 1,
-      //     screenshot:
-      //       "https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg",
-      //     comment: "this is a comment",
-      //   },
-      // ]
     });
     return {};
   },
@@ -93,8 +91,22 @@ export default {
     /**
      * @override
      */
+    onDblClickTableRow(row) {
+      this.edit(row);
+    },
+    /**
+     * @override
+     */
     getDataForExportExcel() {
-      const filterVal = ["date", "symbol", "type", "entry", "exit", "pnl", "comment"];
+      const filterVal = [
+        "date",
+        "symbol",
+        "type",
+        "entry",
+        "exit",
+        "pnl",
+        "comment",
+      ];
       return this.formatJson(filterVal);
     },
     /**
