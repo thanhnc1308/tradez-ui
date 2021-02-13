@@ -93,13 +93,13 @@
 </template>
 
 <script>
-import BaseDetail from "@/views/base/BaseDetail.vue";
+import BaseFormDetail from "@/views/base/BaseFormDetail.vue";
 import { callBase } from "@/mixins/callBase";
 import JournalAPI from '@/api/JournalAPI';
 
 export default {
   name: "DialogAddNewNotification",
-  extends: BaseDetail,
+  extends: BaseFormDetail,
   mixins: [callBase],
   data() {
     this.listStock = ["RAL", "HPG", "VIC"];

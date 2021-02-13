@@ -6,7 +6,7 @@ import BaseAPI from "@/api/BaseAPI";
  * Form dialog handles create, edit, duplicate, view item
  */
 export default {
-  name: "BaseDetail",
+  name: "BaseFormDetail",
   extends: BaseFormDialog,
   props: {
     /**
@@ -86,6 +86,7 @@ export default {
     }
   },
   methods: {
+    //#region CRUD
     create() {
       this.resetForm();
       this.resetValidation();
@@ -185,6 +186,7 @@ export default {
     resetForm() {
       this.currentItem = {};
     },
+    //#endregion CRUD
   },
 };
 </script>

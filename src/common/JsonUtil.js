@@ -1,10 +1,11 @@
 /**
  * Class handle JSON
  */
+import { parseTime } from "@/utils";
 
 class JsonUtil {
-  formatJson(filterVal) {
-    return this.list.map(v =>
+  formatJson(list, filterVal) {
+    return list.map(v =>
       filterVal.map(j => {
         if (j === "timestamp") {
           return parseTime(v[j]);

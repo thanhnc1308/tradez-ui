@@ -260,7 +260,7 @@
  * 4. Screenshot of transaction
  * 5. Comment
  */
-import BaseList from "@/views/base/BaseList.vue";
+import BaseFormList from "@/views/base/BaseFormList.vue";
 import LayoutList from "@/views/base/LayoutList.vue";
 import {
   fetchList,
@@ -281,7 +281,7 @@ const calendarTypeOptions = [
 
 export default {
   name: "InvestingJournal",
-  extends: BaseList,
+  extends: BaseFormList,
   components: {
     LayoutList,
     Pagination,

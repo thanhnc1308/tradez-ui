@@ -29,8 +29,7 @@
             >{{ row[column.dataField] | formatData(column.formatType) }}</span
           >
           <span v-else-if="column.columnType === EnumColumnType.DateTime">{{
-            row[column.dataField]
-              | formatData(column.formatType)
+            row[column.dataField] | formatData(column.formatType)
           }}</span>
           <base-tag
             v-else-if="column.columnType === EnumColumnType.Tag"
@@ -47,8 +46,7 @@
           >
           </base-image>
           <span v-else>{{
-            row[column.dataField]
-              | formatData(column.formatType)
+            row[column.dataField] | formatData(column.formatType)
           }}</span>
         </template>
       </el-table-column>
@@ -72,11 +70,11 @@
     </el-table>
 
     <pagination
-      v-show="total > 0"
+      v-show="pagination && total > 0"
       :total="total"
       :page.sync="listQuery.page"
       :limit.sync="listQuery.limit"
-      @pagination="getList"
+      @pagination="doQuery"
     />
   </div>
 </template>
@@ -84,23 +82,27 @@
 <script>
 import waves from "@/directive/waves";
 import Pagination from "@/components/Pagination";
+import TableStore from "@/common/TableStore";
 import { EnumColumnType, EnumFormatType } from "@/common/enum";
-import {
-  fetchList,
-  createArticle,
-  updateArticle,
-} from "@/api/article";
 import ImageViewer from "@/components/image-viewer/ImageViewer";
 
 export default {
   name: "TableViewer",
   props: {
-      data: {
-          type: Array
-      },
-      columns: {
-          type: Array
-      }
+    store: {
+      type: Object,
+    },
+    columns: {
+      type: Array,
+    },
+    pagination: {
+      type: Boolean,
+      default: false,
+    },
+    autoLoad: {
+      type: Boolean,
+      default: false,
+    },
   },
   components: {
     Pagination,
@@ -110,61 +112,48 @@ export default {
     this.EnumColumnType = EnumColumnType;
     this.EnumFormatType = EnumFormatType;
     return {
-      tableKey: 0,
-      list: null,
+      list: [], // list for render data
+      tableKey: 0, // tableKey for render table
       total: 0,
       listLoading: true,
-      listQuery: {
-        page: 1,
-        limit: 20,
-        importance: undefined,
-        title: undefined,
-        type: undefined,
-        sort: "+id",
-      },
+      listQuery: {},
     };
   },
   created() {
-    this.getList();
+    if (this.autoLoad) {
+      this.doQuery();
+    }
   },
   methods: {
-    getList() {
-      this.listLoading = true;
-      const data = [
-        {
-          date: new Date(),
-          symbol: "RAL",
-          type: "Buy",
-          entry: 100000,
-          exit: 120000,
-          pnl: 20,
-          status: 1,
-          screenshot:
-            "https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg",
-          comment: "this is a comment",
-        },
-      ];
-      fetchList(this.listQuery).then((response) => {
-        this.list = data;
-        this.total = data.length;
+    async doQuery() {
+      try {
+        this.listLoading = true;
+        await this.store.load();
+        this.list = this.store.getData();
+        this.total = this.store.getCount();
         this.listLoading = false;
-      });
+      } catch (e) {
+        this.listLoading = false;
+      }
     },
     onClickTableRow(row, column) {
-        this.$emit('click', row, column);
+      this.$emit("click", row, column);
     },
     viewImage(url) {
       let options = {
         propsData: {
-          url
+          url,
         },
       };
       ImageViewer.show(options);
     },
+    //#region filter
     handleFilter() {
       this.listQuery.page = 1;
-      this.getList();
+      this.doQuery();
     },
+    //#endregion filter
+    //#region sort
     sortChange(data) {
       const { prop, order } = data;
       if (prop === "id") {
@@ -183,6 +172,7 @@ export default {
       const sort = this.listQuery.sort;
       return sort === `+${key}` ? "ascending" : "descending";
     },
+    //#region sort
   },
 };
 </script>

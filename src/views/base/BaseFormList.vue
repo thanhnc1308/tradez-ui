@@ -1,15 +1,21 @@
 <script>
-import JsonUtil from "@/common/JsonUtil";
 import DialogUtil from "@/common/dialogUtil";
 
 export default {
-  name: "BaseList",
+  name: "BaseFormList",
+  computed: {
+    tableContainer() {
+      return this.$refs.tableData;
+    }
+  },
   data() {
     return {
       downloadLoading: false,
+      list: [],
     };
   },
   methods: {
+    //#endregion CRUD
     /**
      * form dialog detail
      * @override
@@ -80,30 +86,44 @@ export default {
     getDeleteMessage() {
       return `Confirm to remove this item?`;
     },
+    //#endregion CRUD
+    //#region search
     search() {},
+    //#endregion search
+    //#region export excel
     exportExcel() {
       this.downloadLoading = true;
       import("@/vendor/Export2Excel").then((excel) => {
-        const tHeader = this.getHeaderForExportExcel();
-        const filterVal = [
-          "timestamp",
-          "title",
-          "type",
-          "importance",
-          "status",
-        ];
-        const data = JsonUtil.formatJson(filterVal);
+        const header = this.getHeaderForExportExcel();
+        const data = this.getDataForExportExcel();
+        const filename = this.getFileNameExcel();
         excel.export_json_to_excel({
-          header: tHeader,
+          header,
           data,
-          filename: "table-list",
+          filename
         });
         this.downloadLoading = false;
       });
     },
-    getHeaderForExportExcel() {
-      return ["timestamp", "title", "type", "importance", "status"];
+    /**
+     * @override
+     */
+    getDataForExportExcel() {
+      return [];
     },
+    /**
+     * @override
+     */
+    getHeaderForExportExcel() {
+      return [];
+    },
+    /**
+     * @override
+     */
+    getFileNameExcel() {
+      return 'file';
+    }
+    //#endregion export excel
   },
 };
 </script>

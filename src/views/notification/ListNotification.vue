@@ -11,11 +11,11 @@
 // import StockNotification from '@/views/notification/StockNotification.js'
 import dialogUtil from '@/common/dialogUtil.js'
 import DialogNotification from '@/views/notification/DialogNotification.vue'
-import BaseList from '@/views/base/BaseList.vue'
+import BaseFormList from '@/views/base/BaseFormList.vue'
 
 export default {
   name: 'ListNotification',
-  extends: BaseList,
+  extends: BaseFormList,
   data() {
     return {
       loading: false
