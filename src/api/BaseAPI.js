@@ -1,7 +1,7 @@
 /**
  * class base for handling CRUD
  */
-import HttpClient from '@/api/HttpClient'
+import HttpClient from "@/api/HttpClient";
 
 export default class BaseAPI {
   /**
@@ -10,21 +10,21 @@ export default class BaseAPI {
   prefix = null;
 
   constructor() {
-    this.service = HttpClient.getInstance()
+    this.service = HttpClient.getInstance();
   }
 
   /**
    * @override
    */
   getUrl() {
-    return this.prefix
+    return this.prefix;
   }
 
   getAll() {
     return this.service.request({
       url: this.getUrl(),
-      method: 'get',
-    })
+      method: "get"
+    });
   }
 
   /**
@@ -38,11 +38,60 @@ export default class BaseAPI {
    */
   getPaging(options) {}
 
-  getById(id) {}
+  getById(id) {
+    let url = this.getFetchUrl(id);
+    return this.service.request({
+      url: url,
+      method: "get"
+    });
+  }
 
-  post(payload) {}
+  getFetchUrl(id) {
+    return `${this.getUrl()}/${id}`;
+  }
 
-  put(id, payload) {}
+  post(payload) {
+    debugger;
+    return this.service.request({
+      url: this.getUrl(),
+      method: "post",
+      data: payload
+    });
+  }
 
-  delete(id) {}
+  put(payload) {
+    let id = this.getPayloadId(payload),
+      url = this.getPutUrl(id);
+    debugger;
+    return this.service.request({
+      url: url,
+      method: "put",
+      data: payload
+    });
+  }
+
+  getPutUrl(id) {
+    return `${this.getUrl()}/${id}`;
+  }
+
+  getPayloadId(payload = {}) {
+    if (payload.getIdProperty instanceof Function) {
+      return payload.getIdProperty();
+    } else {
+      return payload["id"];
+    }
+  }
+
+  delete(id) {
+    let url = this.getDeleteUrl(id);
+    debugger;
+    return this.service.request({
+      url: url,
+      method: "delete"
+    });
+  }
+
+  getDeleteUrl(id) {
+    return `${this.getUrl()}/${id}`;
+  }
 }

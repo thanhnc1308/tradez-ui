@@ -65,11 +65,11 @@ export default {
     },
     getDialogHandler() {
       return {
-        "close": this.onDialogClose
-      }
+        close: this.onDialogClose,
+      };
     },
     onDialogClose(dialogResult) {
-      if (dialogResult === 'Confirm') {
+      if (dialogResult === "Confirm") {
         this.tableContainer.doQuery();
       }
     },

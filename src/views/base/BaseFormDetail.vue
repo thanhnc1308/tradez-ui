@@ -2,6 +2,21 @@
 import BaseFormDialog from "@/views/base/BaseFormDialog.vue";
 import BaseAPI from "@/api/BaseAPI";
 
+let SAVE_CONFIG = {
+  Create: {
+    method: "post",
+    message: "Created Successfully",
+  },
+  Edit: {
+    method: "put",
+    message: "Updated Successfully",
+  },
+  Duplicate: {
+    method: "post",
+    message: "Created Successfully",
+  },
+};
+
 /**
  * Form dialog handles create, edit, duplicate, view item
  */
@@ -111,46 +126,27 @@ export default {
       this.currentItem = Object.assign({}, this.selectedItem);
     },
     async handleConfirm() {
-      switch (this.formStatus) {
-        case "Create":
-          await this.createData();
-        case "Edit":
-          await this.updateData();
-        case "Duplicate":
-          await this.duplicateData();
-          break;
-        default:
-          break;
-      }
+      await this.save();
     },
-    async createData() {
+    async save() {
       if (await this.validate()) {
-        this.$notify({
-          title: "Success",
-          message: "Created Successfully",
-          type: "success",
-          duration: 2000,
-        });
-      }
-    },
-    async updateData() {
-      if (await this.validate()) {
-        this.$notify({
-          title: "Success",
-          message: "Update Successfully",
-          type: "success",
-          duration: 2000,
-        });
-      }
-    },
-    async duplicateData() {
-      if (await this.validate()) {
-        this.$notify({
-          title: "Success",
-          message: "Created Successfully",
-          type: "success",
-          duration: 2000,
-        });
+        let config = SAVE_CONFIG[this.formStatus];
+        let response = await this.api[config.method](this.currentItem);
+        if (response && response.success) {
+          this.$notify({
+            title: "Success",
+            message: config.message,
+            type: "success",
+            duration: 2000,
+          });
+        } else if (response && response.message) {
+          this.$notify({
+            title: "Error",
+            message: response.message,
+            type: "danger",
+            duration: 2000,
+          });
+        }
       }
     },
     async validate() {

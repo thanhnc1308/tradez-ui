@@ -42,7 +42,7 @@
             {{ row[column.dataField] | formatData(column.formatType) }}
           </base-tag>
           <base-image
-            v-else-if="column.columnType === EnumColumnType.Image"
+            v-else-if="column.columnType === EnumColumnType.Image && row[column.dataField]"
             class="c-pointer image-in-row"
             :src="row[column.dataField]"
             @click="viewImage(row[column.dataField])"

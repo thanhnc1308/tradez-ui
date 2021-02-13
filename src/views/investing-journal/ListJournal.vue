@@ -2,9 +2,9 @@
   <layout-list>
     <template slot="utility">
       <div class="flex flex-end filter-container">
-        <el-button class="filter-item" type="primary" icon="el-icon-search">
+        <!-- <el-button class="filter-item" type="primary" icon="el-icon-search">
           Search
-        </el-button>
+        </el-button> -->
         <el-button
           class="filter-item"
           style="margin-left: 10px"
@@ -36,7 +36,7 @@
         :columns="columnsJournal"
       >
         <template slot="actions" slot-scope="{ row }">
-          <el-dropdown split-button type="primary" @click="edit(row)">
+          <el-dropdown split-button type="primary" size="small" @click="edit(row)">
             Edit
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>
@@ -68,7 +68,7 @@ export default {
     this.columnsJournal = columnsJournal;
     this.storeJournal = new TableStore({
       proxy: {
-        url: "test",
+        url: "/journal",
         type: "remote",
       }
     });

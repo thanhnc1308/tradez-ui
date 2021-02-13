@@ -24,7 +24,7 @@ export default {
         .catch((_) => {});
     },
     async confirm() {
-      this.dialogResult = 'Confirm';
+      this.dialogResult = "Confirm";
       await this.handleConfirm();
       this.close();
     },
@@ -33,7 +33,7 @@ export default {
      */
     async handleConfirm() {},
     cancel() {
-      this.dialogResult = 'Cancel';
+      this.dialogResult = "Cancel";
       this.close();
     },
     close() {

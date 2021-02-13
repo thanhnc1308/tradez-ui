@@ -57,6 +57,7 @@ export default class TableStore extends Vue {
   load() {
     this.data = [
       {
+        id: 1,
         date: new Date(),
         symbol: "RAL",
         type: "Buy",
@@ -64,8 +65,8 @@ export default class TableStore extends Vue {
         exit: 120000,
         pnl: 20,
         status: 1,
-        screenshot:
-          "https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg",
+        // screenshot:
+        //   "https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg",
         comment: "this is a comment",
       },
     ];

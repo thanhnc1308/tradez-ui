@@ -13,7 +13,7 @@ import '@/styles/utils.scss' // global css
 
 import App from './App'
 import store from './store'
-import router from './router'
+import router from './router/router'
 
 import './icons' // icon
 import './permission' // permission control
