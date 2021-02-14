@@ -51,7 +51,6 @@ export default class BaseAPI {
   }
 
   post(payload) {
-    debugger;
     return this.service.request({
       url: this.getUrl(),
       method: "post",
@@ -62,7 +61,6 @@ export default class BaseAPI {
   put(payload) {
     let id = this.getPayloadId(payload),
       url = this.getPutUrl(id);
-    debugger;
     return this.service.request({
       url: url,
       method: "put",
@@ -84,7 +82,6 @@ export default class BaseAPI {
 
   delete(id) {
     let url = this.getDeleteUrl(id);
-    debugger;
     return this.service.request({
       url: url,
       method: "delete"

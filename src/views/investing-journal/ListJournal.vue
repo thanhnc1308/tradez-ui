@@ -68,7 +68,7 @@ export default {
     this.columnsJournal = columnsJournal;
     this.storeJournal = new TableStore({
       proxy: {
-        url: "/journal",
+        url: "/journals",
         type: "remote",
       }
     });
