@@ -61,7 +61,7 @@ export default class TableStore {
   //#region API
   async load() {
     let url = this.proxy.url;
-    let service = HttpClient.getInstance();
+    let service = HttpClient;
     let data = await service.request({
       url: url,
       method: 'get',
@@ -105,7 +105,7 @@ export default class TableStore {
   loadFromServer() {
     this.loading = true;
     if (this.proxy.url) {
-      let service = HttpClient.getInstance();
+      let service = HttpClient;
       let response = service.get({
         url: this.proxy.url,
         method: 'get',

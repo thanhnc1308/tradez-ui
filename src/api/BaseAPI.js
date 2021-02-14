@@ -10,7 +10,7 @@ export default class BaseAPI {
   prefix = null;
 
   constructor() {
-    this.service = HttpClient.getInstance();
+    this.service = HttpClient;
   }
 
   /**

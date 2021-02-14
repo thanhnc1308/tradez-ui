@@ -11,17 +11,21 @@ let token =
 
 class HttpClient {
   constructor() {
-    this.init();
+    if (!HttpClient.instance) {
+      this.init();
+      HttpClient.instance = this;
+    }
+    return HttpClient.instance
   }
   init() {
-    this.instance = axios.create({
+    this.service = axios.create({
       baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
       // withCredentials: true, // send cookies when cross-domain requests
       timeout: 5000 // request timeout
     });
 
     // request interceptor
-    this.instance.interceptors.request.use(
+    this.service.interceptors.request.use(
       config => {
         // do something before request is sent
 
@@ -40,7 +44,7 @@ class HttpClient {
     );
 
     // response interceptor
-    this.instance.interceptors.response.use(
+    this.service.interceptors.response.use(
       /**
        * If you want to get http information such as headers or status
        * Please return  response => response
@@ -96,9 +100,28 @@ class HttpClient {
     );
   }
 
-  getInstance() {
-    return this.instance;
+  request(options) {
+    return this.service.request(options);
+  }
+
+  get(options) {
+    return this.service.get(options);
+  }
+
+  post(options) {
+    return this.service.post(options);
+  }
+
+  put(options) {
+    return this.service.put(options);
+  }
+
+  delete(options) {
+    return this.service.delete(options);
   }
 }
 
-export default new HttpClient();
+const instance = new HttpClient();
+Object.freeze(instance);
+
+export default instance;
