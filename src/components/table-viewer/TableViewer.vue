@@ -131,6 +131,7 @@ export default {
     };
   },
   created() {
+    this.doQueryCount = 0;
     if (this.autoLoad) {
       this.doQuery();
     }
@@ -138,7 +139,7 @@ export default {
   methods: {
     async doQuery() {
       try {
-        console.log('do query');
+        console.log('do query count ' + this.doQueryCount++);
         this.listLoading = true;
         await this.store.load();
         this.list = this.store.getData();

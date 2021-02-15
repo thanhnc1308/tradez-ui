@@ -2,10 +2,10 @@
   <layout-list>
     <template slot="utility">
       <div class="flex flex-end filter-container">
-        <!-- <el-button class="filter-item" type="primary" icon="el-icon-search">
+        <!-- <base-button class="filter-item" type="primary" icon="el-icon-search">
           Search
-        </el-button> -->
-        <el-button
+        </base-button> -->
+        <base-button
           class="filter-item"
           style="margin-left: 10px"
           type="primary"
@@ -13,8 +13,17 @@
           @click="create"
         >
           Add
-        </el-button>
-        <el-button
+        </base-button>
+        <base-button
+          class="filter-item"
+          style="margin-left: 10px"
+          type="primary"
+          icon="el-icon-edit"
+          @click="refresh"
+        >
+          Refresh
+        </base-button>
+        <base-button
           :loading="downloadLoading"
           class="filter-item"
           type="primary"
@@ -22,7 +31,7 @@
           @click="exportExcel"
         >
           Export
-        </el-button>
+        </base-button>
       </div>
     </template>
     <template slot="table">

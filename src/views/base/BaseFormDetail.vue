@@ -72,20 +72,16 @@ export default {
      */
     validationContainer() {
       return this.$refs["dataForm"];
-    },
-    /**
-     * @override
-     */
-    api() {
-      return BaseAPI;
-    },
+    }
   },
   data() {
+    this.api = BaseAPI;
     return {
       currentItem: {},
     };
   },
   mounted() {
+    debugger
     switch (this.formStatus) {
       case "Create":
         this.create();
@@ -98,6 +94,11 @@ export default {
       default:
         this.view();
         break;
+    }
+  },
+  watch: {
+    currentItem(_old, _new) {
+      debugger
     }
   },
   methods: {
@@ -129,9 +130,12 @@ export default {
       await this.save();
     },
     async save() {
+      const me = this;
       if (await this.validate()) {
         let config = SAVE_CONFIG[this.formStatus];
-        let response = await this.api[config.method](this.currentItem);
+        debugger
+        let response = await me.api[config.method](me.currentItem);
+        debugger
         if (response && response.success) {
           this.$notify({
             title: "Success",
@@ -180,6 +184,7 @@ export default {
      * @override
      */
     resetForm() {
+      debugger
       this.currentItem = {};
     },
     //#endregion CRUD

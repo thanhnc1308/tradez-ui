@@ -136,6 +136,11 @@ export default {
       return "file";
     },
     //#endregion export excel
+    //#region Methods
+    refresh() {
+      this.tableContainer.doQuery();
+    }
+    //#endregion Methods
   },
 };
 </script>

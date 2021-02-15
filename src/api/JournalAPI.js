@@ -1,7 +1,7 @@
 import BaseAPI from '@/api/BaseAPI'
 
 class JournalAPI extends BaseAPI {
-  prefix = '/journal'
+  prefix = '/journals'
 }
 
 export default new JournalAPI();

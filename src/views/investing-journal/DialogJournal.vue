@@ -14,9 +14,9 @@
       label-width="100px"
       style="width: 400px; margin-left: 50px"
     >
-      <base-form-item label="Date" prop="date">
+      <base-form-item label="Date" prop="journal_date">
         <base-date-picker
-          v-model="currentItem.date"
+          v-model="currentItem.journal_date"
           type="datetime"
           placeholder="Please pick a date"
         />
@@ -35,9 +35,9 @@
           />
         </el-select>
       </base-form-item>
-      <base-form-item label="Type" prop="type">
+      <base-form-item label="Type" prop="transaction_type">
         <el-select
-          v-model="currentItem.type"
+          v-model="currentItem.transaction_type"
           class="filter-item"
           placeholder="Please select type"
         >
@@ -108,6 +108,11 @@ export default {
   extends: BaseFormDetail,
   mixins: [callBase],
   data() {
+    /**
+     * @override
+     */
+    this.api = JournalAPI;
+
     this.listStock = ["RAL", "HPG", "VIC"];
     this.listType = ["Buy", "Sell"];
     return {};
@@ -118,12 +123,6 @@ export default {
      */
     formName() {
       return "journal";
-    },
-    /**
-     * @override
-     */
-    api() {
-      return JournalAPI;
     }
   },
   methods: {
@@ -152,11 +151,16 @@ export default {
      * @override
      */
     resetForm() {
+      debugger
       this.currentItem = {
-        date: new Date(),
-        symbol: "",
-        type: "Buy",
+        journal_date: new Date(),
+        symbol: "VIC",
+        transaction_type: "Buy",
         status: "win",
+        entry: 100000,
+        exit: 100000,
+        pnl: 100000,
+        comment: "comment",
       };
     },
     //#region Handle upload

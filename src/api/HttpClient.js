@@ -5,10 +5,6 @@ import axios from "axios";
 import { MessageBox, Message } from "element-ui";
 import store from "@/store";
 import { getToken } from "@/utils/auth";
-
-let token =
-  "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoibmN0aGFuaCIsImV4cCI6MTYxMzMxNTc1MX0.wBcaUk7xk9I6Ehcocl8kc9nyo-qoK1xvaOKIj6hZaJM";
-
 class HttpClient {
   constructor() {
     if (!HttpClient.instance) {
@@ -31,8 +27,7 @@ class HttpClient {
 
         if (store.getters.token) {
           // let each request carry token
-          // config.headers['X-Token'] = getToken()
-          config.headers["x-access-token"] = token;
+          config.headers["Authorization"] = getToken();
         }
         return config;
       },

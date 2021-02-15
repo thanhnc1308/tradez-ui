@@ -1,6 +1,13 @@
 import request from '@/utils/request'
+import HttpClient from "@/api/HttpClient";
+
 
 export function login(data) {
+  return HttpClient.request({
+    url: '/auth/login',
+    method: 'post',
+    data
+  })
   return new Promise((resolve, reject) => {
     resolve({
       data: {
