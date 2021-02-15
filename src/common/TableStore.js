@@ -59,25 +59,33 @@ export default class TableStore {
   }
 
   //#region API
-  async load() {
+  async load(opts={}) {
+    const options = {
+      page: opts.page || 1,
+      per_page: opts.limit || 20,
+    }
     if (this.proxy.type === "cache") {
-      await this.loadFromCache();
+      await this.loadFromCache(options);
     } else {
-      await this.loadFromServer();
+      await this.loadFromServer(options);
     }
   }
 
-  async loadFromCache() {
+  async loadFromCache(options) {
     this.loading = true;
     this.loading = true;
   }
 
-  async loadFromServer() {
+  async loadFromServer(options) {
     this.loading = true;
+
+    this.page = options.page;
+    this.per_page = options.per_page;
+
     let url = this.proxy.url,
       service = HttpClient,
       res = await service.request({
-        url: url,
+        url: `${url}?page=${options.page}&per_page=${options.per_page}`, // ?page=1&per_page=100
         method: "get"
       });
     if (res && res.success) {
@@ -85,8 +93,11 @@ export default class TableStore {
       // paging
       if (data.meta) {
         this.data = data.items;
+        this.total = data.meta.total;
+        this.pages = data.meta.pages;
       } else {
         this.data = data;
+        this.total = data.length
       }
     }
     this.loading = true;

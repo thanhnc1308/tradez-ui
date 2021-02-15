@@ -120,11 +120,12 @@ export default {
     //#endregion search
     //#region export excel
     exportExcel() {
+      const self = this;
       this.downloadLoading = true;
       import("@/vendor/Export2Excel").then((excel) => {
-        const header = this.getHeaderForExportExcel();
-        const data = this.getDataForExportExcel();
-        const filename = this.getFileNameExcel();
+        const header = self.getHeaderForExportExcel();
+        const data = self.getDataForExportExcel();
+        const filename = self.getFileNameExcel();
         excel.export_json_to_excel({
           header,
           data,
@@ -137,7 +138,7 @@ export default {
      * @override
      */
     getDataForExportExcel() {
-      return [];
+      return []
     },
     /**
      * @override

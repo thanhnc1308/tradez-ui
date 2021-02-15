@@ -132,7 +132,8 @@ export default {
      * @override
      */
     formatJson(filterVal) {
-      return this.list.map((v) =>
+      let data = this.tableContainer.store.getData();
+      return data.map((v) =>
         filterVal.map((j) => {
           if (j === "date") {
             return parseTime(v[j]);

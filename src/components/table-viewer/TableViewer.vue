@@ -88,7 +88,7 @@
 
 <script>
 import waves from "@/directive/waves";
-import Pagination from "@/components/Pagination";
+import Pagination from "@/components/Pagination/Pagination";
 import TableStore from "@/common/TableStore";
 import { EnumColumnType, EnumFormatType } from "@/common/enum";
 import ImageViewer from "@/components/image-viewer/ImageViewer";
@@ -137,13 +137,17 @@ export default {
     }
   },
   methods: {
-    async doQuery() {
+    async doQuery(options={}) {
       try {
         console.log('do query count ' + this.doQueryCount++);
         this.listLoading = true;
-        await this.store.load();
+        let opts = {
+          page: options.page || 1,
+          per_page: options.limit || 20,
+        }
+        await this.store.load(opts);
         this.list = this.store.getData();
-        this.total = this.store.getCount();
+        this.total = this.store.total;
         this.listLoading = false;
       } catch (e) {
         this.listLoading = false;
