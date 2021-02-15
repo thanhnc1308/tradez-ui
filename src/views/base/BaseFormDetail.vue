@@ -190,13 +190,47 @@ export default {
     handleShortkeyAction(event) {
       switch (event.srcKey) {
         case "Save":
-          this.confirm();
+          if (this.isViewing) {
+            this.close();
+          } else {
+            this.confirm();
+          }
           break;
         case "Close":
-          this.close();
+          this.cancel();
           break;
       }
     },
+    handleClose(done) {
+      if (this.checkChanges()) {
+        this.$confirm("Are you sure to close this dialog?")
+          .then((_) => {
+            done();
+          })
+          .catch((_) => {});
+      } else {
+        done();
+      }
+    },
+    checkChanges() {
+      switch (this.formStatus) {
+        case 'Create':
+          return true;
+        case 'Edit':
+          for (const key in this.selectedItem) {
+            if (Object.hasOwnProperty.call(this.selectedItem, key)) {
+              const element = this.selectedItem[key];
+              if (element !== this.currentItem[key]) {
+                return true;
+              }
+            }
+          }
+          return false;
+        case 'View':
+        default:
+          return false;
+      }
+    }
   },
 };
 </script>

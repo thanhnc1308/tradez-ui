@@ -46,7 +46,7 @@ export default {
     },
     view(row) {
       let DetailForm = this.getDialogDetailForm(),
-        options = this.getCreateOptions(row);
+        options = this.getViewOptions(row);
       DialogUtil.showDialog(DetailForm, options);
     },
     getViewOptions(row) {

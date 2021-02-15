@@ -16,13 +16,6 @@ export default {
     show() {
       this.isShow = true;
     },
-    handleClose(done) {
-      this.$confirm("Are you sure to close this dialog?")
-        .then((_) => {
-          done();
-        })
-        .catch((_) => {});
-    },
     async confirm() {
       this.dialogResult = "Confirm";
       await this.handleConfirm();
@@ -34,11 +27,14 @@ export default {
     async handleConfirm() {},
     cancel() {
       this.dialogResult = "Cancel";
-      this.close();
+      this.handleClose(this.close);
     },
     close() {
       this.$emit("close", this.dialogResult);
       this.isShow = false;
+    },
+    handleClose(done) {
+      done();
     },
   },
 };

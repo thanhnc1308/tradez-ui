@@ -19,6 +19,7 @@
         <base-date-picker
           v-model="currentItem.journal_date"
           type="datetime"
+          :disabled="isViewing"
           placeholder="Please pick a date"
         />
       </base-form-item>
@@ -26,6 +27,7 @@
         <el-select
           v-model="currentItem.symbol"
           class="filter-item"
+          :disabled="isViewing"
           placeholder="Please select"
         >
           <el-option
@@ -39,6 +41,7 @@
       <base-form-item label="Type" prop="transaction_type">
         <el-select
           v-model="currentItem.transaction_type"
+          :disabled="isViewing"
           class="filter-item"
           placeholder="Please select type"
         >
@@ -51,17 +54,18 @@
         </el-select>
       </base-form-item>
       <base-form-item label="Entry" prop="entry">
-        <base-input-number v-model="currentItem.entry" />
+        <base-input-number :disabled="isViewing" v-model="currentItem.entry" />
       </base-form-item>
       <base-form-item label="Exit" prop="exit">
-        <base-input-number v-model="currentItem.exit" />
+        <base-input-number :disabled="isViewing" v-model="currentItem.exit" />
       </base-form-item>
       <base-form-item label="PnL" prop="pnl">
-        <base-input-number v-model="currentItem.pnl" />
+        <base-input-number :disabled="isViewing" v-model="currentItem.pnl" />
       </base-form-item>
       <base-form-item label="Screenshot" prop="screenshot">
         <el-upload
           class="avatar-uploader"
+          :disabled="isViewing"
           v-if="!currentItem.screenshot"
           action="https://jsonplaceholder.typicode.com/posts/"
           :show-file-list="false"
@@ -79,22 +83,25 @@
           <i class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
         <base-image
-            v-if="currentItem.screenshot"
-            :src="currentItem.screenshot"
-            fit="cover"
-          />
+          v-if="currentItem.screenshot"
+          :src="currentItem.screenshot"
+          fit="cover"
+        />
       </base-form-item>
       <base-form-item label="Comment" prop="comment">
         <base-input
           :autosize="{ minRows: 2, maxRows: 4 }"
           type="textarea"
+          :disabled="isViewing"
           v-model="currentItem.comment"
         />
       </base-form-item>
     </base-form>
     <span slot="footer" class="dialog-footer flex flex-end">
       <base-button @click="cancel">Cancel</base-button>
-      <base-button type="primary" @click="confirm">Save</base-button>
+      <base-button v-if="!isViewing" type="primary" @click="confirm"
+        >Save</base-button
+      >
     </span>
   </base-dialog>
 </template>
@@ -102,7 +109,7 @@
 <script>
 import BaseFormDetail from "@/views/base/BaseFormDetail.vue";
 import { callBase } from "@/mixins/callBase";
-import JournalAPI from '@/api/JournalAPI';
+import JournalAPI from "@/api/JournalAPI";
 
 export default {
   name: "DialogAddNewNotification",
@@ -131,7 +138,7 @@ export default {
      */
     formName() {
       return "journal";
-    }
+    },
   },
   methods: {
     /**

@@ -49,7 +49,10 @@
             Edit
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>
-                <span @click="deleteEntity(row)"> Delete </span>
+                <div @click="view(row)">View</div>
+              </el-dropdown-item>
+              <el-dropdown-item>
+                <span @click="deleteEntity(row)">Delete</span>
               </el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
