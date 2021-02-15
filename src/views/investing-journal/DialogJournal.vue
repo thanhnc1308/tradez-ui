@@ -151,7 +151,7 @@ export default {
      * @override
      */
     resetForm() {
-      debugger
+      
       this.currentItem = {
         journal_date: new Date(),
         symbol: "VIC",

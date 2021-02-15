@@ -1,5 +1,5 @@
 <template>
-  <div ref="rightPanel" :class="{show:show}" class="rightPanel-container">
+  <div v-show="userSettings.showGlobalSettingsButton" ref="rightPanel" :class="{show:show}" class="rightPanel-container">
     <div class="rightPanel-background" />
     <div class="rightPanel">
       <div class="handle-button" :style="{'top':buttonTop+'px','background-color':theme}" @click="show=!show">
@@ -14,6 +14,7 @@
 
 <script>
 import { addClass, removeClass } from '@/utils'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'RightPanel',
@@ -33,6 +34,9 @@ export default {
     }
   },
   computed: {
+    ...mapGetters([
+      'userSettings'
+    ]),
     theme() {
       return this.$store.state.settings.theme
     }

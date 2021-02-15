@@ -1,6 +1,16 @@
 <template>
   <div class="app-container">
     Settings
+    <div>
+      Show global settings button
+      <base-switch
+        v-model="userSettings.showGlobalSettingsButton"
+        active-color="#13ce66"
+        active-text="Show"
+        @change="$store.dispatch('userSettings/showGlobalSettingsButton', $event)"
+        inactive-text="Hide">
+      </base-switch>
+    </div>
   </div>
 </template>
 
@@ -16,7 +26,7 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'name'
+      'userSettings'
     ])
   },
   created() {

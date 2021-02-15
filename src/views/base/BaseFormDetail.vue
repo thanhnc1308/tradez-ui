@@ -81,7 +81,7 @@ export default {
     };
   },
   mounted() {
-    debugger
+    
     switch (this.formStatus) {
       case "Create":
         this.create();
@@ -98,7 +98,7 @@ export default {
   },
   watch: {
     currentItem(_old, _new) {
-      debugger
+      
     }
   },
   methods: {
@@ -133,9 +133,9 @@ export default {
       const me = this;
       if (await this.validate()) {
         let config = SAVE_CONFIG[this.formStatus];
-        debugger
+        
         let response = await me.api[config.method](me.currentItem);
-        debugger
+        
         if (response && response.success) {
           this.$notify({
             title: "Success",
@@ -184,7 +184,7 @@ export default {
      * @override
      */
     resetForm() {
-      debugger
+      
       this.currentItem = {};
     },
     //#endregion CRUD

@@ -2,7 +2,7 @@ import { EnumColumnType, EnumFormatType } from "@/common/enum";
 
 export const columnsJournal = [
   {
-    dataField: "date",
+    dataField: "journal_date",
     label: "Date",
     sortable: "custom",
     columnAlign: "center",
@@ -21,7 +21,7 @@ export const columnsJournal = [
     formatType: EnumFormatType.Text
   },
   {
-    dataField: "type",
+    dataField: "transaction_type",
     label: "Type",
     columnAlign: "center",
     dataAlign: "center",
