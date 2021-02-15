@@ -60,57 +60,34 @@ export default class TableStore {
 
   //#region API
   async load() {
-    let url = this.proxy.url;
-    let service = HttpClient;
-    let data = await service.request({
-      url: url,
-      method: 'get',
-    })
-    // paging
-    if (data.meta) {
-      this.data = data.items;
+    if (this.proxy.type === "cache") {
+      await this.loadFromCache();
     } else {
-      this.data = data;
+      await this.loadFromServer();
     }
   }
-  // load() {
-    // this.data = [
-    //   {
-    //     id: 1,
-    //     date: new Date(),
-    //     symbol: "RAL",
-    //     type: "Buy",
-    //     entry: 100000,
-    //     exit: 120000,
-    //     pnl: 20,
-    //     status: 1,
-    //     // screenshot:
-    //     //   "https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg",
-    //     comment: "this is a comment"
-    //   }
-    // ];
 
-  //   if (this.proxy.type === "cache") {
-  //     this.loadFromCache();
-  //   } else {
-  //     this.loadFromServer();
-  //   }
-  // }
-
-  loadFromCache() {
+  async loadFromCache() {
     this.loading = true;
     this.loading = true;
   }
 
-  loadFromServer() {
+  async loadFromServer() {
     this.loading = true;
-    if (this.proxy.url) {
-      let service = HttpClient;
-      let response = service.get({
-        url: this.proxy.url,
-        method: 'get',
-        data
-      })
+    let url = this.proxy.url,
+      service = HttpClient,
+      res = await service.request({
+        url: url,
+        method: "get"
+      });
+    if (res && res.success) {
+      let data = res.data;
+      // paging
+      if (data.meta) {
+        this.data = data.items;
+      } else {
+        this.data = data;
+      }
     }
     this.loading = true;
   }

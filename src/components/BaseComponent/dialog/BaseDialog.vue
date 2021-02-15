@@ -6,6 +6,8 @@
     <div
       v-show="visible"
       class="el-dialog__wrapper"
+      v-shortkey="{Save: ['ctrl', 's'], Close: ['esc']}"
+      @shortkey="handleShortkeyAction"
       @click.self="handleWrapperClick">
       <div
         role="dialog"
@@ -155,6 +157,9 @@
     },
 
     methods: {
+      handleShortkeyAction(event) {
+        this.$emit('shortkey', event);
+      },
       getMigratingConfig() {
         return {
           props: {

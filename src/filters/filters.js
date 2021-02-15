@@ -75,7 +75,8 @@ export function uppercaseFirst(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-export function formatDate(date, format = "{d}-{m}-{y}") {
+export function formatDate(sDate, format = "{d}-{m}-{y}") {
+  let date = new Date(sDate);
   return parseTime(date, format);
 }
 

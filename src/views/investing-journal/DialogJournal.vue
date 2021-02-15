@@ -2,6 +2,7 @@
   <base-dialog
     :title="title"
     :visible.sync="isShow"
+    @shortkey="handleShortkeyAction"
     width="75%"
     :before-close="handleClose"
   >
@@ -108,15 +109,22 @@ export default {
   extends: BaseFormDetail,
   mixins: [callBase],
   data() {
-    /**
-     * @override
-     */
-    this.api = JournalAPI;
-
     this.listStock = ["RAL", "HPG", "VIC"];
     this.listType = ["Buy", "Sell"];
     return {};
   },
+  // mounted() {
+  //   this.currentItem = {
+  //     journal_date: new Date(),
+  //     symbol: "VIC",
+  //     transaction_type: "Buy",
+  //     status: "win",
+  //     entry: 100000,
+  //     exit: 100000,
+  //     pnl: 100000,
+  //     comment: "comment",
+  //   };
+  // },
   computed: {
     /**
      * @override
@@ -126,6 +134,12 @@ export default {
     }
   },
   methods: {
+    /**
+     * @override
+     */
+    getApi() {
+      return new JournalAPI();
+    },
     /**
      * @override
      */
@@ -151,7 +165,6 @@ export default {
      * @override
      */
     resetForm() {
-      
       this.currentItem = {
         journal_date: new Date(),
         symbol: "VIC",

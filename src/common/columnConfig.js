@@ -69,7 +69,8 @@ export const columnsJournal = [
     columnAlign: "center",
     dataAlign: "center",
     width: "150",
-    columnType: EnumColumnType.Image
+    columnType: EnumColumnType.Image,
+    formatType: EnumFormatType.Text
   },
   {
     dataField: "comment",

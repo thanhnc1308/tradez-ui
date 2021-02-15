@@ -66,6 +66,7 @@ import StockViewer from "@/views/market-info/StockViewer";
 import { columnsJournal } from "@/common/columnConfig";
 import DialogJournal from "@/views/investing-journal/DialogJournal.vue";
 import TableStore from "@/common/TableStore";
+import JournalAPI from '@/api/JournalAPI';
 
 export default {
   name: "InvestingJournal",
@@ -84,6 +85,12 @@ export default {
     return {};
   },
   methods: {
+    /**
+     * @override
+     */
+    getApi() {
+      return new JournalAPI();
+    },
     /**
      * form dialog detail
      * @override

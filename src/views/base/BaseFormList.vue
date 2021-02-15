@@ -1,5 +1,6 @@
 <script>
 import DialogUtil from "@/common/dialogUtil";
+import BaseAPI from "@/api/BaseAPI";
 
 export default {
   name: "BaseFormList",
@@ -9,12 +10,19 @@ export default {
     },
   },
   data() {
+    this.api = this.getApi();
     return {
       downloadLoading: false,
       list: [],
     };
   },
   methods: {
+    /**
+     * @override
+     */
+    getApi() {
+      return new BaseAPI();
+    },
     //#endregion CRUD
     /**
      * form dialog detail
@@ -70,7 +78,7 @@ export default {
     },
     onDialogClose(dialogResult) {
       if (dialogResult === "Confirm") {
-        this.tableContainer.doQuery();
+        this.refresh();
       }
     },
     deleteEntity(row) {
@@ -81,15 +89,23 @@ export default {
         type: "warning",
       })
         .then(async () => {
-          let id = row.id;
-          // await this.api.delete(row.key)
-          // this.list.splice($index, 1)
-          this.$notify({
-            title: "Success",
-            message: "Delete Successfully",
-            type: "success",
-            duration: 2000,
-          });
+          const res = await this.api.delete(row)
+          if (res && res.success) {
+            this.$notify({
+              title: "Success",
+              message: "Delete Successfully",
+              type: "success",
+              duration: 2000,
+            });
+          } else {
+            this.$notify({
+              title: "Error",
+              message: res.message || "An error has occured",
+              type: "danger",
+              duration: 2000,
+            });
+          }
+          await this.refresh();
         })
         .catch((err) => {
           console.error(err);

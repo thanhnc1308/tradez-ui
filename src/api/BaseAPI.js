@@ -80,8 +80,9 @@ export default class BaseAPI {
     }
   }
 
-  delete(id) {
-    let url = this.getDeleteUrl(id);
+  delete(payload) {
+    let id = this.getPayloadId(payload),
+      url = this.getDeleteUrl(id);
     return this.service.request({
       url: url,
       method: "delete"

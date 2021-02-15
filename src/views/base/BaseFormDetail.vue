@@ -72,21 +72,22 @@ export default {
      */
     validationContainer() {
       return this.$refs["dataForm"];
-    }
+    },
   },
   data() {
-    this.api = BaseAPI;
+    this.api = this.getApi();
     return {
       currentItem: {},
     };
   },
   mounted() {
-    
     switch (this.formStatus) {
       case "Create":
         this.create();
+        break;
       case "Edit":
         this.edit();
+        break;
       case "Duplicate":
         this.duplicate();
         break;
@@ -96,13 +97,14 @@ export default {
         break;
     }
   },
-  watch: {
-    currentItem(_old, _new) {
-      
-    }
-  },
   methods: {
     //#region CRUD
+    /**
+     * @override
+     */
+    getApi() {
+      return new BaseAPI();
+    },
     create() {
       this.resetForm();
       this.resetValidation();
@@ -133,9 +135,7 @@ export default {
       const me = this;
       if (await this.validate()) {
         let config = SAVE_CONFIG[this.formStatus];
-        
         let response = await me.api[config.method](me.currentItem);
-        
         if (response && response.success) {
           this.$notify({
             title: "Success",
@@ -146,7 +146,7 @@ export default {
         } else if (response && response.message) {
           this.$notify({
             title: "Error",
-            message: response.message,
+            message: response.message || "An error has occured",
             type: "danger",
             duration: 2000,
           });
@@ -184,10 +184,19 @@ export default {
      * @override
      */
     resetForm() {
-      
       this.currentItem = {};
     },
     //#endregion CRUD
+    handleShortkeyAction(event) {
+      switch (event.srcKey) {
+        case "Save":
+          this.confirm();
+          break;
+        case "Close":
+          this.close();
+          break;
+      }
+    },
   },
 };
 </script>
