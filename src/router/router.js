@@ -144,6 +144,18 @@ export const asyncRoutes = [
     ]
   },
   {
+    path: '/backtest',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        component: () => import('@/views/backtest/Backtest.vue'),
+        name: 'Backtest',
+        meta: { title: 'Backtest', icon: 'clipboard' }
+      }
+    ]
+  },
+  {
     path: '/watch-list',
     component: Layout,
     children: [
