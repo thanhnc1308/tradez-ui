@@ -41,6 +41,7 @@
         @dblclick="onDblClickTableRow"
         :store="storeJournal"
         pagination
+        hasActionColumn
         autoLoad
         :columns="columnsJournal"
       >

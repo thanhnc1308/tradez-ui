@@ -82,10 +82,10 @@ export default class TableStore {
     this.page = options.page;
     this.per_page = options.per_page;
 
-    let url = this.proxy.url,
+    let url = this.buildRequestUrl(options),
       service = HttpClient,
       res = await service.request({
-        url: `${url}?page=${options.page}&per_page=${options.per_page}`, // ?page=1&per_page=100
+        url,
         method: "get"
       });
     if (res && res.success) {
@@ -101,6 +101,23 @@ export default class TableStore {
       }
     }
     this.loading = true;
+  }
+  buildRequestUrl(options) {
+    let url = `${this.proxy.url}?page=${options.page}&per_page=${options.per_page}`,
+      filter = this.buildFilterUrl();
+    if (filter) {
+      url += filter
+    }
+    return url;
+  }
+  buildFilterUrl() {
+    let url = "";
+    if (this.filters) {
+      for (const item of this.filters) {
+        url += `&${item.key}${item.operator}${item.value}`
+      }
+    }
+    return url;
   }
   //#endregion API
   //#region CRUD

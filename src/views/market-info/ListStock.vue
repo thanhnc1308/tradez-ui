@@ -10,15 +10,6 @@
           style="margin-left: 10px"
           type="primary"
           icon="el-icon-edit"
-          @click="create"
-        >
-          Add
-        </base-button>
-        <base-button
-          class="filter-item"
-          style="margin-left: 10px"
-          type="primary"
-          icon="el-icon-edit"
           @click="refresh"
         >
           Refresh
@@ -39,24 +30,11 @@
         ref="tableData"
         @click="onClickTableRow"
         @dblclick="onDblClickTableRow"
-        :store="storeJournal"
+        :store="storeMarketInfo"
         pagination
         autoLoad
-        :columns="columnsJournal"
+        :columns="columnsStockPrice"
       >
-        <template slot="actions" slot-scope="{ row }">
-          <el-dropdown split-button type="primary" size="small" @click="edit(row)">
-            Edit
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>
-                <div @click="view(row)">View</div>
-              </el-dropdown-item>
-              <el-dropdown-item>
-                <span @click="deleteEntity(row)">Delete</span>
-              </el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
-        </template>
       </table-viewer>
     </template>
   </layout-list>
@@ -66,24 +44,23 @@
 import BaseFormList from "@/views/base/BaseFormList.vue";
 import LayoutList from "@/views/base/LayoutList.vue";
 import StockViewer from "@/views/market-info/StockViewer";
-import { columnsJournal } from "@/common/columnConfig";
-import DialogJournal from "@/views/investing-journal/DialogJournal.vue";
+import { columnsStockPrice } from "@/common/columnConfig";
 import TableStore from "@/common/TableStore";
-import JournalAPI from '@/api/JournalAPI';
+import StockPriceAPI from "@/api/StockPriceAPI";
 
 export default {
-  name: "InvestingJournal",
+  name: "ListStock",
   extends: BaseFormList,
   components: {
     LayoutList,
   },
   data() {
-    this.columnsJournal = columnsJournal;
-    this.storeJournal = new TableStore({
+    this.columnsStockPrice = columnsStockPrice;
+    this.storeMarketInfo = new TableStore({
       proxy: {
-        url: "/journals",
+        url: "/stock_price/market_info",
         type: "remote",
-      }
+      },
     });
     return {};
   },
@@ -92,14 +69,7 @@ export default {
      * @override
      */
     getApi() {
-      return new JournalAPI();
-    },
-    /**
-     * form dialog detail
-     * @override
-     */
-    getDialogDetailForm() {
-      return DialogJournal;
+      return new StockPriceAPI();
     },
     /**
      * @override
@@ -111,7 +81,7 @@ export default {
      * @override
      */
     onDblClickTableRow(row) {
-      this.edit(row);
+      StockViewer.show(row);
     },
     /**
      * @override
@@ -153,7 +123,7 @@ export default {
      * @override
      */
     getFileNameExcel() {
-      return "investing-journal";
+      return "stock";
     },
   },
 };

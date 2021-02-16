@@ -112,7 +112,7 @@ export default {
     },
     hasActionColumn: {
       type: Boolean,
-      default: true,
+      default: false,
     },
   },
   components: {
