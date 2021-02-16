@@ -46,6 +46,12 @@ export default class TableStore {
 
   loading = false;
 
+  paging = true;
+
+  filters = [];
+
+  sorters = [];
+
   setProperties(options) {
     for (const key in options) {
       if (Object.hasOwnProperty.call(options, key)) {
@@ -59,11 +65,11 @@ export default class TableStore {
   }
 
   //#region API
-  async load(opts={}) {
+  async load(opts = {}) {
     const options = {
       page: opts.page || 1,
-      per_page: opts.limit || 20,
-    }
+      per_page: opts.limit || 20
+    };
     if (this.proxy.type === "cache") {
       await this.loadFromCache(options);
     } else {
@@ -97,7 +103,7 @@ export default class TableStore {
         this.pages = data.meta.pages;
       } else {
         this.data = data;
-        this.total = data.length
+        this.total = data.length;
       }
     }
     this.loading = true;
@@ -105,8 +111,12 @@ export default class TableStore {
   buildRequestUrl(options) {
     let url = `${this.proxy.url}?page=${options.page}&per_page=${options.per_page}`,
       filter = this.buildFilterUrl();
+    if (!this.paging) {
+      url = `${this.proxy.url}?`;
+    }
+
     if (filter) {
-      url += filter
+      url += filter;
     }
     return url;
   }
@@ -114,7 +124,9 @@ export default class TableStore {
     let url = "";
     if (this.filters) {
       for (const item of this.filters) {
-        url += `&${item.key}${item.operator}${item.value}`
+        if (item.value) {
+          url += `&${item.key}${item.operator}${item.value}`;
+        }
       }
     }
     return url;
@@ -124,7 +136,20 @@ export default class TableStore {
   add(item) {}
   remove(item) {}
   removeAll() {
-    this.data.splice();
+    this.data.removeAll();
+  }
+  addFilter(filter) {
+    if (filter instanceof Array) {
+      this.filters.append(filter);
+    } else if (filter instanceof Object) {
+      this.filters.push(filter);
+    }
+  }
+  removeFilter(filter) {
+    this.filters.remove(filter);
+  }
+  clearFilter() {
+    this.filters.removeAll();
   }
   filter() {}
   localFilter() {}

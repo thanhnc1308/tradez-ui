@@ -6,6 +6,9 @@
     <div class="table">
       <slot name="table" />
     </div>
+    <div class="back-to-top">
+      <base-backtop target=".layout-list"></base-backtop>
+    </div>
   </div>
 </template>
 
