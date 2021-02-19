@@ -2,7 +2,7 @@ import { EnumColumnType, EnumFormatType } from "@/common/enum";
 
 export const columnsJournal = [
   {
-    dataField: "journal_date",
+    dataField: "transaction_date",
     label: "Date",
     sortable: "custom",
     columnAlign: "center",
@@ -30,8 +30,17 @@ export const columnsJournal = [
     formatType: EnumFormatType.Text
   },
   {
+    dataField: "quantity",
+    label: "Quantity",
+    columnAlign: "center",
+    dataAlign: "center",
+    width: "100",
+    columnType: EnumColumnType.Number,
+    formatType: EnumFormatType.Number
+  },
+  {
     dataField: "entry",
-    label: "Entry",
+    label: "Entry price",
     columnAlign: "center",
     dataAlign: "center",
     width: "100",
@@ -40,7 +49,16 @@ export const columnsJournal = [
   },
   {
     dataField: "exit",
-    label: "Exit",
+    label: "Exit price",
+    columnAlign: "center",
+    dataAlign: "center",
+    width: "100",
+    columnType: EnumColumnType.Number,
+    formatType: EnumFormatType.Number
+  },
+  {
+    dataField: "total_value",
+    label: "Total value",
     columnAlign: "center",
     dataAlign: "center",
     width: "100",
@@ -73,8 +91,8 @@ export const columnsJournal = [
     formatType: EnumFormatType.Text
   },
   {
-    dataField: "comment",
-    label: "Comment",
+    dataField: "comments",
+    label: "Comments",
     columnAlign: "center",
     dataAlign: "center",
     minWidth: "200",
