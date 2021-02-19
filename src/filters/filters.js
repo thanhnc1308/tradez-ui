@@ -90,6 +90,8 @@ export function formatData(data, formatType) {
       return formatDate(data);
     case EnumFormatType.Percentage:
       return formatPercentage(data);
+    case EnumFormatType.AbsPercentage:
+      return formatPercentage(Math.abs(data));
     case EnumFormatType.Timestamp:
       return formatDate(data, "{d}-{m}-{y} {h}-{i}-{s}");
     case EnumFormatType.Number:

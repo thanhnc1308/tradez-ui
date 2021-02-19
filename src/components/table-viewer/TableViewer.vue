@@ -41,6 +41,13 @@
           >
             {{ row[column.dataField] | formatData(column.formatType) }}
           </base-tag>
+          <base-tag
+            @dblclick="onDblClickTableRow(row, column)"
+            v-else-if="column.columnType === EnumColumnType.SignedTag"
+            :type="row[column.dataField] >= 0 ? 'success' : 'danger'"
+          >
+            {{ row[column.dataField] | formatData(column.formatType) }}
+          </base-tag>
           <base-image
             v-else-if="column.columnType === EnumColumnType.Image && row[column.dataField]"
             class="c-pointer image-in-row"

@@ -10,7 +10,8 @@ export const EnumColumnType = {
     Number: 3,
     Link: 4,
     Image: 5,
-    Tag: 6
+    Tag: 6,
+    SignedTag: 7
 }
 
 export const EnumFormatType = {
@@ -21,4 +22,5 @@ export const EnumFormatType = {
     Currency: 4,
     Percentage: 5,
     Number: 6,
+    AbsPercentage: 7
 }

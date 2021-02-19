@@ -53,15 +53,15 @@ export const columnsJournal = [
     columnAlign: "center",
     dataAlign: "center",
     width: "100",
-    tagTypeFilter: function(data) {
-      if (data.status === "win") {
-        return "success";
-      } else {
-        return "danger";
-      }
-    },
-    columnType: EnumColumnType.Tag,
-    formatType: EnumFormatType.Percentage
+    // tagTypeFilter: function(data) {
+    //   if (data.status === "win") {
+    //     return "success";
+    //   } else {
+    //     return "danger";
+    //   }
+    // },
+    columnType: EnumColumnType.SignedTag,
+    formatType: EnumFormatType.AbsPercentage
   },
   {
     dataField: "screenshot",
@@ -100,15 +100,15 @@ export const columnsStockPrice = [
     columnAlign: "center",
     dataAlign: "center",
     minWidth: "200",
-    tagTypeFilter: function(data) {
-      if (data.status === "up") {
-        return "success";
-      } else {
-        return "danger";
-      }
-    },
-    columnType: EnumColumnType.Tag,
-    formatType: EnumFormatType.Percentage
+    // tagTypeFilter: function(data) {
+    //   if (data.status === "up") {
+    //     return "success";
+    //   } else {
+    //     return "danger";
+    //   }
+    // },
+    columnType: EnumColumnType.SignedTag,
+    formatType: EnumFormatType.AbsPercentage
   }
 ];
 
@@ -129,7 +129,7 @@ export const columnsHistoricalPrice = [
     columnAlign: "center",
     dataAlign: "center",
     width: "120",
-    columnType: EnumColumnType.Link,
+    columnType: EnumColumnType.Text,
     formatType: EnumFormatType.Text
   },
   {
@@ -164,7 +164,7 @@ export const columnsHistoricalPrice = [
     label: "Close",
     columnAlign: "center",
     dataAlign: "center",
-    width: "100",
+    minWidth: "100",
     columnType: EnumColumnType.Number,
     formatType: EnumFormatType.Number
   },
