@@ -3,11 +3,16 @@
  */
 import Vue from "vue";
 import HttpClient from "@/api/HttpClient";
+import { delete } from "vue/types/umd";
 
-export default class TableStore {
+export default class TableStore extends Vue {
   constructor(options = {}) {
+    super();
+    this.init();
     this.setProperties(options);
-    // this.load(options);
+    if (this.model) {
+      this.idProperty = this.model.prototype.getIdProperty();
+    }
   }
 
   /**
@@ -40,22 +45,53 @@ export default class TableStore {
     type: "api"
   };
 
-  remoteFilter = false;
+  init() {
+    let privateData = {
+      /**
+       * list of record to be removed update in server
+       */
+      _removed: [],
+      /**
+       * finish loading data from server
+       */
+      complete: true,
+      remoteFilter: false,
+      remoteSort: false,
+      loading: false,
+      paging: true,
+      filters: [],
+      sorters: [],
+      model: null,
+      idProperty: null,
+      _loaded: true,
+      _filterFn: null,
+      _filterChanged: false
+    };
 
-  remoteSort = false;
-
-  loading = false;
-
-  paging = true;
-
-  filters = [];
-
-  sorters = [];
+    Object.keys(privateData).forEach(key => {
+      if (privateData.hasOwnProperty(key)) {
+        Object.defineProperty(this, key, {
+          enumerable: false,
+          configurable: false,
+          get: function() {
+            return privateData[key];
+          },
+          set: function(value) {
+            privateData[key] = value;
+          }
+        });
+      }
+    });
+  }
 
   setProperties(options) {
     for (const key in options) {
       if (Object.hasOwnProperty.call(options, key)) {
-        this[key] = options[key];
+        if (key == "data") {
+          this.loadRecords(options[key]);
+        } else {
+          this[key] = options[key];
+        }
         // Object.defineProperty(this, key, {
         //   get() { return this[key]; },
         //   set(newValue) { this[key] = newValue; }
@@ -108,6 +144,9 @@ export default class TableStore {
     }
     this.loading = true;
   }
+  loadRecords(data) {
+    this.data = data;
+  }
   buildRequestUrl(options) {
     let url = `${this.proxy.url}?page=${options.page}&per_page=${options.per_page}`,
       filter = this.buildFilterUrl();
@@ -135,15 +174,31 @@ export default class TableStore {
   //#region CRUD
   add(item) {}
   remove(item) {}
-  removeAll() {
+  clearData() {
     this.data.removeAll();
   }
+  //#endregion CRUD
+  //#region filter
   addFilter(filter) {
     if (filter instanceof Array) {
       this.filters.append(filter);
     } else if (filter instanceof Object) {
       this.filters.push(filter);
+    } else {
+      return;
     }
+    this._filterFn = null;
+    this._filterChanged = true;
+    this.localFilter();
+  }
+  /**
+   * generate filter function for local filter
+   */
+  genFilterFn() {
+    if (this.filters && !this._filterFn) {
+      this._filterFn = null; // generate here
+    }
+    return this._filterFn;
   }
   removeFilter(filter) {
     this.filters.remove(filter);
@@ -152,10 +207,36 @@ export default class TableStore {
     this.filters.removeAll();
   }
   filter() {}
-  localFilter() {}
+  localFilter(force) {
+    if (!this.remoteFilter && this.dataSource.length > 0) {
+      if (force || this._filterChanged) {
+        if (force) {
+          this._filterFn = null;
+        }
+
+        let filtered = this.dataSource;
+        let filterFn = this.genFilterFn();
+        if (filterFn) {
+          filtered = this.dataSource.filter(filterFn);
+        }
+
+        this.data.removeAll();
+        this.data.append(filtered);
+        this.localSort();
+        this.pageTotal = this.getCount();
+        delete this._filterChanged;
+      }
+    }
+  }
+  //#endregion filter
+  //#region sort
   sort() {}
   localSort() {}
-  //#endregion CRUD
+  genSortFn() {
+    if (!this._sortFn) {
+    }
+  }
+  //#endregion sort
   //#region Methods
   getCount() {
     return this.data.length;
@@ -165,6 +246,9 @@ export default class TableStore {
   }
   getOriginalData() {
     return this.dataSource;
+  }
+  isLoaded() {
+    return this._loaded;
   }
   //#endregion Methods
 }

@@ -8,6 +8,7 @@ export default class BaseAPI {
    * prefix of api
    */
   prefix = null;
+  controller = null;
 
   constructor() {
     this.service = HttpClient;

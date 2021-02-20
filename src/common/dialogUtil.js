@@ -20,12 +20,19 @@ class DialogUtil {
     this.instance.show();
   }
 
+  /**
+   * show a dialog
+   * @param {*} component
+   * @param {*} owner
+   * @param {*} initOptions contains options for constructor and events
+   * @param {*} showOptions
+   */
   showDialog2(component, owner, initOptions = {}, showOptions = {}) {
     if (component) {
       // if (!initOptions.i18n) {
       //   initOptions.i18n = i18n;
       // }
-      initOptions.router = router;
+      initOptions.options.router = router;
       let frm = this.prepareDialog(component, owner, initOptions);
       if (frm && frm.show instanceof Function) {
         frm.owner = owner;
@@ -35,7 +42,38 @@ class DialogUtil {
     }
   }
 
-  prepareDialog(component, owner, initOptions) {}
+  /**
+   * Create a dialog class from component
+   * @param {'*'} component
+   * @param {*} owner
+   * @param {*} initOptions
+   */
+  prepareDialog(component, owner, initOptions) {
+    if (component && owner) {
+      let DialogType = Vue.extend(component),
+        { options } = initOptions,
+        dialog = new DialogType(options),
+        { events } = initOptions;
+      // register event handler
+      for (const key in events) {
+        if (Object.hasOwnProperty.call(events, key)) {
+          const fn = events[key];
+          dialog.$on(key, fn);
+        }
+      }
+      dialog.$mount();
+
+      let el = owner;
+      // if owner is a dialog, append to el of dialog so that new dialog is not below the owner dialog
+      if (owner.isDialog) {
+        el = owner.$refs.dialogx;
+      } else if (!owner instanceof Element) {
+        el = owner.$el;
+      }
+      el.appendChild(dialog.$el);
+      return dialog;
+    }
+  }
 
   /**
    * show form dialog from path
@@ -72,7 +110,7 @@ class DialogUtil {
     if (component && component.default) {
       FormType = component.default;
     } else {
-      throw new Error("Does not exist form "+ dialogType);
+      throw new Error("Does not exist form " + dialogType);
     }
     return FormType;
   }
@@ -82,6 +120,6 @@ export default new DialogUtil();
 
 const EnumDialogType = {
   Type: 1
-}
+};
 
-export { EnumDialogType }
+export { EnumDialogType };
