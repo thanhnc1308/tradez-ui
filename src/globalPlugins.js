@@ -6,6 +6,17 @@ const install = Vue => {
 
   Vue.mixin({
     /**
+     * add method to return Vue instance
+     */
+    mounted() {
+      if (this.$el && !this.$el.getVueInstance) {
+        this.$el.getVueInstance = () => {
+          return this;
+        };
+      }
+    },
+
+    /**
      * remove all event listeners of the component
      */
     destroyed() {
