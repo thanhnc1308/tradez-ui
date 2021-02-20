@@ -73,11 +73,24 @@ export default {
     validationContainer() {
       return this.$refs["dataForm"];
     },
+    formDetail() {
+      return this.$refs[this.formDetailName];
+    },
   },
   data() {
     this.api = this.getApi();
     return {
       currentItem: {},
+      /**
+       * store of form list
+       */
+      store: null,
+      /**
+       * Owner form in case of quickAdd
+       */
+      ownerForm: null,
+      loading: false,
+      processing: false,
     };
   },
   mounted() {
@@ -98,6 +111,62 @@ export default {
     }
   },
   methods: {
+    show(options = {}) {
+      this.resetForm();
+      this.resetValidation();
+      if (this.formStatus === "Create" || this.formStatus === "QuickAdd") {
+        // this.prepareForInsert(options);
+      } else {
+        // this.loadDetail();
+      }
+      this.resetErrors();
+    },
+    resetErrors() {},
+    hide() {
+      this.resetCurrentItem();
+      this.close();
+    },
+    resetCurrentItem() {
+      this.setTimeout(() => {
+        this.currentItem = {};
+      });
+    },
+    async cancel(event) {
+      let dirty = this.checkChanges();
+      if (!dirty) {
+        this.resetValidation();
+        // if (this.store) {
+        //   this.store.rejectChanges();
+        // }
+        this.hide();
+      } else {
+        let answer = "Yes";
+        switch (answer) {
+          case 'Yes':
+            if (event && !event.cancel) {
+              event.cancel = true;
+              this.buttonClick('Save');
+              this.resetValidation();
+              this.dialogResult = 'Comfirm';
+            }
+            break;
+          case 'No':
+            this.resetValidation();
+            // if (this.store) {
+            //   this.store.rejectChanges();
+            // }
+            this.dialogResult = 'Cancel';
+            this.hide();
+            break;
+          case 'Cancel':
+            this.dialogResult = 'Cancel';
+            // this.forcusFirstControl();
+            break;
+          default:
+            break;
+        }
+      }
+    },
     //#region CRUD
     /**
      * @override
@@ -132,10 +201,18 @@ export default {
       await this.save();
     },
     async save() {
-      const me = this;
+      const self = this;
+
+      if (self.processing) {
+        return;
+      }
+
+      self.processing = true;
+
       if (await this.validate()) {
+        // NCThanh-TODO: show mask
         let config = SAVE_CONFIG[this.formStatus];
-        let response = await me.api[config.method](me.currentItem);
+        let response = await self.api[config.method](self.currentItem);
         if (response && response.success) {
           this.$notify({
             title: "Success",
@@ -152,6 +229,8 @@ export default {
           });
         }
       }
+
+      self.processing = false;
     },
     async validate() {
       return (
@@ -214,9 +293,9 @@ export default {
     },
     checkChanges() {
       switch (this.formStatus) {
-        case 'Create':
+        case "Create":
           return true;
-        case 'Edit':
+        case "Edit":
           for (const key in this.selectedItem) {
             if (Object.hasOwnProperty.call(this.selectedItem, key)) {
               const element = this.selectedItem[key];
@@ -226,11 +305,48 @@ export default {
             }
           }
           return false;
-        case 'View':
+        case "View":
         default:
           return false;
       }
-    }
+    },
+    /**
+     * model of current entity
+     * there is no store and modelin case of QuickAdd
+     * @override
+     */
+    getCurrentStore() {
+      return this.store || this.initStore();
+    },
+    initStore() {
+      throw new Error("init store");
+    },
+    addHandler() {
+      // this.addTableHandler();
+    },
+    addTableHandler() {
+      if (this.tableContainer) {
+        this.tableContainer.$on("filter", () => {});
+        this.tableContainer.$on("loaded", () => {});
+        this.tableContainer.$on("perPageChanged", () => {});
+      }
+    },
+    removeHandler() {
+      // this.removeTableHandler();
+    },
+    removeTableHandler() {
+      if (this.tableContainer) {
+        this.tableContainer.$off("filter", () => {});
+        this.tableContainer.$off("loaded", () => {});
+        this.tableContainer.$off("perPageChanged", () => {});
+      }
+    },
   },
+  /**
+   * remove all event listener before destroying the form
+   */
+  beforeDestroy() {
+    this.removeHandler();
+  }
 };
 </script>

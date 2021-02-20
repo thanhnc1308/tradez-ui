@@ -11,7 +11,7 @@ class HttpClient {
       this.init();
       HttpClient.instance = this;
     }
-    return HttpClient.instance
+    return HttpClient.instance;
   }
   init() {
     this.service = axios.create({
@@ -114,6 +114,30 @@ class HttpClient {
   delete(options) {
     return this.service.delete(options);
   }
+
+  callRequest(options) {
+    let token = null; // NCThanh-TODO: process token
+
+    this.processHeader(options);
+    this.processData(options);
+    let _axios = axios.create();
+    _axios.defaults.timeout = 20000;
+    const promise = new Promise((resolve, reject) => {
+      _axios(options)
+        .then(res => {
+          resolve(res);
+        })
+        .catch(ex => {
+          reject(ex);
+          // NCThanh-TODO: log exception here
+        });
+    });
+    return promise;
+  }
+
+  processData(options) {}
+
+  processHeader(options) {}
 }
 
 const instance = new HttpClient();

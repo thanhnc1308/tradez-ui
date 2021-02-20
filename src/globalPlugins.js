@@ -1,8 +1,10 @@
 import Vue from "vue";
 import Converter from "@/utils/converter";
+import Utility from "@/utils/utility";
 
 const install = Vue => {
   Vue.prototype.$converter = Converter;
+  Vue.prototype.$utility = Utility;
 
   Vue.mixin({
     /**
