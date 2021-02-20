@@ -21,7 +21,9 @@ import "./utils/error-log"; // error log
 
 import * as filters from "./filters/filters"; // global filters
 
-import globalComponents from "@/globalComponents";
+import "@/globalComponents";
+
+import "@/globalPlugins";
 
 import "./prototype";
 
