@@ -70,34 +70,36 @@ export default {
         },
         fromDate = formatDate(this.daterange[0]),
         toDate = formatDate(this.daterange[1]);
-      const filters = [
-        {
-          key: "symbol",
-          operator: "=",
-          value: symbol,
-        },
-        {
-          key: "from_date",
-          operator: "=",
-          operand: "and",
-          value: fromDate,
-        },
-        {
-          key: "to_date",
-          operator: "=",
-          operand: "and",
-          value: toDate,
-        },
-      ];
-      this.storeHistoricalPrice.clearFilter();
-      this.storeHistoricalPrice.addFilter(filters);
-      await this.storeHistoricalPrice.load();
-      let data = this.storeHistoricalPrice.getData();
-      this.series = [
-        {
-          data,
-        },
-      ];
+      if (symbol && (fromDate || toDate)) {
+        const filters = [
+          {
+            key: "symbol",
+            operator: "=",
+            value: symbol,
+          },
+          {
+            key: "from_date",
+            operator: "=",
+            operand: "and",
+            value: fromDate,
+          },
+          {
+            key: "to_date",
+            operator: "=",
+            operand: "and",
+            value: toDate,
+          },
+        ];
+        this.storeHistoricalPrice.clearFilter();
+        this.storeHistoricalPrice.addFilter(filters);
+        await this.storeHistoricalPrice.load();
+        let data = this.storeHistoricalPrice.getData();
+        this.series = [
+          {
+            data,
+          },
+        ];
+      }
     },
   },
   data() {

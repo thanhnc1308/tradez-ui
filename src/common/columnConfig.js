@@ -7,7 +7,7 @@ export const columnsJournal = [
     sortable: "custom",
     columnAlign: "center",
     dataAlign: "center",
-    width: "120",
+    width: "100",
     columnType: EnumColumnType.DateTime,
     formatType: EnumFormatType.DateTime
   },
@@ -16,7 +16,7 @@ export const columnsJournal = [
     label: "Symbol",
     columnAlign: "center",
     dataAlign: "center",
-    width: "120",
+    width: "100",
     columnType: EnumColumnType.Link,
     formatType: EnumFormatType.Text
   },
@@ -25,7 +25,7 @@ export const columnsJournal = [
     label: "Type",
     columnAlign: "center",
     dataAlign: "center",
-    width: "100",
+    width: "80",
     columnType: EnumColumnType.Text,
     formatType: EnumFormatType.Text
   },
@@ -34,7 +34,7 @@ export const columnsJournal = [
     label: "Quantity",
     columnAlign: "center",
     dataAlign: "center",
-    width: "100",
+    width: "80",
     columnType: EnumColumnType.Number,
     formatType: EnumFormatType.Number
   },

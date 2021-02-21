@@ -76,8 +76,12 @@ export function uppercaseFirst(string) {
 }
 
 export function formatDate(sDate, format = "{d}-{m}-{y}") {
-  let date = new Date(sDate);
-  return parseTime(date, format);
+  if (sDate) {
+    let date = new Date(sDate);
+    return parseTime(date, format);
+  } else {
+    return "";
+  }
 }
 
 export function formatPercentage(number) {

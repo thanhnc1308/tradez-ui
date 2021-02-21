@@ -3,7 +3,6 @@
  */
 import Vue from "vue";
 import HttpClient from "@/api/HttpClient";
-import { delete } from "vue/types/umd";
 
 export default class TableStore extends Vue {
   constructor(options = {}) {
