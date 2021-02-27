@@ -47,8 +47,7 @@
                 'Input_LOHLC_MACD_Signal',
                 'Input_LOHLC_MACD_Level',
                 'Input_LOHLC_Stock_D',
-                'Input_LOHLC_Stock_K',
-                'comboFilter',
+                'Input_LOHLC_Stock_K'
               ].includes(filter.value.type)
             "
             class="filter-value-item flex"

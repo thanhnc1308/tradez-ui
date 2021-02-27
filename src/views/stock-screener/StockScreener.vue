@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import DialogUtil from "@/common/dialogUtil";
+import DialogUtil from "@/common/DialogUtil";
 
 export default {
   name: "StockScreener",
@@ -35,21 +35,24 @@ export default {
           "@/views/stock-screener/ChooseStockFilters.vue"
         );
       }
-      let initOptions = {
+      if (!this.dialog) {
+        let initOptions = {
           options: {},
           events: {
             close: this.onDialogChooseStockFiltersClose,
           },
-        },
-        showOptions = {};
-      DialogUtil.showDialog2(this.component, this, initOptions, showOptions);
+        };
+        this.dialog = DialogUtil.prepareDialog(this.component, this, initOptions);
+      }
+      let showOptions = {};
+      DialogUtil.showDialog(this.dialog, showOptions);
     },
     onDialogChooseStockFiltersClose(dialogResult, frm) {
       debugger;
       if (dialogResult === "Confirm") {
-        this.loadListStock();
         this.currentParams.stockFilters = frm.stockFilters;
         this.currentParams.titleParam = frm.titleParam;
+        this.loadListStock();
         // set cache currentParams
       }
     },

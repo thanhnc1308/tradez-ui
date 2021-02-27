@@ -1,12 +1,15 @@
 /**
  * class handle for viewing dialog stock
  */
-import DialogUtil from '@/common/dialogUtil'
+import DialogUtil from '@/common/DialogUtil'
 import DialogImageViewer from '@/components/image-viewer/DialogImageViewer.vue'
 
 class ImageViewer {
     show(options) {
-        DialogUtil.showDialog(DialogImageViewer, options);
+        if (!this.dialog) {
+            this.dialog = DialogUtil.prepareDialog(DialogImageViewer);
+        }
+        DialogUtil.showDialog(this.dialog, options);
     }
 }
 

@@ -1,30 +1,34 @@
 <template>
   <div>
     <div class="open-popup">
-      <base-button type="primary" @click="openPopupAddNotification">Add Notification</base-button>
+      <base-button type="primary" @click="openPopupAddNotification"
+        >Add Notification</base-button
+      >
     </div>
     <div class="list-notification">Notification Table</div>
   </div>
 </template>
 
 <script>
-// import StockNotification from '@/views/notification/StockNotification.js'
-import dialogUtil from '@/common/dialogUtil.js'
-import DialogNotification from '@/views/notification/DialogNotification.vue'
-import BaseFormList from '@/views/base/BaseFormList.vue'
+import DialogUtil from "@/common/DialogUtil";
+import DialogNotification from "@/views/notification/DialogNotification.vue";
+import BaseFormList from "@/views/base/BaseFormList.vue";
 
 export default {
-  name: 'ListNotification',
+  name: "ListNotification",
   extends: BaseFormList,
   data() {
     return {
-      loading: false
-    }
+      loading: false,
+    };
   },
   methods: {
     async openPopupAddNotification() {
-      dialogUtil.showDialog(DialogNotification)
-    }
-  }
-}
+      if (!this.dialog) {
+        this.dialog = DialogUtil.prepareDialog(DialogNotification, this);
+      }
+      DialogUtil.showDialog(this.dialog);
+    },
+  },
+};
 </script>

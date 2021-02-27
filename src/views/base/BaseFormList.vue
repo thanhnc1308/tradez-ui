@@ -1,6 +1,6 @@
 <script>
 import Vue from "vue";
-import DialogUtil from "@/common/dialogUtil";
+import DialogUtil from "@/common/DialogUtil";
 import BaseAPI from "@/api/BaseAPI";
 
 export default {
@@ -98,14 +98,19 @@ export default {
     onButtonClick(command, data) {
       switch (command) {
         case "Create":
+          this.create();
           break;
         case "Edit":
+          this.edit(data);
           break;
         case "Duplicate":
+          this.edit(data);
           break;
         case "View":
+          this.view(data);
           break;
         case "Delete":
+          this.deleteEntity(data);
           break;
       }
     },
@@ -116,129 +121,67 @@ export default {
     getFormDetailComponent() {
       return null;
     },
+    getDetailDialog() {
+      if (!this._frmDetail) {
+        let DetailForm = this.getFormDetailComponent(),
+          initOptions = this.getInitOptions();
+        this._frmDetail = DialogUtil.prepareDialog(
+          DetailForm,
+          this,
+          initOptions
+        );
+      }
+      return this._frmDetail;
+    },
+    getInitOptions() {
+      return {
+        options: {},
+        events: this.getDialogHandler(),
+      };
+    },
     create() {
-      let DetailForm = this.getFormDetailComponent(),
-        options = this.getCreateOptions(),
-        events = this.getDialogHandler();
-      DialogUtil.showDialog(DetailForm, options, events);
+      let dialog = this.getDetailDialog(),
+        showOptions = this.getCreateShowOptions();
+      DialogUtil.showDialog(dialog, showOptions);
     },
-    getCreateOptions() {
+    getCreateShowOptions() {
       return {
-        propsData: {
-          formStatus: "Create",
-        },
+        formStatus: "Create",
+        selectedItem: this.getDefaultItem(),
       };
-    },
-    view(row) {
-      let DetailForm = this.getFormDetailComponent(),
-        options = this.getViewOptions(row);
-      DialogUtil.showDialog(DetailForm, options);
-    },
-    getViewOptions(row) {
-      return {
-        propsData: {
-          formStatus: "View",
-          selectedItem: row,
-        },
-      };
-    },
-    edit(row) {
-      let DetailForm = this.getFormDetailComponent(),
-        options = this.getEditOptions(row),
-        events = this.getDialogHandler();
-      DialogUtil.showDialog(DetailForm, options, events);
-    },
-    getEditOptions(row) {
-      return {
-        propsData: {
-          formStatus: "Edit",
-          selectedItem: row,
-        },
-      };
-    },
-    getDialogHandler() {
-      return {
-        close: this.onFormDetailClose,
-      };
-    },
-    showFormDetail(mode, entity) {
-      let frmDetail = this._frmDetail;
-      if (!frmDetail) {
-        let FormDetailComponent = this.getFormDetailComponent();
-        if (FormDetailComponent) {
-          let FormDetailClass = Vue.extend(FormDetailComponent);
-          frmDetail = new FormDetailClass({
-            i18n: this.$i18n,
-            router: this.$router,
-            propsData: this.getCustomPropsForFormDetail(),
-            data: this.getCustomDataForFormDetail(),
-          });
-          frmDetail.mode = mode;
-          frmDetail.$mount();
-          this.$el.appendChild(frmDetail.$el);
-          this._frmDetail = frmDetail;
-          this.addHandlerForFormDetail(frmDetail);
-        }
-      }
-      this.initStaticDataForFormDetail(frmDetail);
-      this.prepareBeforeShow(frmDetail, mode, entity);
-      frmDetail.show();
-    },
-    /**
-     * @override
-     */
-    getCustomPropsForFormDetail() {},
-    /**
-     * @override
-     */
-    getCustomDataForFormDetail() {},
-    /**
-     * @override
-     */
-    addHandlerForFormDetail(frmDetail) {
-      if (frmDetail) {
-        let listEvent = this.getEventHandlerForFormDetail();
-        if (listEvent && listEvent instanceof Object) {
-          for (const key in listEvent) {
-            if (Object.hasOwnProperty.call(listEvent, key)) {
-              const fn = listEvent[key];
-              if (!frmDetail._events[key]) {
-                frmDetail.$on(key, fn);
-              }
-            }
-          }
-        }
-      }
-    },
-    /**
-     * @override
-     */
-    getEventHandlerForFormDetail() {
-      const self = this;
-      return {
-        close: self.onFormDetailClose,
-      };
-    },
-    /**
-     * @override
-     */
-    initStaticDataForFormDetail(frmDetail) {
-      // api
-      // title
-      // TableStore
-    },
-    prepareBeforeShow(frmDetail, mode, entity) {
-      if (mode === "Create") {
-        frmDetail.currentItem = this.getDefaultItem();
-      } else {
-        frmDetail.currentItem = entity;
-      }
     },
     /**
      * @override
      */
     getDefaultItem() {
       return {};
+    },
+    view(row) {
+      let dialog = this.getDetailDialog(),
+        showOptions = this.getViewShowOptions(row);
+      DialogUtil.showDialog(dialog, showOptions);
+    },
+    getViewShowOptions(row) {
+      return {
+        formStatus: "View",
+        selectedItem: row,
+      };
+    },
+    edit(row) {
+      let dialog = this.getDetailDialog(),
+        showOptions = this.getEditShowOptions(row);
+      DialogUtil.showDialog(dialog, showOptions);
+    },
+    getEditShowOptions(row) {
+      return {
+        formStatus: "Edit",
+        selectedItem: row,
+      };
+    },
+    getDialogHandler() {
+      return {
+        close: this.onFormDetailClose,
+      };
     },
     onFormDetailClose(dialogResult) {
       if (dialogResult === "Confirm") {
@@ -344,6 +287,6 @@ export default {
    */
   beforeDestroy() {
     this.removeHandler();
-  }
+  },
 };
 </script>

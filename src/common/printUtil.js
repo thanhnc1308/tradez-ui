@@ -1,7 +1,7 @@
 /**
  * Class handle everything about dialog
  */
-import DialogUtil from "@/common/dialogUtil";
+import DialogUtil from "@/common/DialogUtil";
 import logger from "@/common/Logger";
 
 class PrintUtil {
