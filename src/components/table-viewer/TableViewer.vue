@@ -133,7 +133,7 @@ export default {
       list: [], // list for render data
       tableKey: 0, // tableKey for render table
       total: 0,
-      listLoading: true,
+      listLoading: false,
       listQuery: {},
     };
   },

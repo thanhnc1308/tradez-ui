@@ -140,7 +140,7 @@ export const listPattern = [
 
 export const listFilters = [
   {
-    type: "BB.lower",
+    type: "bb_20_lower",
     label: "Bollinger Lower Band (20)",
     operation: {
       type: "combo",
@@ -157,7 +157,7 @@ export const listFilters = [
     }
   },
   {
-    type: "BB.upper",
+    type: "bb_20_upper",
     label: "Bollinger Upper Band (20)",
     operation: {
       type: "combo",
@@ -174,7 +174,7 @@ export const listFilters = [
     }
   },
   {
-    type: "EMA20",
+    type: "ema20",
     label: "Exponential Moving Average (20)",
     operation: {
       type: "combo",
@@ -191,7 +191,7 @@ export const listFilters = [
     }
   },
   {
-    type: "SMA20",
+    type: "sma20",
     label: "Simple Moving Average (20)",
     operation: {
       type: "combo",
@@ -208,7 +208,7 @@ export const listFilters = [
     }
   },
   {
-    type: "RSI14",
+    type: "rsi14",
     label: "Relative Strength Index (14)",
     operation: {
       type: "combo",
@@ -223,7 +223,7 @@ export const listFilters = [
     }
   },
   {
-    type: "RSI7",
+    type: "rsi7",
     label: "Relative Strength Index (7)",
     operation: {
       type: "combo",
@@ -238,7 +238,7 @@ export const listFilters = [
     }
   },
   {
-    type: "ADX14",
+    type: "adx14",
     label: "Average Directional Index (14)",
     operation: {
       type: "combo",
@@ -253,7 +253,7 @@ export const listFilters = [
     }
   },
   {
-    type: "ATR14",
+    type: "atr14",
     label: "Average True Range (14)",
     operation: {
       type: "combo",
@@ -268,7 +268,7 @@ export const listFilters = [
     }
   },
   {
-    type: "AO",
+    type: "ao",
     label: "Awesome Oscillator",
     operation: {
       type: "combo",
@@ -283,7 +283,7 @@ export const listFilters = [
     }
   },
   {
-    type: "CCI20",
+    type: "cci20",
     label: "Commodity Channel Index (20)",
     operation: {
       type: "combo",
@@ -298,7 +298,7 @@ export const listFilters = [
     }
   },
   {
-    type: "CMF20",
+    type: "cmf20",
     label: "Chaikin Money Flow (20)",
     operation: {
       type: "combo",
@@ -313,7 +313,7 @@ export const listFilters = [
     }
   },
   {
-    type: "MFI14",
+    type: "mfi14",
     label: "Money Flow Index (14)",
     operation: {
       type: "combo",
@@ -328,7 +328,7 @@ export const listFilters = [
     }
   },
   {
-    type: "P.SAR",
+    type: "p_sar",
     label: "Parabolic SAR",
     operation: {
       type: "combo",
@@ -359,7 +359,7 @@ export const listFilters = [
     }
   },
   {
-    type: "MACD.macd",
+    type: "macd_level",
     label: "MACD Level (12, 26)",
     operation: {
       type: "combo",
@@ -376,7 +376,7 @@ export const listFilters = [
     }
   },
   {
-    type: "MACD.signal",
+    type: "macd_signal",
     label: "MACD Signal (12, 26)",
     operation: {
       type: "combo",
@@ -393,7 +393,7 @@ export const listFilters = [
     }
   },
   {
-    type: "Stoch.K",
+    type: "stoch_k",
     label: "Stochastic %K (14, 3, 3)",
     operation: {
       type: "combo",
@@ -410,7 +410,7 @@ export const listFilters = [
     }
   },
   {
-    type: "Stoch.D",
+    type: "stoch_d",
     label: "Stochastic %D (14, 3, 3)",
     operation: {
       type: "combo",
@@ -427,7 +427,7 @@ export const listFilters = [
     }
   },
   {
-    type: "W.R",
+    type: "williams_percent",
     label: "Williams Percent Range (14)",
     operation: {
       type: "combo",

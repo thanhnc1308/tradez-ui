@@ -7,7 +7,16 @@
     </div>
     <div class="result">
       <div class="filter-title">Some title</div>
-      <div class="table-result"></div>
+      <div class="table-result">
+        <table-viewer
+        ref="tableData"
+        @click="onClickTableRow"
+        :store="storeStockScreener"
+        pagination
+        :columns="columnsStockScreener"
+      >
+      </table-viewer>
+      </div>
     </div>
     <div>Add to WatchList</div>
   </div>
@@ -15,6 +24,9 @@
 
 <script>
 import DialogUtil from "@/common/DialogUtil";
+import StockViewer from "@/views/market-info/StockViewer";
+import { columnsStockScreener } from "@/common/columnConfig";
+import TableStore from "@/common/TableStore";
 
 export default {
   name: "StockScreener",
@@ -26,7 +38,18 @@ export default {
       stockFilters: [],
       titleParam: [],
     };
+    this.columnsStockScreener = columnsStockScreener;
+    this.storeStockScreener = new TableStore({
+      proxy: {
+        url: "/stock_screener",
+        type: "remote",
+      },
+      method: "post"
+    });
     return {};
+  },
+  mounted() {
+    this.loadListStock();
   },
   methods: {
     async showDialogChooseFilters() {
@@ -56,7 +79,20 @@ export default {
         // set cache currentParams
       }
     },
-    loadListStock() {},
+    loadListStock() {
+      let filters = this.currentParams.stockFilters;
+      if (filters.length > 0) {
+        let options = {
+          data: {
+            filters
+          }
+        }
+        this.storeStockScreener.load(options);
+      }
+    },
+    onClickTableRow(row) {
+      StockViewer.show(row);
+    },
   },
 };
 </script>

@@ -103,7 +103,8 @@ export default class TableStore extends Vue {
   async load(opts = {}) {
     const options = {
       page: opts.page || 1,
-      per_page: opts.limit || 20
+      per_page: opts.limit || 20,
+      method: opts.method || this.method
     };
     if (this.proxy.type === "cache") {
       await this.loadFromCache(options);
@@ -127,7 +128,8 @@ export default class TableStore extends Vue {
       service = HttpClient,
       res = await service.request({
         url,
-        method: "get"
+        method: options.method || "get",
+        data: options.data
       });
     if (res && res.success) {
       let data = res.data;
@@ -144,18 +146,25 @@ export default class TableStore extends Vue {
     this.loading = true;
   }
   loadRecords(data) {
-    this.data = data;
+    this.data.removeAll();
+    this.data.append(data);
   }
   buildRequestUrl(options) {
-    let url = `${this.proxy.url}?page=${options.page}&per_page=${options.per_page}`,
-      filter = this.buildFilterUrl();
-    if (!this.paging) {
-      url = `${this.proxy.url}?`;
+    let url = "",
+      method = options.method || this.method || "get";
+    if (method === "get") {
+      url = `${this.proxy.url}?page=${options.page}&per_page=${options.per_page}`;
+      let filter = this.buildFilterUrl();
+      if (!this.paging) {
+        url = `${this.proxy.url}?`;
+      }
+      if (filter) {
+        url += filter;
+      }
+    } else if (method === 'post') {
+      url = `${this.proxy.url}`;
     }
 
-    if (filter) {
-      url += filter;
-    }
     return url;
   }
   buildFilterUrl() {

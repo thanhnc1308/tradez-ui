@@ -148,9 +148,9 @@ export default {
   methods: {
     async handleConfirm() {
       if (await !this.validateFilters()) {
-        this.stockFilters = this._stockFilter.buildFilter();
         return;
       }
+      this.stockFilters = this._stockFilter.buildFilter();
     },
     async validateFilters() {
       return true;

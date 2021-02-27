@@ -101,7 +101,6 @@ export const columnsJournal = [
   }
 ];
 
-
 export const columnsStockPrice = [
   {
     dataField: "symbol",
@@ -185,5 +184,17 @@ export const columnsHistoricalPrice = [
     minWidth: "100",
     columnType: EnumColumnType.Number,
     formatType: EnumFormatType.Number
-  },
+  }
+];
+
+export const columnsStockScreener = [
+  {
+    dataField: "symbol",
+    label: "Symbol",
+    columnAlign: "center",
+    dataAlign: "center",
+    minWidth: "120",
+    columnType: EnumColumnType.Link,
+    formatType: EnumFormatType.Text
+  }
 ];
