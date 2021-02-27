@@ -49,8 +49,8 @@ class DialogUtil {
    * @param {*} initOptions
    */
   prepareDialog(component, owner, initOptions) {
-    if (component && owner) {
-      let DialogType = Vue.extend(component),
+    if (component && component.default && owner) {
+      let DialogType = Vue.extend(component.default),
         { options } = initOptions,
         dialog = new DialogType(options),
         { events } = initOptions;
@@ -63,13 +63,14 @@ class DialogUtil {
       }
       dialog.$mount();
 
-      let el = owner;
+      let el = document.body;
       // if owner is a dialog, append to el of dialog so that new dialog is not below the owner dialog
       if (owner.isDialog) {
         el = owner.$refs.dialogx;
-      } else if (!owner instanceof Element) {
-        el = owner.$el;
       }
+      // else if (!(owner instanceof Element)) {
+      //   el = owner.$el;
+      // }
       el.appendChild(dialog.$el);
       return dialog;
     }

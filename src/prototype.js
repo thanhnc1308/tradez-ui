@@ -11,4 +11,13 @@ Array.prototype.remove = Array.prototype.remove || function(item) {
 Array.prototype.append = Array.prototype.append || function(items) {
     this.push.apply(this, items);
 }
+
+Array.prototype.clone = Array.prototype.clone || function(items) {
+    return this.map(item => {
+        if (item instanceof Object) {
+            return {...item};
+        }
+        return item;
+    });
+}
 //#endregion Array

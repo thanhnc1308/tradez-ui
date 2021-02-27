@@ -24,31 +24,34 @@ export default {
      */
     this.currentParams = {
       stockFilters: [],
-      titleParam: []
+      titleParam: [],
     };
     return {};
   },
   methods: {
     async showDialogChooseFilters() {
-      let component = await import(
+      if (!this.component) {
+        this.component = await import(
           "@/views/stock-screener/ChooseStockFilters.vue"
-        ),
-        initOptions = {
+        );
+      }
+      let initOptions = {
           options: {},
           events: {
             close: this.onDialogChooseStockFiltersClose,
           },
         },
         showOptions = {};
-      DialogUtil.showDialog2(component, this, initOptions, showOptions);
+      DialogUtil.showDialog2(this.component, this, initOptions, showOptions);
     },
-    onDialogChooseStockFiltersClose(stockFilters, titleParam) {
+    onDialogChooseStockFiltersClose(dialogResult, frm) {
       debugger;
-      this.loadListStock();
-
-      this.currentParams.stockFilters = stockFilters;
-      this.currentParams.titleParam = titleParam;
-      // set cache currentParams
+      if (dialogResult === "Confirm") {
+        this.loadListStock();
+        this.currentParams.stockFilters = frm.stockFilters;
+        this.currentParams.titleParam = frm.titleParam;
+        // set cache currentParams
+      }
     },
     loadListStock() {},
   },
