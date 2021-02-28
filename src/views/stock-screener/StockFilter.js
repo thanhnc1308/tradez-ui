@@ -31,10 +31,14 @@ export default class StockFilter {
   buildFilter() {
     let filters = [];
     for (const item of this.filters) {
+      let specialValue = null;
+      if (item.value.typeValue !== 'input') {
+        specialValue = item.value.typeValue;
+      }
       let filter = {
         type: item.type,
         operation: item.operation.value,
-        value: item.value.value,
+        value: specialValue || item.value.value,
       };
       filters.push(filter);
     }

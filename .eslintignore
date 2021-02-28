@@ -2,3 +2,7 @@ build/*.js
 src/assets
 public
 dist
+mock
+plop-templates
+src
+tests

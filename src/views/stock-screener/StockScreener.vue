@@ -92,6 +92,7 @@ export default {
         { type: "bb_20_lower", operation: "less", value: 10 },
         { type: "bb_20_upper", operation: "nequal", value: 20 },
         { type: "rsi14", operation: "egreater", value: 40 },
+        { type: "ema20", operation: "egreater", value: 'ema200' },
         { type: "ema200", operation: "in_range", value: [10,40] },
         { type: "ema20", operation: "not_in_range", value: [10,40] },
       ];
