@@ -238,6 +238,36 @@ export const listFilters = [
     }
   },
   {
+    type: "rsi10",
+    label: "Relative Vigor Index (10)",
+    operation: {
+      type: "combo",
+      list: listOperation,
+      defaultOperation: "less",
+      value: "less"
+    },
+    value: {
+      type: "input",
+      defaultValue: 30,
+      value: 30
+    }
+  },
+  {
+    type: "obv",
+    label: "On Balance Volume",
+    operation: {
+      type: "combo",
+      list: listOperation,
+      defaultOperation: "less",
+      value: "less"
+    },
+    value: {
+      type: "input",
+      defaultValue: 30,
+      value: 30
+    }
+  },
+  {
     type: "adx14",
     label: "Average Directional Index (14)",
     operation: {
@@ -268,7 +298,7 @@ export const listFilters = [
     }
   },
   {
-    type: "ao",
+    type: "awesome_oscillator",
     label: "Awesome Oscillator",
     operation: {
       type: "combo",
@@ -328,7 +358,7 @@ export const listFilters = [
     }
   },
   {
-    type: "p_sar",
+    type: "parabolic_sar",
     label: "Parabolic SAR",
     operation: {
       type: "combo",
@@ -359,7 +389,7 @@ export const listFilters = [
     }
   },
   {
-    type: "macd_level",
+    type: "macd_level_12_26",
     label: "MACD Level (12, 26)",
     operation: {
       type: "combo",
@@ -376,7 +406,7 @@ export const listFilters = [
     }
   },
   {
-    type: "macd_signal",
+    type: "macd_signal_12_26",
     label: "MACD Signal (12, 26)",
     operation: {
       type: "combo",
@@ -393,7 +423,7 @@ export const listFilters = [
     }
   },
   {
-    type: "stoch_k",
+    type: "stochastic_k_14_3_3",
     label: "Stochastic %K (14, 3, 3)",
     operation: {
       type: "combo",
@@ -410,7 +440,7 @@ export const listFilters = [
     }
   },
   {
-    type: "stoch_d",
+    type: "stochastic_d_14_3_3",
     label: "Stochastic %D (14, 3, 3)",
     operation: {
       type: "combo",
@@ -427,7 +457,7 @@ export const listFilters = [
     }
   },
   {
-    type: "williams_percent",
+    type: "williams_percent_range_14",
     label: "Williams Percent Range (14)",
     operation: {
       type: "combo",

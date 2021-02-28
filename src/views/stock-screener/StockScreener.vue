@@ -4,18 +4,19 @@
       <base-button type="primary" @click="showDialogChooseFilters"
         >Choose filters</base-button
       >
+      <base-button type="primary" @click="refresh">Refresh</base-button>
     </div>
     <div class="result">
       <div class="filter-title">Some title</div>
       <div class="table-result">
         <table-viewer
-        ref="tableData"
-        @click="onClickTableRow"
-        :store="storeStockScreener"
-        pagination
-        :columns="columnsStockScreener"
-      >
-      </table-viewer>
+          ref="tableData"
+          @click="onClickTableRow"
+          :store="storeStockScreener"
+          pagination
+          :columns="columnsStockScreener"
+        >
+        </table-viewer>
       </div>
     </div>
     <div>Add to WatchList</div>
@@ -44,7 +45,7 @@ export default {
         url: "/stock_screener",
         type: "remote",
       },
-      method: "post"
+      method: "post",
     });
     return {};
   },
@@ -65,13 +66,16 @@ export default {
             close: this.onDialogChooseStockFiltersClose,
           },
         };
-        this.dialog = DialogUtil.prepareDialog(this.component, this, initOptions);
+        this.dialog = DialogUtil.prepareDialog(
+          this.component,
+          this,
+          initOptions
+        );
       }
       let showOptions = {};
       DialogUtil.showDialog(this.dialog, showOptions);
     },
     onDialogChooseStockFiltersClose(dialogResult, frm) {
-      debugger;
       if (dialogResult === "Confirm") {
         this.currentParams.stockFilters = frm.stockFilters;
         this.currentParams.titleParam = frm.titleParam;
@@ -79,14 +83,26 @@ export default {
         // set cache currentParams
       }
     },
+    refresh() {
+      this.loadListStock();
+    },
     loadListStock() {
-      let filters = this.currentParams.stockFilters;
+      // let filters = this.currentParams.stockFilters;
+      let filters = [
+        { type: "bb_20_lower", operation: "less", value: 10 },
+        { type: "bb_20_upper", operation: "nequal", value: 20 },
+        { type: "rsi14", operation: "egreater", value: 40 },
+        { type: "ema200", operation: "in_range", value: [10,40] },
+        { type: "ema20", operation: "not_in_range", value: [10,40] },
+      ];
+      let columns = ["symbol"];
       if (filters.length > 0) {
         let options = {
           data: {
-            filters
-          }
-        }
+            filters,
+            columns,
+          },
+        };
         this.storeStockScreener.load(options);
       }
     },

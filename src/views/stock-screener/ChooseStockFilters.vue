@@ -4,7 +4,7 @@
     v-shortkey="{ Save: ['ctrl', 's'], Close: ['esc'] }"
     @shortkey="handleShortkeyAction"
     :visible.sync="isShow"
-    width="750px"
+    width="770px"
   >
     <div class="list-selected-filters">
       <div
@@ -35,11 +35,27 @@
           </div>
         </div>
         <div class="filter-value mr-1">
-          <div v-if="filter.value.type === 'input'" class="filter-value-item">
-            <base-input class="w-120" v-model="filter.value.value"></base-input>
+          <div
+            v-if="['in_range', 'not_in_range'].includes(filter.operation.value)"
+            class="filter-value-item"
+          >
+            <base-input-number-range
+              :controls="false"
+              v-model="filter.value.value"
+            ></base-input-number-range>
           </div>
           <div
-            v-if="
+            v-else-if="filter.value.type === 'input'"
+            class="filter-value-item"
+          >
+            <base-input-number
+              class="w-120"
+              :controls="false"
+              v-model="filter.value.value"
+            ></base-input-number>
+          </div>
+          <div
+            v-else-if="
               [
                 'Input_LOHLC',
                 'Input_LOHLC_EMA',
@@ -47,7 +63,7 @@
                 'Input_LOHLC_MACD_Signal',
                 'Input_LOHLC_MACD_Level',
                 'Input_LOHLC_Stock_D',
-                'Input_LOHLC_Stock_K'
+                'Input_LOHLC_Stock_K',
               ].includes(filter.value.type)
             "
             class="filter-value-item flex"
@@ -66,14 +82,15 @@
                 :value="item.type"
               />
             </el-select>
-            <base-input
+            <base-input-number
               class="w-120"
+              :controls="false"
               v-if="filter.value.typeValue === 'input'"
               v-model="filter.value.value"
-            ></base-input>
+            ></base-input-number>
           </div>
           <div
-            v-if="['comboFilter'].includes(filter.value.type)"
+            v-else-if="['comboFilter'].includes(filter.value.type)"
             class="filter-value-item flex"
           >
             <el-select
@@ -126,10 +143,14 @@
 import BaseFormDialog from "@/views/base/BaseFormDialog.vue";
 import { listFilters, listOperation } from "@/data/StockFilters";
 import StockFilter from "@/views/stock-screener/StockFilter.js";
+import BaseInputNumberRange from '@/components/BaseComponent/input-number/BaseInputNumberRange.vue';
 
 export default {
   name: "ChooseStockFilters",
   extends: BaseFormDialog,
+  components: {
+    BaseInputNumberRange
+  },
   data() {
     this.listFilters = listFilters.clone();
     this.listOperations = listOperation.clone();

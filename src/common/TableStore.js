@@ -104,7 +104,8 @@ export default class TableStore extends Vue {
     const options = {
       page: opts.page || 1,
       per_page: opts.limit || 20,
-      method: opts.method || this.method
+      method: opts.method || this.method,
+      data: opts.data
     };
     if (this.proxy.type === "cache") {
       await this.loadFromCache(options);
@@ -132,7 +133,7 @@ export default class TableStore extends Vue {
         data: options.data
       });
     if (res && res.success) {
-      let data = res.data;
+      let data = res.data || [];
       // paging
       if (data.meta) {
         this.data = data.items;
