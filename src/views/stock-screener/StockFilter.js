@@ -37,6 +37,7 @@ export default class StockFilter {
       }
       let filter = {
         type: item.type,
+        label: item.label,
         operation: item.operation.value,
         value: specialValue || item.value.value,
       };

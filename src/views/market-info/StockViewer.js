@@ -2,19 +2,17 @@
  * class handle for viewing dialog stock
  */
 import DialogUtil from "@/common/DialogUtil";
-import DialogStock from "@/views/market-info/DialogStock.vue";
 
 class StockViewer {
-  show(row) {
-    let initOptions = {
-      propsData: {
-        symbol: row.symbol
-      }
-    };
+  async show(row, owner) {
     if (!this.dialog) {
-      this.dialog = DialogUtil.prepareDialog(DialogStock, null, initOptions);
+      let DialogStock = await import ("@/views/market-info/DialogStock.vue");
+      this.dialog = DialogUtil.prepareDialog(DialogStock, owner);
     }
-    DialogUtil.showDialog(this.dialog);
+    let showOptions = {
+      symbol: row.symbol
+    };
+    DialogUtil.showDialog(this.dialog, showOptions);
   }
 }
 

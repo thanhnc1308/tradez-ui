@@ -11,7 +11,7 @@
       @sort-change="sortChange"
     >
       <el-table-column
-        v-for="column in columns"
+        v-for="column in columnsx"
         :label="column.label"
         :key="column.dataField"
         :prop="column.dataField"
@@ -135,6 +135,7 @@ export default {
       total: 0,
       listLoading: false,
       listQuery: {},
+      columnsx: []
     };
   },
   created() {
@@ -142,15 +143,22 @@ export default {
     if (this.autoLoad) {
       this.doQuery();
     }
+    this.columnsx = this.columns;
   },
   methods: {
     async doQuery(options={}) {
       try {
         console.log('do query count ' + this.doQueryCount++);
         this.listLoading = true;
-        let opts = {
-          page: options.page || 1,
-          per_page: options.limit || 20,
+        let opts = {};
+        if (this.pagination) {
+          opts = {
+            ...options,
+            page: options.page || 1,
+            per_page: options.limit || 20,
+          }
+        } else {
+          opts = {...options}
         }
         await this.store.load(opts);
         this.list = this.store.getData();

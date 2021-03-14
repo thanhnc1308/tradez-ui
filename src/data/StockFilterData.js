@@ -140,7 +140,7 @@ export const listPattern = [
 
 export const listFilters = [
   {
-    type: "bb_20_lower",
+    type: "bollinger20_lband_indicator",
     label: "Bollinger Lower Band (20)",
     operation: {
       type: "combo",
@@ -157,7 +157,7 @@ export const listFilters = [
     }
   },
   {
-    type: "bb_20_upper",
+    type: "bollinger20_hband_indicator",
     label: "Bollinger Upper Band (20)",
     operation: {
       type: "combo",
@@ -237,21 +237,21 @@ export const listFilters = [
       value: 30
     }
   },
-  {
-    type: "rsi10",
-    label: "Relative Vigor Index (10)",
-    operation: {
-      type: "combo",
-      list: listOperation,
-      defaultOperation: "less",
-      value: "less"
-    },
-    value: {
-      type: "input",
-      defaultValue: 30,
-      value: 30
-    }
-  },
+  // {
+  //   type: "rvi10",
+  //   label: "Relative Vigor Index (10)",
+  //   operation: {
+  //     type: "combo",
+  //     list: listOperation,
+  //     defaultOperation: "less",
+  //     value: "less"
+  //   },
+  //   value: {
+  //     type: "input",
+  //     defaultValue: 30,
+  //     value: 30
+  //   }
+  // },
   {
     type: "obv",
     label: "On Balance Volume",
@@ -358,8 +358,25 @@ export const listFilters = [
     }
   },
   {
-    type: "parabolic_sar",
-    label: "Parabolic SAR",
+    type: "psar_up_indicator",
+    label: "Parabolic SAR Up Indicator",
+    operation: {
+      type: "combo",
+      list: listOperation,
+      defaultOperation: "less",
+      value: "less"
+    },
+    value: {
+      type: "Input_LOHLC",
+      typeValue: "input",
+      list: listInputLOHLC,
+      defaultValue: 0,
+      value: 0
+    }
+  },
+  {
+    type: "psar_down_indicator",
+    label: "Parabolic SAR Down Indicator",
     operation: {
       type: "combo",
       list: listOperation,
@@ -469,6 +486,66 @@ export const listFilters = [
       type: "input",
       defaultValue: 30,
       value: 30
+    }
+  },
+  {
+    type: "aroon_up_14",
+    label: "Aroon Up (14)",
+    operation: {
+      type: "combo",
+      list: listOperation,
+      defaultOperation: "less",
+      value: "less"
+    },
+    value: {
+      type: "input",
+      defaultValue: 30,
+      value: 30
+    }
+  },
+  {
+    type: "aroon_down_14",
+    label: "Aroon Down (14)",
+    operation: {
+      type: "combo",
+      list: listOperation,
+      defaultOperation: "less",
+      value: "less"
+    },
+    value: {
+      type: "input",
+      defaultValue: 30,
+      value: 30
+    }
+  },
+  {
+    type: "keltner20_channel_hband_indicator",
+    label: "Keltner Channel High Band (20)",
+    operation: {
+      type: "combo",
+      list: listOperation,
+      defaultOperation: "less",
+      value: "less"
+    },
+    value: {
+      type: "input",
+      defaultValue: 1,
+      value: 1
+    }
+  },
+  {
+    type: "keltner20_channel_lband_indicator",
+    label: "Keltner Channel Low Band (14)",
+    operation: {
+      type: "combo",
+      list: listOperation,
+      defaultOperation: "less",
+      value: "less"
+    },
+    value: {
+      type: "input",
+      defaultValue: 1,
+      value: 1
     }
   }
 ];

@@ -26,7 +26,7 @@ class DialogUtil {
    * @param {*} owner
    * @param {*} initOptions
    */
-  prepareDialog(component, owner, initOptions) {
+  prepareDialog(component, owner, initOptions={}) {
     if (component && component.default && owner) {
       let DialogType = Vue.extend(component.default),
         { options } = initOptions,

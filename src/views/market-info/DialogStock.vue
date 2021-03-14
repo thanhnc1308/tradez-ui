@@ -36,13 +36,6 @@ export default {
         url: "/stock_price/historical_price",
         type: "remote",
       },
-      filters: [
-        {
-          "key": "symbol",
-          "operator": "=",
-          "value": this.symbol
-        }
-      ]
     });
     return {
       companyName: null,
@@ -60,6 +53,23 @@ export default {
     },
   },
   methods: {
+    /**
+     * @override
+     */
+    prepareWhenShowDialog(options) {
+      for (const key in options) {
+        if (Object.hasOwnProperty.call(options, key)) {
+          this[key] = options[key];
+        }
+      }
+      this.storeHistoricalPrice.filters = [
+        {
+          "key": "symbol",
+          "operator": "=",
+          "value": this.symbol
+        }
+      ]
+    },
     getCompanyName() {
       this.companyName = 'companyName'
     },

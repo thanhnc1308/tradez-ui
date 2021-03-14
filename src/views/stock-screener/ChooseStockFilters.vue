@@ -141,7 +141,7 @@
 
 <script>
 import BaseFormDialog from "@/views/base/BaseFormDialog.vue";
-import { listFilters, listOperation } from "@/data/StockFilters";
+import { listFilters, listOperation } from "@/data/StockFilterData";
 import StockFilter from "@/views/stock-screener/StockFilter.js";
 import BaseInputNumberRange from '@/components/BaseComponent/input-number/BaseInputNumberRange.vue';
 

@@ -105,7 +105,7 @@ export default {
      * @override
      */
     onClickTableRow(row) {
-      StockViewer.show(row);
+      StockViewer.show(row, this);
     },
     /**
      * @override
