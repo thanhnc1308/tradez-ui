@@ -7,6 +7,16 @@
     width="770px"
   >
     <div class="list-selected-filters">
+      <div class="filter-item flex mb-1">
+        <div class="filter-type mr-1">Transaction Date</div>
+        <div class="filter-operation">
+          <base-date-picker
+            v-model="stockDate"
+            type="date"
+            placeholder="Pick a day"
+          />
+        </div>
+      </div>
       <div
         v-for="filter in filters"
         :key="filter.id"
@@ -143,13 +153,13 @@
 import BaseFormDialog from "@/views/base/BaseFormDialog.vue";
 import { listFilters, listOperation } from "@/data/StockFilterData";
 import StockFilter from "@/views/stock-screener/StockFilter.js";
-import BaseInputNumberRange from '@/components/BaseComponent/input-number/BaseInputNumberRange.vue';
+import BaseInputNumberRange from "@/components/BaseComponent/input-number/BaseInputNumberRange.vue";
 
 export default {
   name: "ChooseStockFilters",
   extends: BaseFormDialog,
   components: {
-    BaseInputNumberRange
+    BaseInputNumberRange,
   },
   data() {
     this.listFilters = listFilters.clone();
@@ -161,6 +171,7 @@ export default {
        */
       filters: [],
       selectedFilter: null,
+      stockDate: new Date(),
     };
   },
   created() {

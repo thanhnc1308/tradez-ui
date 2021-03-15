@@ -5,9 +5,10 @@
         >Choose filters</base-button
       >
       <base-button type="primary" @click="refresh">Refresh</base-button>
+      <base-button type="primary" @click="saveFilters">Save filters</base-button>
     </div>
     <div class="result">
-      <div class="filter-title">Some title</div>
+      <div class="filter-title">{{ title }}</div>
       <div class="table-result">
         <table-viewer
           ref="tableData"
@@ -48,7 +49,27 @@ export default {
       },
       method: "post",
     });
-    return {};
+    return {
+      stockDate: null,
+    };
+  },
+  computed: {
+    title() {
+      if (this.stockDate) {
+        let options = {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        };
+        return `Stock screener result on ${this.stockDate.toLocaleDateString(
+          "en-US",
+          options
+        )}`;
+      } else {
+        return `Stock screener result`;
+      }
+    },
   },
   mounted() {
     this.loadListStock();
@@ -80,6 +101,7 @@ export default {
       if (dialogResult === "Confirm") {
         this.currentParams.stockFilters = frm.stockFilters;
         this.currentParams.titleParam = frm.titleParam;
+        this.stockDate = frm.stockDate;
         this.loadListStock();
         // set cache currentParams
       }
@@ -88,46 +110,71 @@ export default {
       this.loadListStock();
     },
     loadListStock() {
-      // let filters = this.currentParams.stockFilters;
-      let filters = [
-        { type: "rsi14", label: "Relative Strength Index (14)", operation: "egreater", value: 40 },
-        // { type: "ema20", operation: "egreater", value: 'ema200' },
-        // { type: "ema200", operation: "in_range", value: [10,40] },
-        // { type: "ema20", operation: "not_in_range", value: [10,40] },
-      ];
+      let filters = this.buildStockFilters();
+      // let filters = [
+      //   { type: "rsi14", label: "Relative Strength Index (14)", operation: "egreater", value: 40 },
+      //   // { type: "ema20", operation: "egreater", value: 'ema200' },
+      //   // { type: "ema200", operation: "in_range", value: [10,40] },
+      //   // { type: "ema20", operation: "not_in_range", value: [10,40] },
+      // ];
       let columns = ["symbol"];
       if (filters.length > 0) {
         this.setColumnTable(filters);
-        filters.forEach(filter => {
-          columns.push(filter.type);
-        })
+        filters.forEach((filter) => {
+          if (filter.type !== "stock_date") {
+            columns.push(filter.type);
+          }
+        });
         let options = {
           data: {
             filters,
             columns,
           },
         };
-        this.$refs['tableData'].doQuery(options);
+        this.$refs["tableData"].doQuery(options);
       }
     },
+    buildStockFilters() {
+      let filters = this.currentParams.stockFilters;
+      if (this.stockDate) {
+        let filterDate = filters.find(item => item.type === 'stock_date');
+        if (filterDate) {
+          filterDate.value = this.stockDate.toLocaleDateString("en-US");
+        } else {
+          filters.push({
+            type: "stock_date",
+            operation: "equals",
+            value: this.stockDate.toLocaleDateString("en-US"),
+          });
+        }
+      }
+      return filters;
+    },
     setColumnTable(filters) {
-      this.$refs.tableData.columnsx = this.$refs.tableData.columnsx.filter(item => !item.isCustomColumn);
-      filters.forEach(filter => {
-        this.$refs.tableData.columnsx.push({
-          dataField: filter.type,
-          label: filter.label,
-          columnAlign: "center",
-          dataAlign: "center",
-          width: "180",
-          isCustomColumn: true,
-          columnType: EnumColumnType.Number,
-          formatType: EnumFormatType.Number
-        })
-      })
+      this.$refs.tableData.columnsx = this.$refs.tableData.columnsx.filter(
+        (item) => !item.isCustomColumn
+      );
+      filters.forEach((filter) => {
+        if (filter.type !== "stock_date") {
+          this.$refs.tableData.columnsx.push({
+            dataField: filter.type,
+            label: filter.label,
+            columnAlign: "center",
+            dataAlign: "center",
+            width: "180",
+            isCustomColumn: true,
+            columnType: EnumColumnType.Number,
+            formatType: EnumFormatType.Number,
+          });
+        }
+      });
     },
     onClickTableRow(row) {
       StockViewer.show(row, this);
     },
+    saveFilters() {
+      alert('saved')
+    }
   },
 };
 </script>
