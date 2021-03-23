@@ -21,3 +21,9 @@ Array.prototype.clone = Array.prototype.clone || function(items) {
     });
 }
 //#endregion Array
+
+String.prototype.decodeEscapeSequence = function() {
+    return this.replace(/\\x([0-9A-Fa-f]{2})/g, function() {
+        return String.fromCharCode(parseInt(arguments[1], 16));
+    });
+};

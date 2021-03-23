@@ -99,7 +99,7 @@ export default {
      * form dialog detail
      * @override
      */
-    getDialogDetailForm() {
+    getFormDetailComponent() {
       return DialogJournal;
     },
     /**

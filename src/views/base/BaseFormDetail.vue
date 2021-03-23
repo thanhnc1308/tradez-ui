@@ -120,6 +120,7 @@ export default {
         // this.loadDetail();
       }
       this.resetErrors();
+      this.isShow = true;
     },
     resetErrors() {},
     hide() {
@@ -255,7 +256,10 @@ export default {
     },
     resetValidation() {
       this.$nextTick(() => {
-        this.$refs["dataForm"].clearValidate();
+        let dataForm = this.$refs["dataForm"];
+        if (dataForm) {
+          dataForm.clearValidate();
+        }
       });
     },
     /**
