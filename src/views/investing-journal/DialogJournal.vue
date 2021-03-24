@@ -15,9 +15,9 @@
       label-width="100px"
       style="width: 400px; margin-left: 50px"
     >
-      <base-form-item label="Date" prop="journal_date">
+      <base-form-item label="Date" prop="transaction_date">
         <base-date-picker
-          v-model="currentItem.journal_date"
+          v-model="currentItem.transaction_date"
           type="datetime"
           :disabled="isViewing"
           placeholder="Please pick a date"
@@ -88,12 +88,12 @@
           fit="cover"
         />
       </base-form-item>
-      <base-form-item label="Comment" prop="comment">
+      <base-form-item label="Comment" prop="comments">
         <base-input
           :autosize="{ minRows: 2, maxRows: 4 }"
           type="textarea"
           :disabled="isViewing"
-          v-model="currentItem.comment"
+          v-model="currentItem.comments"
         />
       </base-form-item>
     </base-form>
@@ -122,14 +122,14 @@ export default {
   },
   // mounted() {
   //   this.currentItem = {
-  //     journal_date: new Date(),
+  //     transaction_date: new Date(),
   //     symbol: "VIC",
   //     transaction_type: "Buy",
   //     status: "win",
   //     entry: 100000,
   //     exit: 100000,
   //     pnl: 100000,
-  //     comment: "comment",
+  //     comments: "comments",
   //   };
   // },
   computed: {
@@ -173,14 +173,14 @@ export default {
      */
     resetForm() {
       this.currentItem = {
-        journal_date: new Date(),
+        transaction_date: new Date(),
         symbol: "VIC",
         transaction_type: "Buy",
         status: "win",
         entry: 100000,
         exit: 100000,
         pnl: 100000,
-        comment: "comment",
+        comments: "comments",
       };
     },
     //#region Handle upload

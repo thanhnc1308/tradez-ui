@@ -112,13 +112,9 @@ export default {
   },
   methods: {
     show(options = {}) {
+      this.formStatus = options.formStatus || 'View';
       this.resetForm();
       this.resetValidation();
-      if (this.formStatus === "Create" || this.formStatus === "QuickAdd") {
-        // this.prepareForInsert(options);
-      } else {
-        // this.loadDetail();
-      }
       this.resetErrors();
       this.isShow = true;
     },
@@ -128,39 +124,47 @@ export default {
       this.close();
     },
     resetCurrentItem() {
-      this.setTimeout(() => {
+      setTimeout(() => {
         this.currentItem = {};
       });
     },
-    async cancel(event) {
-      let dirty = this.checkChanges();
+    onButtonClick(command, data) {
+      switch (command) {
+        case "Save":
+          this.save();
+          break;
+      }
+    },
+    cancel(event) {
+      const self = this;
+      let dirty = self.checkChanges();
       if (!dirty) {
-        this.resetValidation();
+        self.resetValidation();
         // if (this.store) {
         //   this.store.rejectChanges();
         // }
-        this.hide();
+        self.hide();
       } else {
-        let answer = "Yes";
+        let answer = "No";
         switch (answer) {
           case 'Yes':
             if (event && !event.cancel) {
               event.cancel = true;
-              this.buttonClick('Save');
-              this.resetValidation();
-              this.dialogResult = 'Comfirm';
+              self.onButtonClick('Save');
+              self.resetValidation();
+              self.dialogResult = 'Comfirm';
             }
             break;
           case 'No':
-            this.resetValidation();
+            self.resetValidation();
             // if (this.store) {
             //   this.store.rejectChanges();
             // }
-            this.dialogResult = 'Cancel';
-            this.hide();
+            self.dialogResult = 'Cancel';
+            self.hide();
             break;
           case 'Cancel':
-            this.dialogResult = 'Cancel';
+            self.dialogResult = 'Cancel';
             // this.forcusFirstControl();
             break;
           default:
