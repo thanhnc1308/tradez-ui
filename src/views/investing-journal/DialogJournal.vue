@@ -183,6 +183,11 @@ export default {
         comments: "comments",
       };
     },
+    getPayloadForSave() {
+      let result = {...this.currentItem};
+      result.transaction_date = new Date(result.transaction_date);
+      return result;
+    },
     //#region Handle upload
     handleAvatarSuccess(res, file) {
       this.currentItem.screenshot = URL.createObjectURL(file.raw);

@@ -34,12 +34,12 @@ export default {
     /**
      * selected item passed from the form list
      */
-    selectedItem: {
-      type: Object,
-      default: function () {
-        return {};
-      },
-    },
+    // selectedItem: {
+    //   type: Object,
+    //   default: function () {
+    //     return {};
+    //   },
+    // },
   },
   computed: {
     /**
@@ -79,6 +79,7 @@ export default {
   },
   data() {
     this.api = this.getApi();
+    this.selectedItem = Object.create(null);
     return {
       currentItem: {},
       /**
@@ -93,29 +94,28 @@ export default {
       processing: false,
     };
   },
-  mounted() {
-    switch (this.formStatus) {
-      case "Create":
-        this.create();
-        break;
-      case "Edit":
-        this.edit();
-        break;
-      case "Duplicate":
-        this.duplicate();
-        break;
-      case "View":
-      default:
-        this.view();
-        break;
-    }
-  },
   methods: {
     show(options = {}) {
       this.formStatus = options.formStatus || 'View';
-      this.resetForm();
-      this.resetValidation();
-      this.resetErrors();
+      this.setSelectedItem(options.selectedItem);
+      // this.resetForm();
+      // this.resetValidation();
+      // this.resetErrors();
+      switch (this.formStatus) {
+        case "Create":
+          this.create();
+          break;
+        case "Edit":
+          this.edit();
+          break;
+        case "Duplicate":
+          this.duplicate();
+          break;
+        case "View":
+        default:
+          this.view();
+          break;
+      }
       this.isShow = true;
     },
     resetErrors() {},
@@ -182,25 +182,28 @@ export default {
     create() {
       this.resetForm();
       this.resetValidation();
-      this.show();
+      // this.show();
     },
     view() {
-      this.setSelectedItem();
+      this.setCurrentItem();
       this.resetValidation();
-      this.show();
+      // this.show();
     },
     duplicate() {
-      this.setSelectedItem();
+      this.setCurrentItem();
       this.resetValidation();
-      this.show();
+      // this.show();
     },
     edit() {
-      this.setSelectedItem();
+      this.setCurrentItem();
       this.resetValidation();
-      this.show();
+      // this.show();
     },
-    setSelectedItem() {
+    setCurrentItem() {
       this.currentItem = Object.assign({}, this.selectedItem);
+    },
+    setSelectedItem(item) {
+      this.selectedItem = Object.assign({}, item);
     },
     async handleConfirm() {
       await this.save();
@@ -216,8 +219,9 @@ export default {
 
       if (await this.validate()) {
         // NCThanh-TODO: show mask
-        let config = SAVE_CONFIG[this.formStatus];
-        let response = await self.api[config.method](self.currentItem);
+        let config = SAVE_CONFIG[this.formStatus],
+          payload = self.getPayloadForSave();
+        let response = await self.api[config.method](payload);
         if (response && response.success) {
           this.$notify({
             title: "Success",
@@ -250,6 +254,9 @@ export default {
      */
     async validateBusiness() {
       return true;
+    },
+    getPayloadForSave() {
+      return this.currentItem;
     },
     /**
      * return validation rules for base-form
