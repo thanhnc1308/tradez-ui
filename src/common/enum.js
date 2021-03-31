@@ -11,7 +11,8 @@ export const EnumColumnType = {
     Link: 4,
     Image: 5,
     Tag: 6,
-    SignedTag: 7
+    SignedTag: 7,
+    Boolean: 8,
 }
 
 export const EnumFormatType = {

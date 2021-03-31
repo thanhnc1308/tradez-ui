@@ -101,6 +101,64 @@ export const columnsJournal = [
   }
 ];
 
+export const columnsNotification = [
+  {
+    dataField: "created_date",
+    label: "Date",
+    sortable: "custom",
+    columnAlign: "center",
+    dataAlign: "center",
+    width: "100",
+    columnType: EnumColumnType.DateTime,
+    formatType: EnumFormatType.DateTime
+  },
+  {
+    dataField: "description",
+    label: "Description",
+    columnAlign: "center",
+    dataAlign: "center",
+    width: "100",
+    columnType: EnumColumnType.Text,
+    formatType: EnumFormatType.Text
+  },
+  {
+    dataField: "gmail",
+    label: "Gmail",
+    columnAlign: "center",
+    dataAlign: "center",
+    width: "100",
+    columnType: EnumColumnType.Text,
+    formatType: EnumFormatType.Text
+  },
+  {
+    dataField: "send_gmail",
+    label: "Send Gmail",
+    columnAlign: "center",
+    dataAlign: "center",
+    minWidth: "100",
+    columnType: EnumColumnType.Boolean,
+    formatType: EnumFormatType.Text
+  },
+  {
+    dataField: "tg_chat_id",
+    label: "Telegram Chat",
+    columnAlign: "center",
+    dataAlign: "center",
+    minWidth: "100",
+    columnType: EnumColumnType.Text,
+    formatType: EnumFormatType.Text
+  },
+  {
+    dataField: "send_telegram",
+    label: "Send Telegram",
+    columnAlign: "center",
+    dataAlign: "center",
+    minWidth: "100",
+    columnType: EnumColumnType.Boolean,
+    formatType: EnumFormatType.Text
+  }
+];
+
 export const columnsStockPrice = [
   {
     dataField: "symbol",

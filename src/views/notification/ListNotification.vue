@@ -37,13 +37,12 @@
     <template slot="table">
       <table-viewer
         ref="tableData"
-        @click="onClickTableRow"
         @dblclick="onDblClickTableRow"
-        :store="storeJournal"
+        :store="storeNotification"
         pagination
         hasActionColumn
         autoLoad
-        :columns="columnsJournal"
+        :columns="columnsNotification"
       >
         <template slot="actions" slot-scope="{ row }">
           <el-dropdown split-button type="primary" size="small" @click="edit(row)">
@@ -66,21 +65,20 @@
 <script>
 import BaseFormList from "@/views/base/BaseFormList.vue";
 import LayoutList from "@/views/base/LayoutList.vue";
-import StockViewer from "@/views/market-info/StockViewer";
-import { columnsJournal } from "@/common/columnConfig";
-import DialogJournal from "@/views/investing-journal/DialogJournal.vue";
+import { columnsNotification } from "@/common/columnConfig";
+import DialogNotification from "@/views/notification/DialogNotification.vue";
 import TableStore from "@/common/TableStore";
-import JournalAPI from '@/api/JournalAPI';
+import NotificationAPI from '@/api/NotificationAPI';
 
 export default {
-  name: "InvestingJournal",
+  name: "ListNotification",
   extends: BaseFormList,
   components: {
     LayoutList,
   },
   data() {
-    this.columnsJournal = columnsJournal;
-    this.storeJournal = new TableStore({
+    this.columnsNotification = columnsNotification;
+    this.storeNotification = new TableStore({
       proxy: {
         url: "/journals",
         type: "remote",
@@ -93,20 +91,14 @@ export default {
      * @override
      */
     getApi() {
-      return new JournalAPI();
+      return new NotificationAPI();
     },
     /**
      * form dialog detail
      * @override
      */
     getFormDetailComponent() {
-      return DialogJournal;
-    },
-    /**
-     * @override
-     */
-    onClickTableRow(row) {
-      StockViewer.show(row, this);
+      return DialogNotification;
     },
     /**
      * @override
@@ -154,7 +146,7 @@ export default {
      * @override
      */
     getFileNameExcel() {
-      return "investing-journal";
+      return "notification";
     },
   },
 };

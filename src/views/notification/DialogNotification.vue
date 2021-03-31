@@ -12,89 +12,28 @@
       :rules="getFormRules()"
       :model="currentItem"
       label-position="left"
-      label-width="100px"
+      label-width="150px"
       style="width: 400px; margin-left: 50px"
     >
-      <base-form-item label="Date" prop="journal_date">
-        <base-date-picker
-          v-model="currentItem.journal_date"
-          type="datetime"
-          :disabled="isViewing"
-          placeholder="Please pick a date"
-        />
-      </base-form-item>
-      <base-form-item label="Symbol" prop="symbol">
-        <el-select
-          v-model="currentItem.symbol"
-          class="filter-item"
-          :disabled="isViewing"
-          placeholder="Please select"
-        >
-          <el-option
-            v-for="symbol in listStock"
-            :key="symbol"
-            :label="symbol"
-            :value="symbol"
-          />
-        </el-select>
-      </base-form-item>
-      <base-form-item label="Type" prop="transaction_type">
-        <el-select
-          v-model="currentItem.transaction_type"
-          :disabled="isViewing"
-          class="filter-item"
-          placeholder="Please select type"
-        >
-          <el-option
-            v-for="type in listType"
-            :key="type"
-            :label="type"
-            :value="type"
-          />
-        </el-select>
-      </base-form-item>
-      <base-form-item label="Entry" prop="entry">
-        <base-input-number :disabled="isViewing" v-model="currentItem.entry" />
-      </base-form-item>
-      <base-form-item label="Exit" prop="exit">
-        <base-input-number :disabled="isViewing" v-model="currentItem.exit" />
-      </base-form-item>
-      <base-form-item label="PnL" prop="pnl">
-        <base-input-number :disabled="isViewing" v-model="currentItem.pnl" />
-      </base-form-item>
-      <base-form-item label="Screenshot" prop="screenshot">
-        <el-upload
-          class="avatar-uploader"
-          :disabled="isViewing"
-          v-if="!currentItem.screenshot"
-          action="https://jsonplaceholder.typicode.com/posts/"
-          :show-file-list="false"
-          :on-preview="handlePictureCardPreview"
-          :on-remove="handleRemove"
-          list-type="picture-card"
-          :on-success="handleAvatarSuccess"
-          :before-upload="beforeAvatarUpload"
-        >
-          <!-- <img
-            v-if="currentItem.screenshot"
-            :src="currentItem.screenshot"
-            class="avatar"
-          /> -->
-          <i class="el-icon-plus avatar-uploader-icon"></i>
-        </el-upload>
-        <base-image
-          v-if="currentItem.screenshot"
-          :src="currentItem.screenshot"
-          fit="cover"
-        />
-      </base-form-item>
-      <base-form-item label="Comment" prop="comment">
+      <base-form-item label="Description" prop="description">
         <base-input
           :autosize="{ minRows: 2, maxRows: 4 }"
           type="textarea"
           :disabled="isViewing"
-          v-model="currentItem.comment"
+          v-model="currentItem.description"
         />
+      </base-form-item>
+      <base-form-item label="Gmail" prop="gmail">
+        <base-input :disabled="isViewing" v-model="currentItem.gmail" />
+      </base-form-item>
+      <base-form-item label="Send Gmail" prop="send_gmail">
+        <base-checkbox :disabled="isViewing" v-model="currentItem.send_gmail" />
+      </base-form-item>
+      <base-form-item label="Telegram Chat ID" prop="tg_chat_id">
+        <base-input :disabled="isViewing" v-model="currentItem.tg_chat_id" />
+      </base-form-item>
+      <base-form-item label="Send Telegram" prop="send_telegram">
+        <base-checkbox :disabled="isViewing" v-model="currentItem.send_telegram" />
       </base-form-item>
     </base-form>
     <span slot="footer" class="dialog-footer flex flex-end">
@@ -109,35 +48,21 @@
 <script>
 import BaseFormDetail from "@/views/base/BaseFormDetail.vue";
 import { callBase } from "@/mixins/callBase";
-import JournalAPI from "@/api/JournalAPI";
+import NotificationAPI from "@/api/NotificationAPI";
 
 export default {
-  name: "DialogAddNewNotification",
+  name: "DialogNotification",
   extends: BaseFormDetail,
   mixins: [callBase],
   data() {
-    this.listStock = ["RAL", "HPG", "VIC"];
-    this.listType = ["Buy", "Sell"];
     return {};
   },
-  // mounted() {
-  //   this.currentItem = {
-  //     journal_date: new Date(),
-  //     symbol: "VIC",
-  //     transaction_type: "Buy",
-  //     status: "win",
-  //     entry: 100000,
-  //     exit: 100000,
-  //     pnl: 100000,
-  //     comment: "comment",
-  //   };
-  // },
   computed: {
     /**
      * @override
      */
     formName() {
-      return "journal";
+      return "notification";
     },
   },
   methods: {
@@ -145,26 +70,15 @@ export default {
      * @override
      */
     getApi() {
-      return new JournalAPI();
+      return new NotificationAPI();
     },
     /**
      * @override
      */
     getFormRules() {
       return {
-        type: [
-          { required: true, message: "type is required", trigger: "change" },
-        ],
-        timestamp: [
-          {
-            type: "date",
-            required: true,
-            message: "timestamp is required",
-            trigger: "change",
-          },
-        ],
-        title: [
-          { required: true, message: "title is required", trigger: "blur" },
+        gmail: [
+          { required: true, message: "Gmail is required", trigger: "blur" },
         ],
       };
     },
@@ -173,35 +87,19 @@ export default {
      */
     resetForm() {
       this.currentItem = {
-        journal_date: new Date(),
-        symbol: "VIC",
-        transaction_type: "Buy",
-        status: "win",
-        entry: 100000,
-        exit: 100000,
-        pnl: 100000,
-        comment: "comment",
+        description: "",
+        gmail: "",
+        send_gmail: false,
+        tg_chat_id: "",
+        send_telegram: false,
+        condition: "",
       };
     },
-    //#region Handle upload
-    handleAvatarSuccess(res, file) {
-      this.currentItem.screenshot = URL.createObjectURL(file.raw);
-    },
-    beforeAvatarUpload(file) {
-      const isLt2M = file.size / 1024 / 1024 < 2;
-      if (!isLt2M) {
-        this.$message.error("Avatar picture size can not exceed 2MB!");
-      }
-      return isLt2M;
-    },
-    handleRemove(file, fileList) {
-      console.log(file, fileList);
-    },
-    handlePictureCardPreview(file) {
-      this.currentItem.screenshot = file.url;
-      this.dialogVisible = true;
-    },
-    //#endregion Handle upload
+    // getPayloadForSave() {
+    //   let result = { ...this.currentItem };
+    //   result.transaction_date = new Date(result.transaction_date);
+    //   return result;
+    // },
   },
 };
 </script>
