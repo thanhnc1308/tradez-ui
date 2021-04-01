@@ -13,23 +13,23 @@
       :model="currentItem"
       label-position="left"
       label-width="150px"
-      style="width: 400px; margin-left: 50px"
     >
-      <base-form-item label="Description" prop="description">
+      <base-form-item class="w-full" label="Description" prop="description">
         <base-input
           :autosize="{ minRows: 2, maxRows: 4 }"
+          class="w-full"
           type="textarea"
           :disabled="isViewing"
           v-model="currentItem.description"
         />
       </base-form-item>
-      <base-form-item label="Gmail" prop="gmail">
+      <base-form-item class="w-2/3" label="Gmail" prop="gmail">
         <base-input :disabled="isViewing" v-model="currentItem.gmail" />
       </base-form-item>
       <base-form-item label="Send Gmail" prop="send_gmail">
         <base-checkbox :disabled="isViewing" v-model="currentItem.send_gmail" />
       </base-form-item>
-      <base-form-item label="Telegram Chat ID" prop="tg_chat_id">
+      <base-form-item class="w-2/3" label="Telegram Chat ID" prop="tg_chat_id">
         <base-input :disabled="isViewing" v-model="currentItem.tg_chat_id" />
       </base-form-item>
       <base-form-item label="Send Telegram" prop="send_telegram">
@@ -95,11 +95,14 @@ export default {
         condition: "",
       };
     },
-    // getPayloadForSave() {
-    //   let result = { ...this.currentItem };
-    //   result.transaction_date = new Date(result.transaction_date);
-    //   return result;
-    // },
+    /**
+     * @override
+     */
+    getPayloadForSave() {
+      let result = { ...this.currentItem };
+      result.condition = result.condition ? JSON.stringify(result.condition) : null;
+      return result;
+    },
   },
 };
 </script>

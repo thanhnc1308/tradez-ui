@@ -80,7 +80,7 @@ export default {
     this.columnsNotification = columnsNotification;
     this.storeNotification = new TableStore({
       proxy: {
-        url: "/journals",
+        url: "/notifications",
         type: "remote",
       }
     });

@@ -103,7 +103,7 @@ export const columnsJournal = [
 
 export const columnsNotification = [
   {
-    dataField: "created_date",
+    dataField: "created_at",
     label: "Date",
     sortable: "custom",
     columnAlign: "center",
@@ -117,7 +117,7 @@ export const columnsNotification = [
     label: "Description",
     columnAlign: "center",
     dataAlign: "center",
-    width: "100",
+    minWidth: "300",
     columnType: EnumColumnType.Text,
     formatType: EnumFormatType.Text
   },
@@ -126,7 +126,7 @@ export const columnsNotification = [
     label: "Gmail",
     columnAlign: "center",
     dataAlign: "center",
-    width: "100",
+    width: "300",
     columnType: EnumColumnType.Text,
     formatType: EnumFormatType.Text
   },
@@ -135,7 +135,7 @@ export const columnsNotification = [
     label: "Send Gmail",
     columnAlign: "center",
     dataAlign: "center",
-    minWidth: "100",
+    width: "100",
     columnType: EnumColumnType.Boolean,
     formatType: EnumFormatType.Text
   },
@@ -144,7 +144,7 @@ export const columnsNotification = [
     label: "Telegram Chat",
     columnAlign: "center",
     dataAlign: "center",
-    minWidth: "100",
+    Width: "150",
     columnType: EnumColumnType.Text,
     formatType: EnumFormatType.Text
   },
@@ -153,7 +153,7 @@ export const columnsNotification = [
     label: "Send Telegram",
     columnAlign: "center",
     dataAlign: "center",
-    minWidth: "100",
+    width: "130",
     columnType: EnumColumnType.Boolean,
     formatType: EnumFormatType.Text
   }
