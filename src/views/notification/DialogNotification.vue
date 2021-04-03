@@ -35,8 +35,12 @@
       <base-form-item label="Send Telegram" prop="send_telegram">
         <base-checkbox :disabled="isViewing" v-model="currentItem.send_telegram" />
       </base-form-item>
+      <base-form-item label="Condition" prop="condition">
+        {{ currentItem.condition_description }}
+      </base-form-item>
     </base-form>
     <span slot="footer" class="dialog-footer flex flex-end">
+      <base-button @click="openChooseStockFilterDialog">Choose conditions</base-button>
       <base-button @click="cancel">Cancel</base-button>
       <base-button v-if="!isViewing" type="primary" @click="confirm"
         >Save</base-button
@@ -49,6 +53,7 @@
 import BaseFormDetail from "@/views/base/BaseFormDetail.vue";
 import { callBase } from "@/mixins/callBase";
 import NotificationAPI from "@/api/NotificationAPI";
+import DialogUtil from "@/common/DialogUtil";
 
 export default {
   name: "DialogNotification",
@@ -92,7 +97,8 @@ export default {
         send_gmail: false,
         tg_chat_id: "",
         send_telegram: false,
-        condition: "",
+        condition_key: "",
+        condition_description: ""
       };
     },
     /**
@@ -100,9 +106,44 @@ export default {
      */
     getPayloadForSave() {
       let result = { ...this.currentItem };
-      result.condition = result.condition ? JSON.stringify(result.condition) : null;
+      result.condition_key = result.condition_key ? JSON.stringify(result.condition_key) : null;
       return result;
     },
+    async openChooseStockFilterDialog() {
+      if (!this.component) {
+        this.component = await import(
+          "@/views/stock-screener/ChooseStockFilters.vue"
+        );
+      }
+      if (!this.dialog) {
+        let initOptions = {
+          options: {
+            propsData: {
+              caller: 'dialog_notification'
+            }
+          },
+          events: {
+            close: this.onDialogChooseStockFiltersClose,
+          },
+        };
+        this.dialog = DialogUtil.prepareDialog(
+          this.component,
+          this,
+          initOptions
+        );
+      }
+      let showOptions = {};
+      DialogUtil.showDialog(this.dialog, showOptions);
+    },
+    onDialogChooseStockFiltersClose(dialogResult, frm) {
+      if (dialogResult === "Confirm") {
+        this.currentItem.condition_key = frm.stockFilters;
+        this.currentItem.condition_description = this.buildConditionDescription(frm.stockFilters);
+      }
+    },
+    buildConditionDescription(condition_key) {
+      return JSON.stringify(condition_key);
+    }
   },
 };
 </script>

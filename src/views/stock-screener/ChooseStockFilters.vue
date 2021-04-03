@@ -7,9 +7,25 @@
     width="770px"
   >
     <div class="list-selected-filters">
-      <div class="filter-item flex mb-1">
+      <div v-if="caller === 'stock_screener'" class="filter-item flex mb-1">
         <div class="filter-type mr-1">Transaction Date</div>
         <div class="filter-operation">
+          <base-date-picker
+            v-model="stockDate"
+            type="date"
+            placeholder="Pick a day"
+          />
+        </div>
+      </div>
+      <div v-if="caller === 'dialog_backtest'" class="filter-item flex mb-1">
+        <div class="filter-type mr-1">Period</div>
+        <div class="filter-operation">
+          <base-date-picker
+            v-model="stockDate"
+            type="date"
+            placeholder="Pick a day"
+          />
+          <div class="ml-1 mr-1">-</div>
           <base-date-picker
             v-model="stockDate"
             type="date"
@@ -142,7 +158,7 @@
       <div class="footer-right">
         <base-button @click="onButtonClick('Cancel')">Cancel</base-button>
         <base-button type="primary" @click="onButtonClick('Confirm')"
-          >View</base-button
+          >Confirm</base-button
         >
       </div>
     </span>
@@ -160,6 +176,16 @@ export default {
   extends: BaseFormDialog,
   components: {
     BaseInputNumberRange,
+  },
+  props: {
+    /**
+     * form that shows this dialog
+     * stock_screener - dialog_notification - dialog_backtest
+     */
+    caller: {
+      type: String,
+      default: 'stock_screener'
+    }
   },
   data() {
     this.listFilters = listFilters.clone();

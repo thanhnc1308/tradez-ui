@@ -143,6 +143,7 @@ export default {
         // if (this.store) {
         //   this.store.rejectChanges();
         // }
+        self.dialogResult = 'Cancel';
         self.hide();
       } else {
         let answer = "No";
