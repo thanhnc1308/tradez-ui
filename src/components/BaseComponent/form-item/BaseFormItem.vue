@@ -113,6 +113,10 @@
       contentStyle() {
         const ret = {};
         const label = this.label;
+        if (this.form.labelWidth) {
+          let width = `calc(100% - ${this.form.labelWidth})`;
+          ret.width = width;
+        }
         if (this.form.labelPosition === 'top' || this.form.inline) return ret;
         if (!label && !this.labelWidth && this.isNested) return ret;
         const labelWidth = this.labelWidth || this.form.labelWidth;

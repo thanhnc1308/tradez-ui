@@ -204,6 +204,9 @@ export default {
       default: 'stock_screener'
     }
   },
+  mounted() {
+    this.$el.click();
+  },
   data() {
     this.listStock = ["RAL", "HPG", "VIC"];
     this.listFilters = listFilters.clone();

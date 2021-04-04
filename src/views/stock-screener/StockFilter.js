@@ -2,6 +2,15 @@
  * Class for render stock filters
  */
 
+const dict_basic_operation = {
+  'less' : ' < ',
+  'eless' : ' <= ',
+  'greater' : ' > ',
+  'egreater' : ' >= ',
+  'equal' : ' = ',
+  'nequal' : ' <> ',
+  'equals' : " = ",
+}
 export default class StockFilter {
   filters = [];
 
@@ -44,5 +53,26 @@ export default class StockFilter {
       filters.push(filter);
     }
     return filters;
+  }
+
+  static buildFilterDescription(filters) {
+    let arrRes = [];
+    filters.forEach(item => {
+      let filterDescription = this.buildSingleFilterDescription(item);
+      arrRes.push(filterDescription)
+    })
+    return arrRes.join(', ');
+  }
+
+  static buildSingleFilterDescription(filter) {
+    let res = '',
+      operation = filter.operation;
+    if (operation in dict_basic_operation) {
+      let filterOperation = dict_basic_operation[operation];
+      res = `${filter.label} ${filterOperation} ${filter.value}`;
+    } else {
+      res = `${filter.label} ${operation} ${filter.value}`;
+    }
+    return res;
   }
 }

@@ -54,6 +54,7 @@ import BaseFormDetail from "@/views/base/BaseFormDetail.vue";
 import { callBase } from "@/mixins/callBase";
 import NotificationAPI from "@/api/NotificationAPI";
 import DialogUtil from "@/common/DialogUtil";
+import StockFilter from "@/views/stock-screener/StockFilter.js";
 
 export default {
   name: "DialogNotification",
@@ -137,11 +138,11 @@ export default {
     },
     onDialogChooseStockFiltersClose(dialogResult, frm) {
       if (dialogResult === "Confirm") {
-        this.currentItem.condition_key = frm.stockFilters;
-        this.currentItem.condition_description = this.buildConditionDescription(frm.stockFilters, frm.symbol);
+        this.currentItem.condition_key = this.buildCondition(frm.stockFilters, frm.symbol);
+        this.currentItem.condition_description = this.buildConditionDescription(this.currentItem.condition_key);
       }
     },
-    buildConditionDescription(condition_key, symbol) {
+    buildCondition(condition_key, symbol) {
       let filters = condition_key;
       if (symbol) {
         let filterSymbol = filters.find(item => item.type === 'symbol');
@@ -165,7 +166,22 @@ export default {
           value: new Date().toLocaleDateString("en-US"),
         });
       }
-      return JSON.stringify(filters);
+      return filters;
+    },
+    buildConditionDescription(condition_key) {
+      let filterSymbol = '',
+        arrFilter = [];
+      condition_key.forEach(item => {
+        if (item.type !== 'stock_date') {
+          if (item.type === 'symbol') {
+            filterSymbol = item.value;
+          } else {
+            let filterText = StockFilter.buildSingleFilterDescription(item);
+            arrFilter.push(filterText);
+          }
+        }
+      })
+      return `Symbol ${filterSymbol}: ${arrFilter.join(', ')}`;
     }
   },
 };
