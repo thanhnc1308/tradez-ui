@@ -17,6 +17,23 @@
           />
         </div>
       </div>
+      <div v-if="caller === 'dialog_notification'" class="filter-item flex mb-1">
+        <div class="filter-type mr-1">Symbol</div>
+        <div class="filter-operation">
+          <el-select
+          v-model="symbol"
+          class="filter-item"
+          placeholder="Please select"
+        >
+          <el-option
+            v-for="symbol in listStock"
+            :key="symbol"
+            :label="symbol"
+            :value="symbol"
+          />
+        </el-select>
+        </div>
+      </div>
       <div v-if="caller === 'dialog_backtest'" class="filter-item flex mb-1">
         <div class="filter-type mr-1">Period</div>
         <div class="filter-operation">
@@ -188,6 +205,7 @@ export default {
     }
   },
   data() {
+    this.listStock = ["RAL", "HPG", "VIC"];
     this.listFilters = listFilters.clone();
     this.listOperations = listOperation.clone();
     this.titleParam = [];
@@ -197,6 +215,7 @@ export default {
        */
       filters: [],
       selectedFilter: null,
+      symbol: null,
       stockDate: new Date(),
     };
   },

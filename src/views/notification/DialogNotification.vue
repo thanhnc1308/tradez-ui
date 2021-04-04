@@ -35,7 +35,7 @@
       <base-form-item label="Send Telegram" prop="send_telegram">
         <base-checkbox :disabled="isViewing" v-model="currentItem.send_telegram" />
       </base-form-item>
-      <base-form-item label="Condition" prop="condition">
+      <base-form-item class="w-full" label="Condition" prop="condition">
         {{ currentItem.condition_description }}
       </base-form-item>
     </base-form>
@@ -138,11 +138,34 @@ export default {
     onDialogChooseStockFiltersClose(dialogResult, frm) {
       if (dialogResult === "Confirm") {
         this.currentItem.condition_key = frm.stockFilters;
-        this.currentItem.condition_description = this.buildConditionDescription(frm.stockFilters);
+        this.currentItem.condition_description = this.buildConditionDescription(frm.stockFilters, frm.symbol);
       }
     },
-    buildConditionDescription(condition_key) {
-      return JSON.stringify(condition_key);
+    buildConditionDescription(condition_key, symbol) {
+      let filters = condition_key;
+      if (symbol) {
+        let filterSymbol = filters.find(item => item.type === 'symbol');
+        if (filterSymbol) {
+          filterSymbol.value = symbol;
+        } else {
+          filters.push({
+            type: "symbol",
+            operation: "equals",
+            value:symbol
+          })
+        }
+      }
+      let filterDate = filters.find(item => item.type === 'stock_date');
+      if (filterDate) {
+        filterDate.value = new Date().toLocaleDateString("en-US");
+      } else {
+        filters.push({
+          type: "stock_date",
+          operation: "equals",
+          value: new Date().toLocaleDateString("en-US"),
+        });
+      }
+      return JSON.stringify(filters);
     }
   },
 };
