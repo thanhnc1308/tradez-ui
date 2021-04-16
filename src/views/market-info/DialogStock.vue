@@ -5,7 +5,6 @@
         ref="tableData"
         :store="storeHistoricalPrice"
         pagination
-        autoLoad
         :columns="columnsHistoricalPrice"
       >
       </table-viewer>
@@ -69,6 +68,12 @@ export default {
           "value": this.symbol
         }
       ]
+      this.$nextTick(() => {
+        this.refresh();
+      })
+    },
+    refresh() {
+      this.$refs.tableData.doQuery();
     },
     getCompanyName() {
       this.companyName = 'companyName'

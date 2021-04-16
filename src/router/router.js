@@ -119,18 +119,18 @@ export const constantRoutes = [
  */
 export const asyncRoutes = [
   // #region sidebar
-  {
-    path: '/market-info',
-    component: Layout,
-    children: [
-      {
-        path: '',
-        component: () => import('@/views/market-info/ListStock.vue'),
-        name: 'MarketInfo',
-        meta: { title: 'Market Info', icon: 'clipboard' }
-      }
-    ]
-  },
+  // {
+  //   path: '/market-info',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: '',
+  //       component: () => import('@/views/market-info/ListStock.vue'),
+  //       name: 'MarketInfo',
+  //       meta: { title: 'Market Info', icon: 'clipboard' }
+  //     }
+  //   ]
+  // },
   {
     path: '/stock-screener',
     component: Layout,
@@ -155,18 +155,18 @@ export const asyncRoutes = [
       }
     ]
   },
-  {
-    path: '/watch-list',
-    component: Layout,
-    children: [
-      {
-        path: '',
-        component: () => import('@/views/watch-list/ListWatchStock.vue'),
-        name: 'WatchList',
-        meta: { title: 'Watch List', icon: 'clipboard' }
-      }
-    ]
-  },
+  // {
+  //   path: '/watch-list',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: '',
+  //       component: () => import('@/views/watch-list/ListWatchStock.vue'),
+  //       name: 'WatchList',
+  //       meta: { title: 'Watch List', icon: 'clipboard' }
+  //     }
+  //   ]
+  // },
   {
     path: '/notification',
     component: Layout,
@@ -203,18 +203,18 @@ export const asyncRoutes = [
       }
     ]
   },
-  {
-    path: '/risk-management',
-    component: Layout,
-    children: [
-      {
-        path: '',
-        component: () => import('@/views/risk-management/RiskManagement.vue'),
-        name: 'RiskManagement',
-        meta: { title: 'Risk Management', icon: 'clipboard' }
-      }
-    ]
-  },
+  // {
+  //   path: '/risk-management',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: '',
+  //       component: () => import('@/views/risk-management/RiskManagement.vue'),
+  //       name: 'RiskManagement',
+  //       meta: { title: 'Risk Management', icon: 'clipboard' }
+  //     }
+  //   ]
+  // },
   // #endregion sidebar
 
   // #region hidden router

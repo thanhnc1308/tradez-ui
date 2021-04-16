@@ -30,7 +30,8 @@
         <base-checkbox :disabled="isViewing" v-model="currentItem.send_gmail" />
       </base-form-item>
       <base-form-item class="w-2/3" label="Telegram Chat ID" prop="tg_chat_id">
-        <base-input :disabled="isViewing" v-model="currentItem.tg_chat_id" />
+        <base-input v-if="currentItem.tg_chat_id" :disabled="isViewing" v-model="currentItem.tg_chat_id" />
+        <base-button v-else title='Open link and send a message to get the telegram chat id' @click="getTelegramChatID">Get Telegram ChatId</base-button>
       </base-form-item>
       <base-form-item label="Send Telegram" prop="send_telegram">
         <base-checkbox :disabled="isViewing" v-model="currentItem.send_telegram" />
@@ -182,6 +183,12 @@ export default {
         }
       })
       return `Symbol ${filterSymbol}: ${arrFilter.join(', ')}`;
+    },
+    /**
+     * Open _blank tab to get telegram chat id
+     */
+    getTelegramChatID() {
+      window.open('https://web.telegram.org/#/im?p=@ncthanh_bot', '_blank');
     }
   },
 };
