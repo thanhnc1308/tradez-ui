@@ -6,6 +6,7 @@
       >
       <base-button type="primary" @click="refresh">Refresh</base-button>
       <base-button type="primary" @click="saveFilters">Save filters</base-button>
+      <base-button type="primary" @click="saveAsNotification">Save as notification</base-button>
     </div>
     <div class="result">
       <div class="filter-title">{{ title }}</div>
@@ -173,8 +174,11 @@ export default {
       StockViewer.show(row, this);
     },
     saveFilters() {
-      alert('saved')
-    }
+      alert('saveFilters')
+    },
+    saveAsNotification() {
+      alert('saveAsNotification')
+    },
   },
 };
 </script>
