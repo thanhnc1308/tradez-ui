@@ -1,48 +1,80 @@
-<!--
-https://github.com/tvjsx/trading-vue-js/tree/master/docs/guide
--->
-
 <template>
-  <trading-vue
-    :data="chart"
-    :width="this.width"
-    :height="this.height"
-    :color-back="colors.colorBack"
-    :color-grid="colors.colorGrid"
-    :color-text="colors.colorText"
-  >
-  </trading-vue>
+  <div class="candlestick-chart">
+    <div class="block select-stock">
+      <span class="demonstration">Choose a stock symbol</span>
+      <el-select
+        v-model="symbol"
+        placeholder="Please select"
+      >
+        <el-option
+          v-for="symbol in listStock"
+          :key="symbol"
+          :label="symbol"
+          :value="symbol"
+        />
+      </el-select>
+    </div>
+    <div class="block">
+      <span class="demonstration">Choose a period</span>
+      <el-date-picker
+        v-model="daterange"
+        type="daterange"
+        align="right"
+        unlink-panels
+        range-separator="To"
+        start-placeholder="Start date"
+        end-placeholder="End date"
+        :picker-options="pickerOptions"
+      >
+      </el-date-picker>
+    </div>
+    <trading-vue-chart :symbol="symbol" :daterange="daterange">
+    </trading-vue-chart>
+  </div>
 </template>
 
 <script>
-import TradingVue from "trading-vue-js";
-import Data from "./data.json";
+import TradingVueChart from "@/views/charts/TradingVueChart.vue";
 
 export default {
-  name: "app",
-  components: { TradingVue },
-  methods: {
-    onResize(event) {
-      this.width = window.innerWidth;
-      this.height = window.innerHeight - 85;
-    },
-  },
-  mounted() {
-    window.addEventListener("resize", this.onResize);
-  },
-  beforeDestroy() {
-    window.removeEventListener("resize", this.onResize);
-  },
+  name: "CandlestickCharts",
+  components: { TradingVueChart },
   data() {
+    this.listStock = ["RAL", "HPG", "VIC"];
     return {
-      chart: Data,
-      width: window.innerWidth,
-      height: window.innerHeight - 85,
-      colors: {
-        colorBack: "#fff",
-        colorGrid: "#eee",
-        colorText: "#333",
+      symbol: "",
+      pickerOptions: {
+        shortcuts: [
+          {
+            text: "Last week",
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date();
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+              picker.$emit("pick", [start, end]);
+            },
+          },
+          {
+            text: "Last month",
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date();
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+              picker.$emit("pick", [start, end]);
+            },
+          },
+          {
+            text: "Last 3 months",
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date();
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+              picker.$emit("pick", [start, end]);
+            },
+          },
+        ],
       },
+      daterange: [],
     };
   },
 };
