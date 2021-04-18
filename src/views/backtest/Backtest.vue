@@ -26,6 +26,14 @@
         >
         </el-date-picker>
       </div>
+      <div class="row">
+        <div class="param-label">Captial</div>
+        <base-input-number v-model="cash"></base-input-number>
+      </div>
+      <div class="row">
+        <div class="param-label">Commission</div>
+        <base-input-number v-model="commission"></base-input-number>
+      </div>
       <div class="row select-strategy">
         <div class="param-label">Choose a strategy</div>
         <el-select v-model="strategy" filterable placeholder="Please select">
@@ -141,6 +149,8 @@ export default {
         ],
       },
       daterange: [],
+      commission: 0.001,
+      cash: 100000
     };
   },
   methods: {
@@ -177,6 +187,8 @@ export default {
             symbol: this.symbol,
             from_date: fromDate,
             to_date: toDate,
+            cash: this.cash,
+            commission: this.commission,
             strategy: this.strategy,
             strategy_params: {
               upper: 70,
