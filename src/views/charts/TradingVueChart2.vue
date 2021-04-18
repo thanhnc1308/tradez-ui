@@ -1,15 +1,7 @@
 <template>
   <!-- <div class="trading-vue-chart"> -->
-  <base-dialog
-    width="100%"
-    top="0"
-    :fullscreen="true"
-    :title="title"
-    :visible.sync="isShow"
-  >
-    <template slot="customButton">
-      <svg-icon :icon-class="isFullscreen?'exit-fullscreen':'fullscreen'" @click="toggleFullScreen" />
-    </template>
+  <base-dialog :title="title" :visible.sync="isShow" width="75%">
+    <base-button @click="toggleFullScreen">Toggle fulllscreen</base-button>
     <trading-vue
       id="trading-vue-chart"
       @dblclick="toggleFullScreen"
@@ -48,28 +40,28 @@ export default {
     },
   },
   props: {
-    // symbol: {
-    //   type: String,
-    //   default: "",
-    // },
-    // daterange: {
-    //   type: Array,
-    //   default: function () {
-    //     return [];
-    //   },
-    // },
-    // offchart: {
-    //   type: Array,
-    //   default: function () {
-    //     return [];
-    //   },
-    // },
-    // onchart: {
-    //   type: Array,
-    //   default: function () {
-    //     return [];
-    //   },
-    // },
+    symbol: {
+      type: String,
+      default: "",
+    },
+    daterange: {
+      type: Array,
+      default: function () {
+        return [];
+      },
+    },
+    offchart: {
+      type: Array,
+      default: function () {
+        return [];
+      },
+    },
+    onchart: {
+      type: Array,
+      default: function () {
+        return [];
+      },
+    },
   },
   watch: {
     // symbol() {
@@ -91,7 +83,6 @@ export default {
       this.daterange = options.daterange;
       this.offchart = options.offchart;
       this.onchart = options.onchart;
-      this.loadStockHistoricalPrice();
     },
     onResize(event) {
       this.width = window.innerWidth;
@@ -155,37 +146,21 @@ export default {
       const el = document.getElementById("trading-vue-chart");
       screenfull.request(el);
     },
-    change() {
-      this.isFullscreen = screenfull.isFullscreen
-    },
-    init() {
-      if (screenfull.enabled) {
-        screenfull.on('change', this.change)
-      }
-    },
-    destroy() {
-      if (screenfull.enabled) {
-        screenfull.off('change', this.change)
-      }
-    }
   },
   mounted() {
-    this.init()
     window.addEventListener("resize", this.onResize);
   },
   beforeDestroy() {
     window.removeEventListener("resize", this.onResize);
-    this.destroy();
   },
   data() {
     this.api = new StockPriceAPI();
     return {
-      isFullscreen: false,
       chart: {
-        symbol: "",
+        symbol: '',
         daterange: [],
-        offchart: [],
-        onchart: [],
+        symbol: '',
+        symbol: '',
         chart: {
           data: [],
           type: "Candles",

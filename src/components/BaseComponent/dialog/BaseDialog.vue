@@ -21,6 +21,10 @@
           <slot name="title">
             <span class="el-dialog__title">{{ title }}</span>
           </slot>
+          <div class="custom-dialog-button">
+            <slot name="customButton">
+            </slot>
+          </div>
           <button
             type="button"
             class="el-dialog__headerbtn"
@@ -215,3 +219,11 @@
     }
   };
 </script>
+
+<style lang="scss" scoped>
+.custom-dialog-button {
+  display: flex;
+  width: calc(100% - 20px);
+  justify-content: flex-end;
+}
+</style>

@@ -29,18 +29,34 @@
       >
       </el-date-picker>
     </div>
-    <trading-vue-chart :symbol="symbol" :daterange="daterange">
-    </trading-vue-chart>
+    <base-button @click="showChart">Show chart</base-button>
+    <!-- <trading-vue-chart :symbol="symbol" :daterange="daterange">
+    </trading-vue-chart> -->
   </div>
 </template>
 
 <script>
 import TradingVueChart from "@/views/charts/TradingVueChart.vue";
 import { fnStoreAllStock } from "@/api/storeConfig.js";
+import showTradingViewChart from "@/views/charts/TradingViewChartViewer.js";
 
 export default {
   name: "CandlestickCharts",
   components: { TradingVueChart },
+  methods: {
+    showChart() {
+      showTradingViewChart(
+        this,
+        {},
+        {
+          symbol: this.symbol,
+          daterange: this.daterange,
+          offchart: [],
+          onchart: [],
+        }
+      )
+    }
+  },
   created() {
     const self = this;
     fnStoreAllStock().then(res => {
