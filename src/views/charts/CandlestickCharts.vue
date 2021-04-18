@@ -2,8 +2,8 @@
   <layout-list>
     <template slot="utility">
       <div class="candlestick-chart">
-        <div class="block select-stock">
-          <span class="demonstration">Choose a stock symbol</span>
+        <div class="row select-stock">
+          <span class="param-label">Choose a stock symbol</span>
           <el-select v-model="symbol" filterable placeholder="Please select">
             <el-option
               v-for="stock in listStock"
@@ -13,8 +13,8 @@
             />
           </el-select>
         </div>
-        <div class="block">
-          <span class="demonstration">Choose a period</span>
+        <div class="row">
+          <span class="param-label">Choose a period</span>
           <el-date-picker
             v-model="daterange"
             type="daterange"
@@ -105,3 +105,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.param-label {
+  min-width: 250px;
+}
+</style>

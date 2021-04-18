@@ -1,7 +1,7 @@
 <template>
   <layout-list>
     <template slot="utility">
-      <div class="choose-filters">
+      <div class="flex flex-end choose-filters">
         <base-button type="primary" @click="showDialogChooseFilters"
           >Choose filters</base-button
         >

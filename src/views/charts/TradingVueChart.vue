@@ -47,44 +47,6 @@ export default {
       return this.symbol;
     },
   },
-  props: {
-    // symbol: {
-    //   type: String,
-    //   default: "",
-    // },
-    // daterange: {
-    //   type: Array,
-    //   default: function () {
-    //     return [];
-    //   },
-    // },
-    // offchart: {
-    //   type: Array,
-    //   default: function () {
-    //     return [];
-    //   },
-    // },
-    // onchart: {
-    //   type: Array,
-    //   default: function () {
-    //     return [];
-    //   },
-    // },
-  },
-  watch: {
-    // symbol() {
-    //   this.loadStockHistoricalPrice();
-    // },
-    // daterange() {
-    //   this.loadStockHistoricalPrice();
-    // },
-    // offchart() {
-    //   this.chart.offchart = this.offchart;
-    // },
-    // onchart() {
-    //   this.chart.onchart = this.onchart;
-    // },
-  },
   methods: {
     prepareWhenShowDialog(options) {
       this.symbol = options.symbol;

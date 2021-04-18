@@ -1,8 +1,8 @@
 <template>
   <layout-list>
     <template slot="utility">
-      <div class="block select-stock">
-        <span class="demonstration">Choose a stock symbol</span>
+      <div class="row select-stock">
+        <div class="param-label">Choose a stock symbol</div>
         <el-select v-model="symbol" filterable placeholder="Please select">
           <el-option
             v-for="stock in listStock"
@@ -12,8 +12,8 @@
           />
         </el-select>
       </div>
-      <div class="block">
-        <span class="demonstration">Choose a period</span>
+      <div class="row">
+        <div class="param-label">Choose a period</div>
         <el-date-picker
           v-model="daterange"
           type="daterange"
@@ -26,34 +26,88 @@
         >
         </el-date-picker>
       </div>
-      <base-button @click="showResult">Show chart</base-button>
+      <div class="row select-strategy">
+        <div class="param-label">Choose a strategy</div>
+        <el-select v-model="strategy" filterable placeholder="Please select">
+          <el-option
+            v-for="strategy in listStrategy"
+            :key="strategy.id"
+            :label="strategy.label"
+            :value="strategy.id"
+          />
+        </el-select>
+      </div>
+      <div class="row">
+        <div class="param-label">Choose strategy parameters</div>
+      </div>
+      <base-button @click="showResult">Show Result</base-button>
     </template>
     <template slot="table"> Result </template>
   </layout-list>
 </template>
 
 <script>
-import BaseFormList from "@/views/base/BaseFormList.vue";
+// import BaseFormList from "@/views/base/BaseFormList.vue";
 import LayoutList from "@/views/base/LayoutList.vue";
 import { fnStoreAllStock } from "@/api/storeConfig.js";
+import BacktestAPI from "@/api/BacktestAPI.js";
 
 export default {
   name: "Backtest",
-  extends: BaseFormList,
+  // extends: BaseFormList,
   components: {
     LayoutList,
   },
   created() {
     const self = this;
-    fnStoreAllStock().then(res => {
+    fnStoreAllStock().then((res) => {
       if (res && res.success) {
         self.listStock = res.data;
       }
-    })
+    });
   },
   data() {
+    this.api = this.getApi();
+    this.listStrategy = [
+      {
+        id: "RSIStrategy",
+        label: "RSI",
+        description: "RSI",
+      },
+      {
+        id: "BollingerBandsAndRSIStrategy",
+        label: "Bollinger Bands And RSI",
+        description: "Bollinger Bands And RSI",
+      },
+      {
+        id: "BollingerBandsSidewayStrategy",
+        label: "Bollinger Bands And RSI",
+        description: "Bollinger Bands And RSI",
+      },
+      {
+        id: "BollingerBandsStrategy",
+        label: "Bollinger Bands",
+        description: "Bollinger Bands",
+      },
+      {
+        id: "MACDStrategy",
+        label: "MACD",
+        description: "MACD",
+      },
+      {
+        id: "MaCrossoverStrategy",
+        label: "Moving Average Crossover",
+        description: "Moving Average Crossover",
+      },
+      {
+        id: "ADXDMICrossStrategy",
+        label: "ADX-DMI Cross",
+        description: "ADX-DMI Cross",
+      },
+    ];
     return {
       listStock: [],
+      strategy: "",
       symbol: "",
       pickerOptions: {
         shortcuts: [
@@ -90,7 +144,49 @@ export default {
     };
   },
   methods: {
-    showResult() {},
+    /**
+     * @override
+     */
+    getApi() {
+      return new BacktestAPI();
+    },
+    /**
+     * Do backtest strategy and show result
+     */
+    async showResult() {
+      let symbol = this.symbol,
+        strategy = this.strategy,
+        formatDate = (date) => {
+          if (date && date instanceof Date) {
+            return (
+              date.getUTCFullYear() +
+              "/" +
+              (date.getUTCMonth() + 1) +
+              "/" +
+              date.getUTCDate()
+            );
+          } else {
+            return "";
+          }
+        },
+        fromDate = formatDate(this.daterange[0]),
+        toDate = formatDate(this.daterange[1]);
+      if (symbol && strategy) {
+        let url = `?symbol=${this.symbol}&strategy=${strategy}${
+          fromDate ? `&from_date=${fromDate}` : ""
+        }${toDate ? `&to_date=${toDate}` : ""}`;
+        let res = await this.api.request(url, "get");
+        if (res && res.success) {
+          debugger;
+        }
+      }
+    },
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.param-label {
+  min-width: 250px;
+}
+</style>
