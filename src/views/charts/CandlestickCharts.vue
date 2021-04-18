@@ -4,13 +4,14 @@
       <span class="demonstration">Choose a stock symbol</span>
       <el-select
         v-model="symbol"
+        filterable
         placeholder="Please select"
       >
         <el-option
-          v-for="symbol in listStock"
-          :key="symbol"
-          :label="symbol"
-          :value="symbol"
+          v-for="stock in listStock"
+          :key="stock.id"
+          :label="stock.symbol"
+          :value="stock.symbol"
         />
       </el-select>
     </div>
@@ -35,13 +36,22 @@
 
 <script>
 import TradingVueChart from "@/views/charts/TradingVueChart.vue";
+import { fnStoreAllStock } from "@/api/storeConfig.js";
 
 export default {
   name: "CandlestickCharts",
   components: { TradingVueChart },
+  created() {
+    const self = this;
+    fnStoreAllStock().then(res => {
+      if (res && res.success) {
+        self.listStock = res.data;
+      }
+    })
+  },
   data() {
-    this.listStock = ["RAL", "HPG", "VIC"];
     return {
+      listStock: [],
       symbol: "",
       pickerOptions: {
         shortcuts: [
