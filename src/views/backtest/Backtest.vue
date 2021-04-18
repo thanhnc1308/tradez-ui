@@ -172,10 +172,19 @@ export default {
         fromDate = formatDate(this.daterange[0]),
         toDate = formatDate(this.daterange[1]);
       if (symbol && strategy) {
-        let url = `?symbol=${this.symbol}&strategy=${strategy}${
-          fromDate ? `&from_date=${fromDate}` : ""
-        }${toDate ? `&to_date=${toDate}` : ""}`;
-        let res = await this.api.request(url, "get");
+        let url = "",
+          payload = {
+            symbol: this.symbol,
+            from_date: fromDate,
+            to_date: toDate,
+            strategy: this.strategy,
+            strategy_params: {
+              upper: 70,
+              lower: 30,
+              type: "cross_up",
+            },
+          },
+          res = await this.api.request(url, "post", payload);
         if (res && res.success) {
           debugger;
         }
