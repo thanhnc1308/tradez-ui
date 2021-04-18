@@ -1,160 +1,96 @@
 <template>
   <layout-list>
     <template slot="utility">
-      <div class="flex flex-end filter-container">
-        <!-- <base-button class="filter-item" type="primary" icon="el-icon-search">
-          Search
-        </base-button> -->
-        <base-button
-          class="filter-item"
-          style="margin-left: 10px"
-          type="primary"
-          icon="el-icon-edit"
-          @click="create"
-        >
-          Add
-        </base-button>
-        <base-button
-          class="filter-item"
-          style="margin-left: 10px"
-          type="primary"
-          icon="el-icon-edit"
-          @click="refresh"
-        >
-          Refresh
-        </base-button>
-        <base-button
-          :loading="downloadLoading"
-          class="filter-item"
-          type="primary"
-          icon="el-icon-download"
-          @click="exportExcel"
-        >
-          Export
-        </base-button>
+      <div class="block select-stock">
+        <span class="demonstration">Choose a stock symbol</span>
+        <el-select v-model="symbol" filterable placeholder="Please select">
+          <el-option
+            v-for="stock in listStock"
+            :key="stock.id"
+            :label="stock.symbol"
+            :value="stock.symbol"
+          />
+        </el-select>
       </div>
+      <div class="block">
+        <span class="demonstration">Choose a period</span>
+        <el-date-picker
+          v-model="daterange"
+          type="daterange"
+          align="right"
+          unlink-panels
+          range-separator="To"
+          start-placeholder="Start date"
+          end-placeholder="End date"
+          :picker-options="pickerOptions"
+        >
+        </el-date-picker>
+      </div>
+      <base-button @click="showResult">Show chart</base-button>
     </template>
-    <template slot="table">
-      <table-viewer
-        ref="tableData"
-        @click="onClickTableRow"
-        @dblclick="onDblClickTableRow"
-        :store="storeJournal"
-        pagination
-        autoLoad
-        :columns="columnsJournal"
-      >
-        <template slot="actions" slot-scope="{ row }">
-          <el-dropdown split-button type="primary" size="small" @click="edit(row)">
-            Edit
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>
-                <div @click="view(row)">View</div>
-              </el-dropdown-item>
-              <el-dropdown-item>
-                <span @click="deleteEntity(row)">Delete</span>
-              </el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
-        </template>
-      </table-viewer>
-    </template>
+    <template slot="table"> Result </template>
   </layout-list>
 </template>
 
 <script>
 import BaseFormList from "@/views/base/BaseFormList.vue";
 import LayoutList from "@/views/base/LayoutList.vue";
-import StockViewer from "@/views/market-info/StockViewer";
-import { columnsJournal } from "@/common/columnConfig";
-import DialogJournal from "@/views/investing-journal/DialogJournal.vue";
-import TableStore from "@/common/TableStore";
-import JournalAPI from '@/api/JournalAPI';
+import { fnStoreAllStock } from "@/api/storeConfig.js";
 
 export default {
-  name: "InvestingJournal",
+  name: "Backtest",
   extends: BaseFormList,
   components: {
     LayoutList,
   },
-  data() {
-    this.columnsJournal = columnsJournal;
-    this.storeJournal = new TableStore({
-      proxy: {
-        url: "/journals",
-        type: "remote",
+  created() {
+    const self = this;
+    fnStoreAllStock().then(res => {
+      if (res && res.success) {
+        self.listStock = res.data;
       }
-    });
-    return {};
+    })
+  },
+  data() {
+    return {
+      listStock: [],
+      symbol: "",
+      pickerOptions: {
+        shortcuts: [
+          {
+            text: "Last week",
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date();
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+              picker.$emit("pick", [start, end]);
+            },
+          },
+          {
+            text: "Last month",
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date();
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+              picker.$emit("pick", [start, end]);
+            },
+          },
+          {
+            text: "Last 3 months",
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date();
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+              picker.$emit("pick", [start, end]);
+            },
+          },
+        ],
+      },
+      daterange: [],
+    };
   },
   methods: {
-    /**
-     * @override
-     */
-    getApi() {
-      return new JournalAPI();
-    },
-    /**
-     * form dialog detail
-     * @override
-     */
-    getDialogDetailForm() {
-      return DialogJournal;
-    },
-    /**
-     * @override
-     */
-    onClickTableRow(row) {
-      StockViewer.show(row, this);
-    },
-    /**
-     * @override
-     */
-    onDblClickTableRow(row) {
-      this.edit(row);
-    },
-    /**
-     * @override
-     */
-    getDataForExportExcel() {
-      const filterVal = [
-        "date",
-        "symbol",
-        "type",
-        "entry",
-        "exit",
-        "pnl",
-        "comment",
-      ];
-      return this.formatJson(filterVal);
-    },
-    /**
-     * @override
-     */
-    formatJson(filterVal) {
-      let data = this.tableContainer.store.getData();
-      return data.map((v) =>
-        filterVal.map((j) => {
-          if (j === "date") {
-            return parseTime(v[j]);
-          } else {
-            return v[j];
-          }
-        })
-      );
-    },
-    /**
-     * @override
-     */
-    getHeaderForExportExcel() {
-      return ["date", "symbol", "type", "entry", "exit", "pnl", "comment"];
-    },
-    /**
-     * @override
-     */
-    getFileNameExcel() {
-      return "investing-journal";
-    },
+    showResult() {},
   },
 };
 </script>

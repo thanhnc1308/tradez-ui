@@ -1,38 +1,38 @@
 <template>
-  <div class="candlestick-chart">
-    <div class="block select-stock">
-      <span class="demonstration">Choose a stock symbol</span>
-      <el-select
-        v-model="symbol"
-        filterable
-        placeholder="Please select"
-      >
-        <el-option
-          v-for="stock in listStock"
-          :key="stock.id"
-          :label="stock.symbol"
-          :value="stock.symbol"
-        />
-      </el-select>
-    </div>
-    <div class="block">
-      <span class="demonstration">Choose a period</span>
-      <el-date-picker
-        v-model="daterange"
-        type="daterange"
-        align="right"
-        unlink-panels
-        range-separator="To"
-        start-placeholder="Start date"
-        end-placeholder="End date"
-        :picker-options="pickerOptions"
-      >
-      </el-date-picker>
-    </div>
-    <base-button @click="showChart">Show chart</base-button>
-    <!-- <trading-vue-chart :symbol="symbol" :daterange="daterange">
+  <layout-list>
+    <template slot="utility">
+      <div class="candlestick-chart">
+        <div class="block select-stock">
+          <span class="demonstration">Choose a stock symbol</span>
+          <el-select v-model="symbol" filterable placeholder="Please select">
+            <el-option
+              v-for="stock in listStock"
+              :key="stock.id"
+              :label="stock.symbol"
+              :value="stock.symbol"
+            />
+          </el-select>
+        </div>
+        <div class="block">
+          <span class="demonstration">Choose a period</span>
+          <el-date-picker
+            v-model="daterange"
+            type="daterange"
+            align="right"
+            unlink-panels
+            range-separator="To"
+            start-placeholder="Start date"
+            end-placeholder="End date"
+            :picker-options="pickerOptions"
+          >
+          </el-date-picker>
+        </div>
+        <base-button @click="showChart">Show chart</base-button>
+        <!-- <trading-vue-chart :symbol="symbol" :daterange="daterange">
     </trading-vue-chart> -->
-  </div>
+      </div>
+    </template>
+  </layout-list>
 </template>
 
 <script>
@@ -54,16 +54,16 @@ export default {
           offchart: [],
           onchart: [],
         }
-      )
-    }
+      );
+    },
   },
   created() {
     const self = this;
-    fnStoreAllStock().then(res => {
+    fnStoreAllStock().then((res) => {
       if (res && res.success) {
         self.listStock = res.data;
       }
-    })
+    });
   },
   data() {
     return {

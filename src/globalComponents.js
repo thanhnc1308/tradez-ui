@@ -77,6 +77,7 @@ import BaseTransfer from '@/components/BaseComponent/transfer/BaseTransfer'
 import BaseTree from '@/components/BaseComponent/tree/BaseTree'
 // import BaseUpload from '@/components/BaseComponent/upload/BaseUpload'
 import TableViewer from '@/components/table-viewer/TableViewer'
+import LayoutList from "@/views/base/LayoutList.vue";
 
 Vue.component(BaseAlert.name, BaseAlert)
 Vue.component(BaseAside.name, BaseAside)
@@ -156,3 +157,4 @@ Vue.component(BaseTransfer.name, BaseTransfer)
 Vue.component(BaseTree.name, BaseTree)
 // Vue.component(BaseUpload.name, BaseUpload)
 Vue.component(TableViewer.name, TableViewer)
+Vue.component(LayoutList.name, LayoutList)

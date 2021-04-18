@@ -1,28 +1,35 @@
 <template>
-  <div>
-    <div class="choose-filters">
-      <base-button type="primary" @click="showDialogChooseFilters"
-        >Choose filters</base-button
-      >
-      <base-button type="primary" @click="refresh">Refresh</base-button>
-      <base-button type="primary" @click="saveFilters">Save filters</base-button>
-      <base-button type="primary" @click="saveAsNotification">Save as notification</base-button>
-    </div>
-    <div class="result">
-      <div class="filter-title">{{ title }}</div>
-      <div class="table-result">
-        <table-viewer
-          ref="tableData"
-          @click="onClickTableRow"
-          :store="storeStockScreener"
-          :pagination="false"
-          :columns="columnsStockScreener"
+  <layout-list>
+    <template slot="utility">
+      <div class="choose-filters">
+        <base-button type="primary" @click="showDialogChooseFilters"
+          >Choose filters</base-button
         >
-        </table-viewer>
+        <base-button type="primary" @click="refresh">Refresh</base-button>
+        <base-button type="primary" @click="saveFilters"
+          >Save filters</base-button
+        >
+        <base-button type="primary" @click="saveAsNotification"
+          >Save as notification</base-button
+        >
       </div>
-    </div>
-    <div>Add to WatchList</div>
-  </div>
+    </template>
+    <template slot="table">
+      <div class="result">
+        <div class="filter-title">{{ title }}</div>
+        <div class="table-result">
+          <table-viewer
+            ref="tableData"
+            @click="onClickTableRow"
+            :store="storeStockScreener"
+            :pagination="false"
+            :columns="columnsStockScreener"
+          >
+          </table-viewer>
+        </div>
+      </div>
+    </template>
+  </layout-list>
 </template>
 
 <script>
@@ -138,7 +145,7 @@ export default {
     buildStockFilters() {
       let filters = this.currentParams.stockFilters;
       if (this.stockDate) {
-        let filterDate = filters.find(item => item.type === 'stock_date');
+        let filterDate = filters.find((item) => item.type === "stock_date");
         if (filterDate) {
           filterDate.value = this.stockDate.toLocaleDateString("en-US");
         } else {
@@ -174,10 +181,10 @@ export default {
       StockViewer.show(row, this);
     },
     saveFilters() {
-      alert('saveFilters')
+      alert("saveFilters");
     },
     saveAsNotification() {
-      alert('saveAsNotification')
+      alert("saveAsNotification");
     },
   },
 };
