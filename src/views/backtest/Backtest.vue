@@ -47,6 +47,26 @@
       </div>
       <div class="row">
         <div class="param-label">Choose strategy parameters</div>
+        <div v-if="strategy === 'RSIStrategy'" class="stategy-parameters">
+          <div class="row">
+            <div class="param-label">Period</div>
+            <base-input-number
+              v-model="strategy_params.period"
+            ></base-input-number>
+          </div>
+          <div class="row">
+            <div class="param-label">Buy when RSI overbought at</div>
+            <base-input-number
+              v-model="strategy_params.upper"
+            ></base-input-number>
+          </div>
+          <div class="row">
+            <div class="param-label">Sell when RSI oversold at</div>
+            <base-input-number
+              v-model="strategy_params.lower"
+            ></base-input-number>
+          </div>
+        </div>
       </div>
       <base-button @click="showResult">Show Result</base-button>
     </template>
@@ -116,6 +136,7 @@ export default {
     return {
       listStock: [],
       strategy: "",
+      strategy_params: {},
       symbol: "",
       pickerOptions: {
         shortcuts: [
@@ -150,7 +171,7 @@ export default {
       },
       daterange: [],
       commission: 0.001,
-      cash: 100000
+      cash: 100000,
     };
   },
   methods: {
@@ -190,15 +211,10 @@ export default {
             cash: this.cash,
             commission: this.commission,
             strategy: this.strategy,
-            strategy_params: {
-              upper: 70,
-              lower: 30,
-              type: "cross_up",
-            },
+            strategy_params: this.strategy_params,
           },
           res = await this.api.request(url, "post", payload);
         if (res && res.success) {
-          debugger;
         }
       }
     },
