@@ -38,6 +38,7 @@
         <div class="param-label">Choose a strategy</div>
         <el-select
           v-model="strategy"
+          @change="onSelectStrategy"
           filterable
           value-key="id"
           placeholder="Please select"
@@ -52,6 +53,7 @@
       </div>
       <div class="row">
         <div class="param-label">Choose strategy parameters</div>
+        <!-- RSIStrategy -->
         <div v-if="strategy.id === 'RSIStrategy'" class="stategy-parameters">
           <div class="row">
             <div class="param-label">Period</div>
@@ -72,19 +74,91 @@
             ></base-input-number>
           </div>
         </div>
+        <!-- end RSIStrategy -->
+        <!-- BollingerBandsAndRSIStrategy -->
+        <div
+          v-if="strategy.id === 'BollingerBandsAndRSIStrategy'"
+          class="stategy-parameters"
+        >
+          <div class="row">
+            <div class="param-label">Bollinger Bands Period</div>
+            <base-input-number
+              v-model="strategy_params.bbband_period"
+            ></base-input-number>
+          </div>
+          <div class="row">
+            <div class="param-label">Bollinger Bands Devfactor</div>
+            <base-input-number
+              v-model="strategy_params.devfactor"
+            ></base-input-number>
+          </div>
+          <div class="row">
+            <div class="param-label">RSI Period</div>
+            <base-input-number
+              v-model="strategy_params.rsi_period"
+            ></base-input-number>
+          </div>
+          <div class="row">
+            <div class="param-label">Buy when RSI overbought at</div>
+            <base-input-number
+              v-model="strategy_params.upper"
+            ></base-input-number>
+          </div>
+          <div class="row">
+            <div class="param-label">Sell when RSI oversold at</div>
+            <base-input-number
+              v-model="strategy_params.lower"
+            ></base-input-number>
+          </div>
+        </div>
+        <!-- end BollingerBandsAndRSIStrategy -->
+        <!-- BollingerBandsSidewayStrategy -->
+        <div
+          v-if="strategy.id === 'BollingerBandsSidewayStrategy' || strategy.id === 'BollingerBandsStrategy'"
+          class="stategy-parameters"
+        >
+          <div class="row">
+            <div class="param-label">Bollinger Bands Period</div>
+            <base-input-number
+              v-model="strategy_params.period"
+            ></base-input-number>
+          </div>
+          <div class="row">
+            <div class="param-label">Bollinger Bands Devfactor</div>
+            <base-input-number
+              v-model="strategy_params.devfactor"
+            ></base-input-number>
+          </div>
+        </div>
+        <!-- end BollingerBandsSidewayStrategy -->
       </div>
       <div class="row horizontal-center">
-      <base-button :loading="false" @click="showResult">Show Result</base-button>
+        <base-button :loading="false" @click="showResult"
+          >Show Result</base-button
+        >
       </div>
     </template>
     <template slot="table">
       <div v-show="hasData">
-        <div style="font-size: 20px;" class="title text-center bold mb-1">{{ backtestTitle }}</div>
-        <div class="title text-center italic mb-1">Total trades: {{ totalTrades | formatData(EnumFormatType.Number) }}</div>
-        <div class="title text-center italic mb-1">PnL: {{ pnl | formatData(EnumFormatType.Number) }}</div>
-        <div class="title text-center italic mb-1">% PnL: {{ percent_pnl || 0 }}%</div>
-        <div class="title text-center italic mb-1">Win rate: {{ winRate || 0 }}%</div>
-        <div class="title text-center italic mb-1">Final portfolio: {{ finalPortfolio | formatData(EnumFormatType.Number) }}</div>
+        <div style="font-size: 20px" class="title text-center bold mb-1">
+          {{ backtestTitle }}
+        </div>
+        <div class="title text-center italic mb-1">
+          Total trades: {{ totalTrades | formatData(EnumFormatType.Number) }}
+        </div>
+        <div class="title text-center italic mb-1">
+          PnL: {{ pnl | formatData(EnumFormatType.Number) }}
+        </div>
+        <div class="title text-center italic mb-1">
+          % PnL: {{ percent_pnl || 0 }}%
+        </div>
+        <div class="title text-center italic mb-1">
+          Win rate: {{ winRate || 0 }}%
+        </div>
+        <div class="title text-center italic mb-1">
+          Final portfolio:
+          {{ finalPortfolio | formatData(EnumFormatType.Number) }}
+        </div>
         <div class="table-result">
           <table-viewer
             :pagination="false"
@@ -115,7 +189,7 @@ export default {
     backtestTitle() {
       let fromDate = this.$utility.formatDate(this.daterange[0]),
         toDate = this.$utility.formatDate(this.daterange[1]);
-      return `Backtest result for ${this.strategy.label} of ${this.symbol} from ${fromDate} to ${toDate}`;
+      return `Backtest result for ${this.strategy.label} of ${this.symbol} symbol from ${fromDate} to ${toDate}`;
     },
   },
   created() {
@@ -173,7 +247,7 @@ export default {
       listStock: [],
       strategy: {},
       strategy_params: {},
-      symbol: "",
+      symbol: "HPG",
       pickerOptions: {
         shortcuts: [
           {
@@ -205,14 +279,14 @@ export default {
           },
         ],
       },
-      daterange: [],
+      daterange: [new Date('2020-02-01'), new Date('2020-07-01')],
       commission: 0.001,
       cash: 100000,
       winRate: 0,
       totalTrades: 0,
       finalPortfolio: 0,
       pnl: 0,
-      percent_pnl: 0
+      percent_pnl: 0,
     };
   },
   methods: {
@@ -221,6 +295,52 @@ export default {
      */
     getApi() {
       return new BacktestAPI();
+    },
+    /**
+     * Handle event when selecting strategy
+     * Set default strategy_params
+     */
+    onSelectStrategy(strategy) {
+      this.strategy_params = {}; // reset
+      switch (strategy.id) {
+        case "RSIStrategy":
+          this.strategy_params = {
+            period: 14,
+            upper: 70,
+            lower: 30
+          };
+          break;
+        case "BollingerBandsAndRSIStrategy":
+          this.strategy_params = {
+            bbband_period: 20,
+            devfactor: 2,
+            rsi_period: 14,
+            upper: 70,
+            lower: 30
+          };
+          break;
+        case "BollingerBandsSidewayStrategy":
+          this.strategy_params = {
+            period: 20,
+            devfactor: 2
+          };
+          break;
+        case "BollingerBandsStrategy":
+          this.strategy_params = {
+            period: 20,
+            devfactor: 2
+          };
+          break;
+        case "MACDStrategy":
+          this.strategy_params = {};
+          break;
+        case "MaCrossoverStrategy":
+          this.strategy_params = {};
+          break;
+        case "ADXDMICrossStrategy":
+          this.strategy_params = {};
+          break;
+      }
     },
     /**
      * Do backtest strategy and show result
@@ -280,19 +400,29 @@ export default {
       });
     },
     getDescription(item) {
-      let result = '';
+      let result = "";
       switch (item.transaction_type) {
-        case 'BUY CREATE':
-        case 'SELL CREATE':
-          result = `Price close at ${this.$utility.toThousandFilter(item.price)}`;
+        case "BUY CREATE":
+        case "SELL CREATE":
+          result = `Price close at ${this.$utility.toThousandFilter(
+            item.price
+          )}`;
           break;
-        case 'BUY EXECUTED':
-          result = `Buy executed at ${this.$utility.toThousandFilter(item.price)} with cost ${this.$utility.toThousandFilter(item.cost)} and commission ${this.$utility.toThousandFilter(item.commission)}`;
+        case "BUY EXECUTED":
+          result = `Buy executed at ${this.$utility.toThousandFilter(
+            item.price
+          )} with cost ${this.$utility.toThousandFilter(
+            item.cost
+          )} and commission ${this.$utility.toThousandFilter(item.commission)}`;
           break;
-        case 'SELL EXECUTED':
-          result = `Sell executed at ${this.$utility.toThousandFilter(item.price)} with cost ${this.$utility.toThousandFilter(item.cost)} and commission ${this.$utility.toThousandFilter(item.commission)}`;
+        case "SELL EXECUTED":
+          result = `Sell executed at ${this.$utility.toThousandFilter(
+            item.price
+          )} with cost ${this.$utility.toThousandFilter(
+            item.cost
+          )} and commission ${this.$utility.toThousandFilter(item.commission)}`;
           break;
-        case 'OPERATION PROFIT':
+        case "OPERATION PROFIT":
           const net = this.$utility.toThousandFilter(item.net),
             gross = this.$utility.toThousandFilter(item.gross);
           if (item.net >= 0) {
@@ -303,7 +433,7 @@ export default {
           break;
       }
       return result;
-    }
+    },
   },
 };
 </script>
