@@ -256,3 +256,33 @@ export const columnsStockScreener = [
     formatType: EnumFormatType.Text
   }
 ];
+
+export const columnsBacktestResult = [
+  {
+    dataField: "transaction_date",
+    label: "Transaction Date",
+    columnAlign: "center",
+    dataAlign: "center",
+    width: "150",
+    columnType: EnumColumnType.Text,
+    formatType: EnumFormatType.Text
+  },
+  {
+    dataField: "transaction_type",
+    label: "Transaction Type",
+    columnAlign: "center",
+    dataAlign: "center",
+    width: "250",
+    columnType: EnumColumnType.Text,
+    formatType: EnumFormatType.Text
+  },
+  {
+    dataField: "description",
+    label: "Description",
+    columnAlign: "center",
+    dataAlign: "center",
+    minWidth: "200",
+    columnType: EnumColumnType.Text,
+    formatType: EnumFormatType.Text
+  },
+];

@@ -151,26 +151,34 @@ export default {
   },
   methods: {
     async doQuery(options={}) {
-      try {
-        console.log('do query count ' + this.doQueryCount++);
-        this.listLoading = true;
-        let opts = {};
-        if (this.pagination) {
-          opts = {
-            ...options,
-            page: options.page || 1,
-            per_page: options.limit || 20,
+      if (this.store) {
+        try {
+          console.log('do query count ' + this.doQueryCount++);
+          this.listLoading = true;
+          let opts = {};
+          if (this.pagination) {
+            opts = {
+              ...options,
+              page: options.page || 1,
+              per_page: options.limit || 20,
+            }
+          } else {
+            opts = {...options}
           }
-        } else {
-          opts = {...options}
+          await this.store.load(opts);
+          this.list = this.setDisplayData(this.store.getData());
+          this.total = this.store.total;
+          this.listLoading = false;
+        } catch (e) {
+          this.listLoading = false;
         }
-        await this.store.load(opts);
-        this.list = this.store.getData();
-        this.total = this.store.total;
-        this.listLoading = false;
-      } catch (e) {
-        this.listLoading = false;
       }
+    },
+    setDisplayData(data) {
+      this.list = data;
+    },
+    forceUpdate() {
+      this.tableKey++;
     },
     onClickTableRow(row, column) {
       this.$emit("click", row, column);
