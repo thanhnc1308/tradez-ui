@@ -123,19 +123,105 @@ export const listInputLOHLCAndSMA = [
   }
 ];
 
-export const listPattern = [
-  {
-    "type": "any",
-    "label": "Any"
-  },
+export const listSingleCandle = [
   {
     "type": "doji",
     "label": "Doji"
   },
   {
-    "type": "b_engulfing",
-    "label": "Bullish Engulfing"
+    "type": "bullish_marubozu",
+    "label": "Bullish marubozu"
+  },
+  {
+    "type": "bearish_marubozu",
+    "label": "Bearish marubozu"
+  },
+  {
+    "type": "hammer",
+    "label": "Hammer"
+  },
+  {
+    "type": "inverted_hammer",
+    "label": "Inverted hammer"
+  },
+  {
+    "type": "gravestone_doji",
+    "label": "Gravestone doji"
+  },
+  {
+    "type": "dragonfly_doji",
+    "label": "Dragonfly doji"
   }
+]
+
+export const listDoubleCandles = [
+  {
+    "type": "bullish_shooting_star",
+    "label": "Bullish shooting star"
+  },,
+  {
+    "type": "bearish_shooting_star",
+    "label": "Bearish shooting star"
+  },
+  {
+    "type": "bullish_high_harami",
+    "label": "Bullish high harami"
+  },
+  {
+    "type": "bearish_high_harami",
+    "label": "Bearish high harami"
+  },
+  {
+    "type": "bullish_engulfing",
+    "label": "Bullish engulfing"
+  },
+  {
+    "type": "bearish_engulfing",
+    "label": "Bearish engulfing"
+  },
+  {
+    "type": "bullish_piercing_line",
+    "label": "Bullish piercing line"
+  },
+  {
+    "type": "bearish_piercing_line",
+    "label": "Bearish piercing line"
+  },
+  {
+    "type": "bullish_hanging_man",
+    "label": "Bullish hanging man"
+  },
+  {
+    "type": "bearish_hanging_man",
+    "label": "Bearish hanging man"
+  },
+  {
+    "type": "dark_cloud_cover",
+    "label": "Dark cloud cover"
+  },
+  {
+    "type": "doji_star",
+    "label": "Doji star"
+  },
+]
+
+export const listTripleCandles = [
+  {
+    "type": "evening_star",
+    "label": "Evening star"
+  },
+  {
+    "type": "morning_star",
+    "label": "Morning star"
+  },
+  {
+    "type": "bullish_high_reversal",
+    "label": "Bullish high reversal"
+  },
+  {
+    "type": "bearish_high_reversal",
+    "label": "Bearish high reversal"
+  },
 ]
 
 export const listFilters = [
@@ -392,15 +478,43 @@ export const listFilters = [
     }
   },
   {
-    type: "pattern",
-    label: "Pattern",
+    type: "single_candle",
+    label: "Single candle",
     operation: {
       type: "const",
       value: "equal"
     },
     value: {
       type: "comboFilter",
-      list: listPattern,
+      list: listSingleCandle,
+      defaultValue: "Any",
+      value: "Any"
+    }
+  },
+  {
+    type: "double_candles",
+    label: "Double candles",
+    operation: {
+      type: "const",
+      value: "equal"
+    },
+    value: {
+      type: "comboFilter",
+      list: listDoubleCandles,
+      defaultValue: "Any",
+      value: "Any"
+    }
+  },
+  {
+    type: "triple_candles",
+    label: "Triple candles",
+    operation: {
+      type: "const",
+      value: "equal"
+    },
+    value: {
+      type: "comboFilter",
+      list: listTripleCandles,
       defaultValue: "Any",
       value: "Any"
     }

@@ -16,7 +16,7 @@
     </template>
     <template slot="table">
       <div class="result">
-        <div class="filter-title">{{ title }}</div>
+        <div style="font-size: 20px;" class="filter-title mb-1 mt-1 text-center">{{ title }}</div>
         <div class="table-result">
           <table-viewer
             ref="tableData"

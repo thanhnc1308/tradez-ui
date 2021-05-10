@@ -166,7 +166,7 @@ export default {
             opts = {...options}
           }
           await this.store.load(opts);
-          this.list = this.setDisplayData(this.store.getData());
+          this.setDisplayData(this.store.getData());
           this.total = this.store.total;
           this.listLoading = false;
         } catch (e) {
