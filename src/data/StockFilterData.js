@@ -19,21 +19,21 @@ export const listOperation = [
     label: "Greater than or equal",
     value: "egreater"
   },
-  {
-    key: "crosses",
-    label: "Crosses",
-    value: "crosses"
-  },
-  {
-    key: "crosses_above",
-    label: "Crosses Up",
-    value: "crosses_above"
-  },
-  {
-    key: "crosses_below",
-    label: "Crosses Down",
-    value: "crosses_below"
-  },
+  // {
+  //   key: "crosses",
+  //   label: "Crosses",
+  //   value: "crosses"
+  // },
+  // {
+  //   key: "crosses_above",
+  //   label: "Crosses Up",
+  //   value: "crosses_above"
+  // },
+  // {
+  //   key: "crosses_below",
+  //   label: "Crosses Down",
+  //   value: "crosses_below"
+  // },
   {
     key: "in_range",
     label: "Between",
@@ -158,7 +158,7 @@ export const listDoubleCandles = [
   {
     "type": "bullish_shooting_star",
     "label": "Bullish shooting star"
-  },,
+  },
   {
     "type": "bearish_shooting_star",
     "label": "Bearish shooting star"
@@ -482,7 +482,7 @@ export const listFilters = [
     label: "Single candle",
     operation: {
       type: "const",
-      value: "equal"
+      value: "equals"
     },
     value: {
       type: "comboFilter",
@@ -496,7 +496,7 @@ export const listFilters = [
     label: "Double candles",
     operation: {
       type: "const",
-      value: "equal"
+      value: "equals"
     },
     value: {
       type: "comboFilter",
@@ -510,7 +510,7 @@ export const listFilters = [
     label: "Triple candles",
     operation: {
       type: "const",
-      value: "equal"
+      value: "equals"
     },
     value: {
       type: "comboFilter",
