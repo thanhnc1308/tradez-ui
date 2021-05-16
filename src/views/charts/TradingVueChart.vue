@@ -71,7 +71,7 @@ export default {
               "/" +
               (date.getUTCMonth() + 1) +
               "/" +
-              date.getUTCDate()
+              (date.getUTCDate() + 1)
             );
           } else {
             return "";

@@ -219,7 +219,7 @@ export default {
       filters: [],
       selectedFilter: null,
       symbol: null,
-      stockDate: new Date(),
+      stockDate: new Date('2021-01-28')
     };
   },
   created() {

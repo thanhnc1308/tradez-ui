@@ -151,25 +151,49 @@ export const listSingleCandle = [
   {
     "type": "dragonfly_doji",
     "label": "Dragonfly doji"
+  },
+  {
+    "type": "bearish_hammer_stick",
+    "label": "Bearish Hammer Stick"
+  },
+  {
+    "type": "bearish_inverted_hammer_stick",
+    "label": "Bearish Inverted Hammer Stick"
+  },
+  {
+    "type": "bullish_inverted_hammer_stick",
+    "label": "Bullish Inverted Hammer Stick"
+  },
+  {
+    "type": "bearish_spinning_top",
+    "label": "Bearish Spinning Top"
+  },
+  {
+    "type": "bullish_spinning_top",
+    "label": "Bullish Spinning Top"
+  },
+  {
+    "type": "bullish_hammer_stick",
+    "label": "Bullish Hammer Stick"
   }
 ]
 
 export const listDoubleCandles = [
   {
-    "type": "bullish_shooting_star",
-    "label": "Bullish shooting star"
+    "type": "bullish_harami",
+    "label": "Bullish harami"
   },
   {
-    "type": "bearish_shooting_star",
-    "label": "Bearish shooting star"
+    "type": "bearish_harami",
+    "label": "Bearish harami"
   },
   {
-    "type": "bullish_high_harami",
-    "label": "Bullish high harami"
+    "type": "dark_cloud_cover",
+    "label": "Dark cloud cover"
   },
   {
-    "type": "bearish_high_harami",
-    "label": "Bearish high harami"
+    "type": "doji_star",
+    "label": "Doji star"
   },
   {
     "type": "bullish_engulfing",
@@ -180,47 +204,95 @@ export const listDoubleCandles = [
     "label": "Bearish engulfing"
   },
   {
-    "type": "bullish_piercing_line",
-    "label": "Bullish piercing line"
+    "type": "piercing_pattern",
+    "label": "Piercing Pattern"
   },
   {
-    "type": "bearish_piercing_line",
-    "label": "Bearish piercing line"
+    "type": "rain_drop",
+    "label": "Rain Drop"
   },
   {
-    "type": "bullish_hanging_man",
-    "label": "Bullish hanging man"
+    "type": "rain_drop_doji",
+    "label": "Rain Drop Doji"
   },
   {
-    "type": "bearish_hanging_man",
-    "label": "Bearish hanging man"
+    "type": "star",
+    "label": "Star"
   },
   {
-    "type": "dark_cloud_cover",
-    "label": "Dark cloud cover"
+    "type": "shooting_star",
+    "label": "Shooting star"
   },
   {
-    "type": "doji_star",
-    "label": "Doji star"
+    "type": "bearish_harami_cross",
+    "label": "Bearish Harami Cross"
+  },
+  {
+    "type": "bullish_harami_cross",
+    "label": "Bullish Harami Cross"
+  },
+  {
+    "type": "inside_bar",
+    "label": "Inside Bar"
+  },
+  {
+    "type": "outside_bar",
+    "label": "Outside Bar"
   },
 ]
 
 export const listTripleCandles = [
   {
-    "type": "evening_star",
-    "label": "Evening star"
+    "type": "hanging_man",
+    "label": "Hanging Man"
   },
   {
     "type": "morning_star",
     "label": "Morning star"
   },
   {
-    "type": "bullish_high_reversal",
-    "label": "Bullish high reversal"
+    "type": "morning_star_doji",
+    "label": "Morning star doji"
   },
   {
-    "type": "bearish_high_reversal",
-    "label": "Bearish high reversal"
+    "type": "abandoned_baby",
+    "label": "Abandoned Baby"
+  },
+  {
+    "type": "evening_star",
+    "label": "Evening star"
+  },
+  {
+    "type": "evening_star_doji",
+    "label": "Evening star doji"
+  },
+  {
+    "type": "downside_tasuki_gap",
+    "label": "Downside Tasuki Gap"
+  },
+  {
+    "type": "three_black_crows",
+    "label": "Three Black Crows"
+  },
+  {
+    "type": "three_white_soldiers",
+    "label": "Three White Soldiers"
+  },
+  {
+    "type": "three_outside_down",
+    "label": "Three Outside Down"
+  },
+  {
+    "type": "three_outside_up",
+    "label": "Three Outside Up"
+  },
+  {
+    "type": "three_inside_up",
+    "label": "Three Inside Up"
+  },
+  {
+    "type": "three_inside_down",
+    "label": "Three Inside Down"
   },
 ]
 
@@ -482,7 +554,7 @@ export const listFilters = [
     label: "Single candle",
     operation: {
       type: "const",
-      value: "equals"
+      value: "ilike"
     },
     value: {
       type: "comboFilter",
@@ -496,7 +568,7 @@ export const listFilters = [
     label: "Double candles",
     operation: {
       type: "const",
-      value: "equals"
+      value: "ilike"
     },
     value: {
       type: "comboFilter",
@@ -510,7 +582,7 @@ export const listFilters = [
     label: "Triple candles",
     operation: {
       type: "const",
-      value: "equals"
+      value: "ilike"
     },
     value: {
       type: "comboFilter",

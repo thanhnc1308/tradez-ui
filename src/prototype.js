@@ -27,3 +27,10 @@ String.prototype.decodeEscapeSequence = function() {
         return String.fromCharCode(parseInt(arguments[1], 16));
     });
 };
+
+
+Date.prototype.addDays = function(days) {
+    var date = new Date(this.valueOf());
+    date.setDate(date.getDate() + days);
+    return date;
+}

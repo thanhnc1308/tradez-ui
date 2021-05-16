@@ -23,8 +23,12 @@
             @click="onClickTableRow"
             :store="storeStockScreener"
             :pagination="false"
+            hasActionColumn
             :columns="columnsStockScreener"
           >
+          <template slot="actions" slot-scope="{ row }">
+            <base-button @click="showChart(row)">Show chart</base-button>
+          </template>
           </table-viewer>
         </div>
       </div>
@@ -38,6 +42,7 @@ import StockViewer from "@/views/market-info/StockViewer";
 import { columnsStockScreener } from "@/common/columnConfig";
 import TableStore from "@/common/TableStore";
 import { EnumColumnType, EnumFormatType } from "@/common/enum";
+import showTradingViewChart from "@/views/charts/TradingViewChartViewer.js";
 
 export default {
   name: "StockScreener",
@@ -129,7 +134,7 @@ export default {
       if (filters.length > 0) {
         this.setColumnTable(filters);
         filters.forEach((filter) => {
-          if (filter.type !== "stock_date") {
+          if (this.checkIfShowColumn(filter.type)) {
             columns.push(filter.type);
           }
         });
@@ -158,12 +163,15 @@ export default {
       }
       return filters;
     },
+    checkIfShowColumn(column) {
+      return !["stock_date", "single_candle", "double_candles", "triple_candles"].includes(column);
+    },
     setColumnTable(filters) {
       this.$refs.tableData.columnsx = this.$refs.tableData.columnsx.filter(
         (item) => !item.isCustomColumn
       );
       filters.forEach((filter) => {
-        if (filter.type !== "stock_date") {
+        if (this.checkIfShowColumn(filter.type)) {
           this.$refs.tableData.columnsx.push({
             dataField: filter.type,
             label: filter.label,
@@ -186,6 +194,20 @@ export default {
     saveAsNotification() {
       alert("saveAsNotification");
     },
+    showChart(row) {
+      let toDate = this.stockDate,
+        fromDate = toDate.addDays(-60);
+      showTradingViewChart(
+        this,
+        {},
+        {
+          symbol: row.symbol,
+          daterange: [fromDate, toDate],
+          offchart: [],
+          onchart: [],
+        }
+      );
+    }
   },
 };
 </script>
