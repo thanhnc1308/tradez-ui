@@ -107,6 +107,9 @@ import ImageViewer from "@/components/image-viewer/ImageViewer";
 export default {
   name: "TableViewer",
   props: {
+    data: {
+      type: Array
+    },
     store: {
       type: TableStore,
     },
@@ -144,7 +147,9 @@ export default {
   },
   created() {
     this.doQueryCount = 0;
-    if (this.autoLoad) {
+    if (this.data && this.data.length > 0) {
+      this.setDisplayData(this.data);
+    } else if (this.autoLoad) {
       this.doQuery();
     }
     this.columnsx = this.columns;

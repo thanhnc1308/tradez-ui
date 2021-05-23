@@ -134,18 +134,18 @@ export const asyncRoutes = [
   //     }
   //   ]
   // },
-  {
-    path: "/dashboard",
-    component: Layout,
-    children: [
-      {
-        path: "",
-        component: () => import('@/views/dashboard/Dashboard'),
-        name: 'Dashboard',
-        meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
-      }
-    ]
-  },
+  // {
+  //   path: "/dashboard",
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: "",
+  //       component: () => import('@/views/dashboard/Dashboard'),
+  //       name: 'Dashboard',
+  //       meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
+  //     }
+  //   ]
+  // },
   {
     path: "/stock-screener",
     component: Layout,

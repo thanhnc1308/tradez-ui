@@ -3,7 +3,7 @@
     <template slot="utility">
       <div class="row select-stock">
         <div class="param-label">Choose a stock symbol</div>
-        <el-select v-model="symbol" filterable placeholder="Please select">
+        <el-select v-model="symbol" multiple filterable placeholder="Please select">
           <el-option
             v-for="stock in listStock"
             :key="stock.id"
@@ -27,12 +27,12 @@
         </el-date-picker>
       </div>
       <div class="row">
-        <div class="param-label">Captial</div>
-        <base-input-number v-model="cash"></base-input-number>
+        <div class="param-label">Stop loss ATR factor</div>
+        <base-input-number v-model="strategy_params.atr_stop_loss"></base-input-number>
       </div>
       <div class="row">
-        <div class="param-label">Commission</div>
-        <base-input-number v-model="commission"></base-input-number>
+        <div class="param-label">Scale out ATR factor</div>
+        <base-input-number v-model="strategy_params.atr_stop_scale_out"></base-input-number>
       </div>
       <div class="row select-strategy">
         <div class="param-label">Choose a strategy</div>
@@ -140,33 +140,43 @@
     </template>
     <template slot="table">
       <div v-show="hasData">
+        <div v-for="result in results" :key="result.symbol" class="result-item">
         <div style="font-size: 20px" class="title text-center bold mb-1">
-          {{ backtestTitle }}
+          {{ result.title }}
         </div>
         <div class="title text-center italic mb-1">
-          Total trades: {{ totalTrades | formatData(EnumFormatType.Number) }}
+          Total trades: {{ result.total_trades | formatData(EnumFormatType.Number) }}
+        </div>
+        <!-- <div class="title text-center italic mb-1">
+          PnL: {{ result.pnl | formatData(EnumFormatType.Number) }}
         </div>
         <div class="title text-center italic mb-1">
-          PnL: {{ pnl | formatData(EnumFormatType.Number) }}
+          % PnL: {{ result.percent_pnl || 0 }}%
+        </div> -->
+        <div class="title text-center italic mb-1">
+          Total wins: {{ result.total_won || 0 }}%
         </div>
         <div class="title text-center italic mb-1">
-          % PnL: {{ percent_pnl || 0 }}%
+          Total losses: {{ result.total_lost || 0 }}%
         </div>
         <div class="title text-center italic mb-1">
-          Win rate: {{ winRate || 0 }}%
+          Win rate: {{ result.win_rate || 0 }}%
         </div>
-        <div class="title text-center italic mb-1">
+        <!-- <div class="title text-center italic mb-1">
           Final portfolio:
           {{ finalPortfolio | formatData(EnumFormatType.Number) }}
-        </div>
+        </div> -->
         <div class="table-result">
           <table-viewer
             :pagination="false"
             ref="tableResult"
             id="tableResult"
+            :data="result.data"
             :columns="columnsBacktestResult"
           >
           </table-viewer>
+        </div>
+
         </div>
       </div>
     </template>
@@ -184,13 +194,6 @@ export default {
   name: "Backtest",
   components: {
     LayoutList,
-  },
-  computed: {
-    backtestTitle() {
-      let fromDate = this.$utility.formatDate(this.daterange[0]),
-        toDate = this.$utility.formatDate(this.daterange[1]);
-      return `Backtest result for ${this.strategy.label} of ${this.symbol} symbol from ${fromDate} to ${toDate}`;
-    },
   },
   created() {
     const self = this;
@@ -210,16 +213,16 @@ export default {
         label: "RSI Strategy",
         description: "RSI Strategy",
       },
-      {
-        id: "BollingerBandsAndRSIStrategy",
-        label: "Bollinger Bands And RSI Strategy",
-        description: "Bollinger Bands And RSI Strategy",
-      },
-      {
-        id: "BollingerBandsSidewayStrategy",
-        label: "Bollinger Bands Sideway Strategy",
-        description: "Bollinger Bands Sideway Strategy",
-      },
+      // {
+      //   id: "BollingerBandsAndRSIStrategy",
+      //   label: "Bollinger Bands And RSI Strategy",
+      //   description: "Bollinger Bands And RSI Strategy",
+      // },
+      // {
+      //   id: "BollingerBandsSidewayStrategy",
+      //   label: "Bollinger Bands Sideway Strategy",
+      //   description: "Bollinger Bands Sideway Strategy",
+      // },
       {
         id: "BollingerBandsStrategy",
         label: "Bollinger Bands Strategy",
@@ -245,9 +248,12 @@ export default {
       loading: false,
       hasData: false,
       listStock: [],
-      strategy: {},
-      strategy_params: {},
-      symbol: "HPG",
+      strategy: "RSIStrategy",
+      strategy_params: {
+        atr_stop_loss: 1.5,
+        atr_stop_scale_out: 1,
+      },
+      symbol: ["HPG", "RAL"],
       pickerOptions: {
         shortcuts: [
           {
@@ -280,13 +286,14 @@ export default {
         ],
       },
       daterange: [new Date('2020-02-01'), new Date('2020-07-01')],
-      commission: 0.001,
-      cash: 100000,
-      winRate: 0,
-      totalTrades: 0,
-      finalPortfolio: 0,
-      pnl: 0,
-      percent_pnl: 0,
+      results: []
+      // commission: 0.001,
+      // cash: 100000,
+      // winRate: 0,
+      // totalTrades: 0,
+      // finalPortfolio: 0,
+      // pnl: 0,
+      // percent_pnl: 0,
     };
   },
   methods: {
@@ -341,6 +348,8 @@ export default {
           this.strategy_params = {};
           break;
       }
+      this.strategy_params.atr_stop_loss = 1.5;
+      this.strategy_params.atr_stop_scale_out = 1;
     },
     /**
      * Do backtest strategy and show result
@@ -378,17 +387,36 @@ export default {
           },
           res = await this.api.request(url, "post", payload);
         if (res && res.success) {
-          this.totalTrades = res.data.total_trades;
-          this.winRate = res.data.win_rate;
-          this.finalPortfolio = res.data.final_portfolio;
-          this.pnl = res.data.pnl;
-          this.percent_pnl = res.data.percent_pnl;
-          let data = this.prepareDisplayData(res.data.result);
-          self.$refs.tableResult.setDisplayData(data);
+          this.results = this.prepareResults(res.data);
+          // this.totalTrades = res.data.total_trades;
+          // this.winRate = res.data.win_rate;
+          // this.finalPortfolio = res.data.final_portfolio;
+          // this.pnl = res.data.pnl;
+          // this.percent_pnl = res.data.percent_pnl;
+          // let data = this.prepareDisplayData(res.data.result);
+          // self.$refs.tableResult.setDisplayData(data);
           self.hasData = true;
         }
       }
       this.loading = false;
+    },
+    prepareResults(data) {
+      let results = [];
+      for (let item of data) {
+        let result = {
+          ...item
+        };
+        result.title = this.buildBacktestTitle(item);
+        result.data = this.prepareDisplayData(item.result);
+        results.push(result);
+      }
+      return results;
+
+    },
+    buildBacktestTitle(item) {
+      let fromDate = this.$utility.formatDate(this.daterange[0]),
+        toDate = this.$utility.formatDate(this.daterange[1]);
+      return `Backtest result for ${this.strategy.label} of ${item.symbol} symbol from ${fromDate} to ${toDate}`;
     },
     prepareDisplayData(data) {
       return (data || []).map((item) => {
@@ -441,5 +469,8 @@ export default {
 <style lang="scss" scoped>
 .param-label {
   min-width: 250px;
+}
+.result-item {
+  margin-bottom: 2rem;
 }
 </style>

@@ -62,7 +62,7 @@
       <base-form-item label="PnL" prop="pnl">
         <base-input-number :disabled="isViewing" v-model="currentItem.pnl" />
       </base-form-item>
-      <base-form-item label="Screenshot" prop="screenshot">
+      <!-- <base-form-item label="Screenshot" prop="screenshot">
         <el-upload
           class="avatar-uploader"
           :disabled="isViewing"
@@ -75,11 +75,11 @@
           :on-success="handleAvatarSuccess"
           :before-upload="beforeAvatarUpload"
         >
-          <!-- <img
+          <img
             v-if="currentItem.screenshot"
             :src="currentItem.screenshot"
             class="avatar"
-          /> -->
+          />
           <i class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
         <base-image
@@ -87,7 +87,7 @@
           :src="currentItem.screenshot"
           fit="cover"
         />
-      </base-form-item>
+      </base-form-item> -->
       <base-form-item label="Comment" prop="comments">
         <base-input
           :autosize="{ minRows: 2, maxRows: 4 }"
