@@ -32,7 +32,7 @@
       </div>
       <div class="row">
         <div class="param-label">Scale out ATR factor</div>
-        <base-input-number v-model="strategy_params.atr_stop_scale_out"></base-input-number>
+        <base-input-number v-model="strategy_params.atr_scale_out"></base-input-number>
       </div>
       <div class="row select-strategy">
         <div class="param-label">Choose a strategy</div>
@@ -62,13 +62,13 @@
             ></base-input-number>
           </div>
           <div class="row">
-            <div class="param-label">Buy when RSI overbought at</div>
+            <div class="param-label">Buy when RSI at</div>
             <base-input-number
               v-model="strategy_params.upper"
             ></base-input-number>
           </div>
           <div class="row">
-            <div class="param-label">Sell when RSI oversold at</div>
+            <div class="param-label">Sell when RSI at</div>
             <base-input-number
               v-model="strategy_params.lower"
             ></base-input-number>
@@ -139,8 +139,8 @@
       </div>
     </template>
     <template slot="table">
-      <div v-show="hasData">
-        <div v-for="result in results" :key="result.symbol" class="result-item">
+      <div v-if="hasData">
+        <div v-for="(result, index) in results" :key="result.symbol" class="result-item">
         <div style="font-size: 20px" class="title text-center bold mb-1">
           {{ result.title }}
         </div>
@@ -154,10 +154,10 @@
           % PnL: {{ result.percent_pnl || 0 }}%
         </div> -->
         <div class="title text-center italic mb-1">
-          Total wins: {{ result.total_won || 0 }}%
+          Total wins: {{ result.total_won || 0 }}
         </div>
         <div class="title text-center italic mb-1">
-          Total losses: {{ result.total_lost || 0 }}%
+          Total losses: {{ result.total_lost || 0 }}
         </div>
         <div class="title text-center italic mb-1">
           Win rate: {{ result.win_rate || 0 }}%
@@ -169,8 +169,7 @@
         <div class="table-result">
           <table-viewer
             :pagination="false"
-            ref="tableResult"
-            id="tableResult"
+            :ref="`tableResult${index}`"
             :data="result.data"
             :columns="columnsBacktestResult"
           >
@@ -251,7 +250,7 @@ export default {
       strategy: "RSIStrategy",
       strategy_params: {
         atr_stop_loss: 1.5,
-        atr_stop_scale_out: 1,
+        atr_scale_out: 1,
       },
       symbol: ["HPG", "RAL"],
       pickerOptions: {
@@ -349,13 +348,14 @@ export default {
           break;
       }
       this.strategy_params.atr_stop_loss = 1.5;
-      this.strategy_params.atr_stop_scale_out = 1;
+      this.strategy_params.atr_scale_out = 1;
     },
     /**
      * Do backtest strategy and show result
      */
     async showResult() {
       this.loading = true;
+      this.hasData = false;
       let self = this,
         symbol = this.symbol,
         strategy = this.strategy.id,
@@ -380,8 +380,8 @@ export default {
             symbol: symbol,
             from_date: fromDate,
             to_date: toDate,
-            cash: this.cash,
-            commission: this.commission,
+            // cash: this.cash,
+            // commission: this.commission,
             strategy: strategy,
             strategy_params: this.strategy_params,
           },
@@ -434,31 +434,41 @@ export default {
         case "SELL CREATE":
           result = `Price close at ${this.$utility.toThousandFilter(
             item.price
+          )}. ATR stop loss level is ${this.$utility.toThousandFilter(
+            Math.round(item.stop_loss_level)
+          )}. ATR scale out level is ${this.$utility.toThousandFilter(
+            Math.round(item.scale_out_level)
+          )}.`;
+          break;
+        case "SCALE OUT CREATE":
+        case "STOP LOSS CREATE":
+          result = `Price close at ${this.$utility.toThousandFilter(
+            item.price
           )}`;
           break;
-        case "BUY EXECUTED":
-          result = `Buy executed at ${this.$utility.toThousandFilter(
-            item.price
-          )} with cost ${this.$utility.toThousandFilter(
-            item.cost
-          )} and commission ${this.$utility.toThousandFilter(item.commission)}`;
-          break;
-        case "SELL EXECUTED":
-          result = `Sell executed at ${this.$utility.toThousandFilter(
-            item.price
-          )} with cost ${this.$utility.toThousandFilter(
-            item.cost
-          )} and commission ${this.$utility.toThousandFilter(item.commission)}`;
-          break;
-        case "OPERATION PROFIT":
-          const net = this.$utility.toThousandFilter(item.net),
-            gross = this.$utility.toThousandFilter(item.gross);
-          if (item.net >= 0) {
-            result = `Gross profit is ${gross} and net profit is ${net}`;
-          } else {
-            result = `Gross loss is ${gross} and net loss is ${net}`;
-          }
-          break;
+        // case "BUY EXECUTED":
+        //   result = `Buy executed at ${this.$utility.toThousandFilter(
+        //     item.price
+        //   )} with cost ${this.$utility.toThousandFilter(
+        //     item.cost
+        //   )} and commission ${this.$utility.toThousandFilter(item.commission)}`;
+        //   break;
+        // case "SELL EXECUTED":
+        //   result = `Sell executed at ${this.$utility.toThousandFilter(
+        //     item.price
+        //   )} with cost ${this.$utility.toThousandFilter(
+        //     item.cost
+        //   )} and commission ${this.$utility.toThousandFilter(item.commission)}`;
+        //   break;
+        // case "OPERATION PROFIT":
+        //   const net = this.$utility.toThousandFilter(item.net),
+        //     gross = this.$utility.toThousandFilter(item.gross);
+        //   if (item.net >= 0) {
+        //     result = `Gross profit is ${gross} and net profit is ${net}`;
+        //   } else {
+        //     result = `Gross loss is ${gross} and net loss is ${net}`;
+        //   }
+        //   break;
       }
       return result;
     },
