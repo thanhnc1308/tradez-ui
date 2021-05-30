@@ -51,6 +51,9 @@
           />
         </el-select>
       </div>
+      <div class="row strategy-description">
+        {{ strategy.description }}
+      </div>
       <div class="row">
         <div class="param-label">Choose strategy parameters</div>
         <!-- RSIStrategy -->
@@ -131,6 +134,114 @@
           </div>
         </div>
         <!-- end BollingerBandsSidewayStrategy -->
+        <!-- MACDStrategy -->
+        <div
+          v-if="strategy.id === 'MACDStrategy'"
+          class="stategy-parameters"
+        >
+          <div class="row">
+            <div class="param-label">Fast EMA Period</div>
+            <base-input-number
+              v-model="strategy_params.period_me1"
+            ></base-input-number>
+          </div>
+          <div class="row">
+            <div class="param-label">Slow EMA Period</div>
+            <base-input-number
+              v-model="strategy_params.period_me2"
+            ></base-input-number>
+          </div>
+          <div class="row">
+            <div class="param-label">Signal factor</div>
+            <base-input-number
+              v-model="strategy_params.period_signal"
+            ></base-input-number>
+          </div>
+        </div>
+        <!-- end MACDStrategy -->
+        <!-- MaCrossoverStrategy -->
+        <div
+          v-if="strategy.id === 'MaCrossoverStrategy'"
+          class="stategy-parameters"
+        >
+          <div class="row">
+            <div class="param-label">Fast EMA period</div>
+            <base-input-number
+              v-model="strategy_params.fast_ema"
+            ></base-input-number>
+          </div>
+          <div class="row">
+            <div class="param-label">Slow EMA period</div>
+            <base-input-number
+              v-model="strategy_params.slow_ema"
+            ></base-input-number>
+          </div>
+        </div>
+        <!-- end MaCrossoverStrategy -->
+        <!-- AroonUpAndDownStrategy -->
+        <div
+          v-if="strategy.id === 'AroonUpAndDownStrategy'"
+          class="stategy-parameters"
+        >
+          <div class="row">
+            <div class="param-label">Period</div>
+            <base-input-number
+              v-model="strategy_params.period"
+            ></base-input-number>
+          </div>
+        </div>
+        <!-- end AroonUpAndDownStrategy -->
+        <!-- TRIXStrategy -->
+        <div
+          v-if="strategy.id === 'TRIXStrategy'"
+          class="stategy-parameters"
+        >
+          <div class="row">
+            <div class="param-label">Period</div>
+            <base-input-number
+              v-model="strategy_params.period"
+            ></base-input-number>
+          </div>
+        </div>
+        <!-- end TRIXStrategy -->
+        <!-- MassIndexStrategy -->
+        <div
+          v-if="strategy.id === 'MassIndexStrategy'"
+          class="stategy-parameters"
+        >
+          <div class="row">
+            <div class="param-label">Fast period</div>
+            <base-input-number
+              v-model="strategy_params.fast_period"
+            ></base-input-number>
+          </div>
+          <div class="row">
+            <div class="param-label">Slow period</div>
+            <base-input-number
+              v-model="strategy_params.slow_period"
+            ></base-input-number>
+          </div>
+        </div>
+        <!-- end MassIndexStrategy -->
+        <!-- KSTOscillatorStrategy -->
+        <div
+          v-if="strategy.id === 'KSTOscillatorStrategy'"
+          class="stategy-parameters"
+        >
+          <div class="row">
+            <div class="param-label">Fast period</div>
+            <base-input-number
+              v-model="strategy_params.fast_period"
+            ></base-input-number>
+          </div>
+          <div class="row">
+            <div class="param-label">Slow period</div>
+            <base-input-number
+              v-model="strategy_params.slow_period"
+            ></base-input-number>
+          </div>
+        </div>
+        <!-- end KSTOscillatorStrategy -->
       </div>
       <div class="row horizontal-center">
         <base-button :loading="false" @click="showResult"
@@ -210,7 +321,7 @@ export default {
       {
         id: "RSIStrategy",
         label: "RSI Strategy",
-        description: "RSI Strategy",
+        description: "RSI Strategy will execute a buy transaction when RSI goes oversold and a sell transaction when RSI goes overbought",
       },
       // {
       //   id: "BollingerBandsAndRSIStrategy",
@@ -225,13 +336,14 @@ export default {
       {
         id: "BollingerBandsStrategy",
         label: "Bollinger Bands Strategy",
-        description: "Bollinger Bands Strategy",
+        description: "Bollinger Bands Strategy will execute a buy transaction when price closes below the bottom band and a sell transaction when price close above the top band",
       },
       {
         id: "MACDStrategy",
         label: "MACD Strategy",
-        description: "MACD Strategy",
+        description: "MACD Strategy will execute a buy transaction when histogram goes from negative to positive and a sell transaction when histogram goes from positive to negative",
       },
+      //#endregion DONE
       {
         id: "MaCrossoverStrategy",
         label: "Moving Average Crossover Strategy",
@@ -242,12 +354,87 @@ export default {
         label: "ADX-DMI Cross Strategy",
         description: "ADX-DMI Cross Strategy",
       },
+      {
+        id: "PSARStrategy",
+        label: "Parabolic SAR Strategy",
+        description: "Parabolic SAR Strategy",
+      },
+      {
+        id: "AroonUpAndDownStrategy",
+        label: "Aroon Up And Down Strategy",
+        description: "Aroon Up And Down Strategy",
+      },
+      {
+        id: "CCIStrategy",
+        label: "Commodity Channel Index Strategy",
+        description: "Commodity Channel Index Strategy",
+      },
+      {
+        id: "MFIStrategy",
+        label: "Money Flow Index Strategy",
+        description: "Money Flow Index Strategy",
+      },
+      {
+        id: "ROCStrategy",
+        label: "Rate of change Strategy",
+        description: "Rate of change Strategy",
+      },
+      {
+        id: "StochasticStrategy",
+        label: "Stochastic Strategy",
+        description: "Stochastic Strategy",
+      },
+      {
+        id: "TRIXStrategy",
+        label: "TRIX Strategy",
+        description: "TRIX Strategy",
+      },
+      {
+        id: "MassIndexStrategy",
+        label: "Mass Index Strategy",
+        description: "Mass Index Strategy",
+      },
+      {
+        id: "KSTOscillatorStrategy",
+        label: "KST Oscillator Strategy",
+        description: "KST Oscillator Strategy",
+      },
+      {
+        id: "WilliamsPercentRStrategy",
+        label: "Williams' %R Strategy",
+        description: "Williams' %R Strategy",
+      },
+      {
+        id: "UltimateOscillatorStrategy",
+        label: "Ultimate Oscillator Strategy",
+        description: "Ultimate Oscillator Strategy",
+      },
+      {
+        id: "ChaikinOscillatorStrategy",
+        label: "Chaikin A/D Oscillator Strategy",
+        description: "Chaikin A/D Oscillator Strategy",
+      },
+      {
+        id: "OnBalanceVolumeStrategy",
+        label: "On Balance Volume Strategy",
+        description: "On Balance Volume Strategy",
+      },
+      {
+        id: "SingleCandleStrategy",
+        label: "Single Candle Strategy",
+        description: "Single Candle Strategy",
+      },
+      // {
+      //   id: "UltimateOscillatorStrategy",
+      //   label: "Ultimate Oscillator Strategy",
+      //   description: "Ultimate Oscillator Strategy",
+      // },
     ];
     return {
       loading: false,
       hasData: false,
       listStock: [],
-      strategy: "RSIStrategy",
+      strategy: {},
       strategy_params: {
         atr_stop_loss: 1.5,
         atr_scale_out: 1,
@@ -338,7 +525,11 @@ export default {
           };
           break;
         case "MACDStrategy":
-          this.strategy_params = {};
+          this.strategy_params = {
+            period_me1: 12,
+            period_me2: 26,
+            period_signal: 9,
+          };
           break;
         case "MaCrossoverStrategy":
           this.strategy_params = {};
@@ -424,19 +615,28 @@ export default {
           transaction_date: this.$utility.formatDate(item.transaction_date),
           transaction_type: item.transaction_type,
           description: this.getDescription(item),
+          style: this.getRowStyle(item)
         };
       });
+    },
+    getRowStyle(row) {
+      switch (row.transaction_type) {
+        case "SCALE OUT CREATE":
+          return "color: green;"
+        case "STOP LOSS CREATE":
+          return "color: red;"
+      }
     },
     getDescription(item) {
       let result = "";
       switch (item.transaction_type) {
         case "BUY CREATE":
         case "SELL CREATE":
-          result = `Price close at ${this.$utility.toThousandFilter(
+          result = `- Price close at ${this.$utility.toThousandFilter(
             item.price
-          )}. ATR stop loss level is ${this.$utility.toThousandFilter(
+          )}.<br>- ATR stop loss level is ${this.$utility.toThousandFilter(
             Math.round(item.stop_loss_level)
-          )}. ATR scale out level is ${this.$utility.toThousandFilter(
+          )}.<br>- ATR scale out level is ${this.$utility.toThousandFilter(
             Math.round(item.scale_out_level)
           )}.`;
           break;

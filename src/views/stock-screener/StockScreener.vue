@@ -6,12 +6,12 @@
           >Choose filters</base-button
         >
         <base-button type="primary" @click="refresh">Refresh</base-button>
-        <base-button type="primary" @click="saveFilters"
+        <!-- <base-button type="primary" @click="saveFilters"
           >Save filters</base-button
         >
         <base-button type="primary" @click="saveAsNotification"
           >Save as notification</base-button
-        >
+        > -->
       </div>
     </template>
     <template slot="table">

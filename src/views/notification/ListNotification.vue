@@ -23,7 +23,7 @@
         >
           Refresh
         </base-button>
-        <base-button
+        <!-- <base-button
           :loading="downloadLoading"
           class="filter-item"
           type="primary"
@@ -31,7 +31,7 @@
           @click="exportExcel"
         >
           Export
-        </base-button>
+        </base-button> -->
       </div>
     </template>
     <template slot="table">

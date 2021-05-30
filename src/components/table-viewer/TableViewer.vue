@@ -60,9 +60,9 @@
             v-else-if="column.columnType === EnumColumnType.Boolean"
             :checked="row[column.dataField]"
           ></base-checkbox>
-          <span @dblclick="onDblClickTableRow(row, column)" v-else>{{
+          <div :style="row.style" @dblclick="onDblClickTableRow(row, column)" v-else>{{
             row[column.dataField] | formatData(column.formatType)
-          }}</span>
+          }}</div>
         </template>
       </el-table-column>
 
