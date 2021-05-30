@@ -167,13 +167,13 @@
           <div class="row">
             <div class="param-label">Fast EMA period</div>
             <base-input-number
-              v-model="strategy_params.fast_ema"
+              v-model="strategy_params.pfast"
             ></base-input-number>
           </div>
           <div class="row">
             <div class="param-label">Slow EMA period</div>
             <base-input-number
-              v-model="strategy_params.slow_ema"
+              v-model="strategy_params.pslow"
             ></base-input-number>
           </div>
         </div>
@@ -204,6 +204,50 @@
           </div>
         </div>
         <!-- end TRIXStrategy -->
+        <!-- ADXDMICrossStrategy -->
+        <div
+          v-if="strategy.id === 'ADXDMICrossStrategy'"
+          class="stategy-parameters"
+        >
+          <div class="row">
+            <div class="param-label">Period</div>
+            <base-input-number
+              v-model="strategy_params.period"
+            ></base-input-number>
+          </div>
+          <div class="row">
+            <div class="param-label">ADX strong trend level</div>
+            <base-input-number
+              v-model="strategy_params.adx_strong_trend_level"
+            ></base-input-number>
+          </div>
+        </div>
+        <!-- end ADXDMICrossStrategy -->
+        <!-- PSARStrategy -->
+        <div
+          v-if="strategy.id === 'PSARStrategy'"
+          class="stategy-parameters"
+        >
+          <div class="row">
+            <div class="param-label">Period</div>
+            <base-input-number
+              v-model="strategy_params.period"
+            ></base-input-number>
+          </div>
+          <div class="row">
+            <div class="param-label">Increment</div>
+            <base-input-number
+              v-model="strategy_params.af"
+            ></base-input-number>
+          </div>
+          <div class="row">
+            <div class="param-label">Max value</div>
+            <base-input-number
+              v-model="strategy_params.afmax"
+            ></base-input-number>
+          </div>
+        </div>
+        <!-- end PSARStrategy -->
         <!-- MassIndexStrategy -->
         <div
           v-if="strategy.id === 'MassIndexStrategy'"
@@ -343,91 +387,91 @@ export default {
         label: "MACD Strategy",
         description: "MACD Strategy will execute a buy transaction when histogram goes from negative to positive and a sell transaction when histogram goes from positive to negative",
       },
-      //#endregion DONE
       {
         id: "MaCrossoverStrategy",
         label: "Moving Average Crossover Strategy",
-        description: "Moving Average Crossover Strategy",
+        description: "Moving Average Crossover Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
       },
       {
         id: "ADXDMICrossStrategy",
         label: "ADX-DMI Cross Strategy",
-        description: "ADX-DMI Cross Strategy",
+        description: "ADX-DMI Cross Strategy will execute a buy transaction when DMI+ goes above DMI- and a sell transaction when DMI+ goes below DMI- and both with ADX is above strong trend level",
       },
       {
         id: "PSARStrategy",
         label: "Parabolic SAR Strategy",
-        description: "Parabolic SAR Strategy",
+        description: "Parabolic SAR Strategy will execute a buy transaction when the PSAR dot goes below price and a sell transaction when the PSAR dot goes above price",
       },
+      //#endregion DONE
       {
         id: "AroonUpAndDownStrategy",
         label: "Aroon Up And Down Strategy",
-        description: "Aroon Up And Down Strategy",
+        description: "Aroon Up And Down Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
       },
       {
         id: "CCIStrategy",
         label: "Commodity Channel Index Strategy",
-        description: "Commodity Channel Index Strategy",
+        description: "Commodity Channel Index Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
       },
       {
         id: "MFIStrategy",
         label: "Money Flow Index Strategy",
-        description: "Money Flow Index Strategy",
+        description: "Money Flow Index Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
       },
       {
         id: "ROCStrategy",
         label: "Rate of change Strategy",
-        description: "Rate of change Strategy",
+        description: "Rate of change Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
       },
       {
         id: "StochasticStrategy",
         label: "Stochastic Strategy",
-        description: "Stochastic Strategy",
+        description: "Stochastic Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
       },
       {
         id: "TRIXStrategy",
         label: "TRIX Strategy",
-        description: "TRIX Strategy",
+        description: "TRIX Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
       },
       {
         id: "MassIndexStrategy",
         label: "Mass Index Strategy",
-        description: "Mass Index Strategy",
+        description: "Mass Index Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
       },
       {
         id: "KSTOscillatorStrategy",
         label: "KST Oscillator Strategy",
-        description: "KST Oscillator Strategy",
+        description: "KST Oscillator Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
       },
       {
         id: "WilliamsPercentRStrategy",
         label: "Williams' %R Strategy",
-        description: "Williams' %R Strategy",
+        description: "Williams' %R Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
       },
       {
         id: "UltimateOscillatorStrategy",
         label: "Ultimate Oscillator Strategy",
-        description: "Ultimate Oscillator Strategy",
+        description: "Ultimate Oscillator Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
       },
       {
         id: "ChaikinOscillatorStrategy",
         label: "Chaikin A/D Oscillator Strategy",
-        description: "Chaikin A/D Oscillator Strategy",
+        description: "Chaikin A/D Oscillator Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
       },
       {
         id: "OnBalanceVolumeStrategy",
         label: "On Balance Volume Strategy",
-        description: "On Balance Volume Strategy",
+        description: "On Balance Volume Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
       },
       {
         id: "SingleCandleStrategy",
         label: "Single Candle Strategy",
-        description: "Single Candle Strategy",
+        description: "Single Candle Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
       },
       // {
       //   id: "UltimateOscillatorStrategy",
       //   label: "Ultimate Oscillator Strategy",
-      //   description: "Ultimate Oscillator Strategy",
+      //   description: "Ultimate Oscillator Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
       // },
     ];
     return {
@@ -532,11 +576,25 @@ export default {
           };
           break;
         case "MaCrossoverStrategy":
-          this.strategy_params = {};
+          this.strategy_params = {
+            pfast: 30,
+            pslow: 50
+          };
           break;
         case "ADXDMICrossStrategy":
-          this.strategy_params = {};
+          this.strategy_params = {
+            period: 14,
+            adx_strong_trend_level: 25,
+          };
           break;
+        case "PSARStrategy":
+          this.strategy_params = {
+            period: 2,
+            af: 0.02,
+            afmax: 0.2
+          };
+          break;
+
       }
       this.strategy_params.atr_stop_loss = 1.5;
       this.strategy_params.atr_scale_out = 1;
