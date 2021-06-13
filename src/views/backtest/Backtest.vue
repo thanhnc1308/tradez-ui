@@ -248,6 +248,25 @@
           </div>
         </div>
         <!-- end PSARStrategy -->
+        <!-- JapaneseCandlestickStrategy -->
+        <div
+          v-if="strategy.id === 'JapaneseCandlestickStrategy'"
+          class="stategy-parameters"
+        >
+          <div class="row">
+            <div class="param-label">Buy pattern</div>
+            <base-input
+              v-model="strategy_params.buy_pattern"
+            ></base-input>
+          </div>
+          <div class="row">
+            <div class="param-label">Sell pattern</div>
+            <base-input
+              v-model="strategy_params.sell_pattern"
+            ></base-input>
+          </div>
+        </div>
+        <!-- end JapaneseCandlestickStrategy -->
         <!-- MassIndexStrategy -->
         <div
           v-if="strategy.id === 'MassIndexStrategy'"
@@ -404,9 +423,14 @@ export default {
       },
       //#endregion DONE
       {
+        id: "JapaneseCandlestickStrategy",
+        label: "Japanese Candlestick Strategy",
+        description: "Japanese Candlestick will execute a buy transaction when price formed a bullish pin bar/engufling/maruboru and a sell transaction when formed a bearish pin bar/engufling/maruboru",
+      },
+      {
         id: "AroonUpAndDownStrategy",
         label: "Aroon Up And Down Strategy",
-        description: "Aroon Up And Down Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
+        description: "Aroon Up And Down Strategy will execute a buy transaction when Aroon Up goes above Aroon Down and a sell transaction when Aroon Up goes below Aroon Down",
       },
       {
         id: "CCIStrategy",
@@ -462,11 +486,6 @@ export default {
         id: "OnBalanceVolumeStrategy",
         label: "On Balance Volume Strategy",
         description: "On Balance Volume Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
-      },
-      {
-        id: "SingleCandleStrategy",
-        label: "Single Candle Strategy",
-        description: "Single Candle Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
       },
       // {
       //   id: "UltimateOscillatorStrategy",
@@ -592,6 +611,11 @@ export default {
             period: 2,
             af: 0.02,
             afmax: 0.2
+          };
+          break;
+        case "AroonUpAndDownStrategy":
+          this.strategy_params = {
+            period: 14
           };
           break;
 

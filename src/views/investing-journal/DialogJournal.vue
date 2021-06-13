@@ -3,7 +3,6 @@
     :title="title"
     :visible.sync="isShow"
     @shortkey="handleShortkeyAction"
-    width="75%"
     :before-close="handleClose"
   >
     <base-form
@@ -13,7 +12,7 @@
       :model="currentItem"
       label-position="left"
       label-width="100px"
-      style="width: 400px; margin-left: 50px"
+      style="margin-left: 50px"
     >
       <base-form-item label="Date" prop="transaction_date">
         <base-date-picker
@@ -22,6 +21,9 @@
           :disabled="isViewing"
           placeholder="Please pick a date"
         />
+      </base-form-item>
+      <base-form-item label="Entry" prop="entry">
+        <base-input-number :disabled="isViewing" v-model="currentItem.entry" />
       </base-form-item>
       <base-form-item label="Symbol" prop="symbol">
         <el-select
@@ -38,6 +40,9 @@
           />
         </el-select>
       </base-form-item>
+      <base-form-item label="Exit" prop="exit">
+        <base-input-number :disabled="isViewing" v-model="currentItem.exit" />
+      </base-form-item>
       <base-form-item label="Type" prop="transaction_type">
         <el-select
           v-model="currentItem.transaction_type"
@@ -52,12 +57,6 @@
             :value="type"
           />
         </el-select>
-      </base-form-item>
-      <base-form-item label="Entry" prop="entry">
-        <base-input-number :disabled="isViewing" v-model="currentItem.entry" />
-      </base-form-item>
-      <base-form-item label="Exit" prop="exit">
-        <base-input-number :disabled="isViewing" v-model="currentItem.exit" />
       </base-form-item>
       <base-form-item label="PnL" prop="pnl">
         <base-input-number :disabled="isViewing" v-model="currentItem.pnl" />
@@ -88,7 +87,7 @@
           fit="cover"
         />
       </base-form-item> -->
-      <base-form-item label="Comment" prop="comments">
+      <base-form-item style="display:block;" label="Comment" prop="comments">
         <base-input
           :autosize="{ minRows: 2, maxRows: 4 }"
           type="textarea"
