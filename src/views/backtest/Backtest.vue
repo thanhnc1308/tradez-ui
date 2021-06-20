@@ -311,6 +311,11 @@
           >Show Result</base-button
         >
       </div>
+      <div v-if="hasData" class="row horizontal-center">
+        <base-button :loading="false" @click="exportResult"
+          >Export Result</base-button
+        >
+      </div>
     </template>
     <template slot="table">
       <div v-if="hasData">
@@ -362,6 +367,7 @@ import { fnStoreAllStock } from "@/api/storeConfig.js";
 import BacktestAPI from "@/api/BacktestAPI.js";
 import { columnsBacktestResult } from "@/common/columnConfig";
 import { EnumFormatType } from "@/common/enum";
+import XLSX from "xlsx";
 
 export default {
   name: "Backtest",
@@ -709,11 +715,11 @@ export default {
       switch (item.transaction_type) {
         case "BUY CREATE":
         case "SELL CREATE":
-          result = `- Price close at ${this.$utility.toThousandFilter(
+          result = `Price close at ${this.$utility.toThousandFilter(
             item.price
-          )}.<br>- ATR stop loss level is ${this.$utility.toThousandFilter(
+          )}. ATR stop loss level is ${this.$utility.toThousandFilter(
             Math.round(item.stop_loss_level)
-          )}.<br>- ATR scale out level is ${this.$utility.toThousandFilter(
+          )}. ATR scale out level is ${this.$utility.toThousandFilter(
             Math.round(item.scale_out_level)
           )}.`;
           break;
@@ -749,6 +755,31 @@ export default {
       }
       return result;
     },
+    /**
+     * Export backtest results to excel
+     * @author NCThanh 20.06.2021
+     */
+    exportResult() {
+      /* create new workbook */
+      let workbook = XLSX.utils.book_new();
+      let aHeader = [
+        "transaction_date",
+        "transaction_type",
+        "description"
+      ]
+
+      for (let i = 0, len = this.results.length; i < len; i++) {
+        let result = this.results[i];
+        let symbol = result.symbol;
+        let title = result.title;
+        let data = result.data;
+        let ws = XLSX.utils.json_to_sheet(data, { header : aHeader });
+        XLSX.utils.book_append_sheet(workbook, ws, symbol);
+      }
+
+      /* generate file and send to client */
+      XLSX.writeFile(workbook, `backtest_${new Date()}.xlsx`);
+    }
   },
 };
 </script>
