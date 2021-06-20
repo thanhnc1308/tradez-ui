@@ -34,9 +34,9 @@
         >
           <el-option
             v-for="symbol in listStock"
-            :key="symbol"
-            :label="symbol"
-            :value="symbol"
+            :key="symbol.id"
+            :label="symbol.symbol"
+            :value="symbol.symbol"
           />
         </el-select>
       </base-form-item>
@@ -109,15 +109,25 @@
 import BaseFormDetail from "@/views/base/BaseFormDetail.vue";
 import { callBase } from "@/mixins/callBase";
 import JournalAPI from "@/api/JournalAPI";
+import { fnStoreAllStock } from "@/api/storeConfig.js";
 
 export default {
   name: "DialogAddNewNotification",
   extends: BaseFormDetail,
   mixins: [callBase],
   data() {
-    this.listStock = ["RAL", "HPG", "VIC"];
     this.listType = ["Buy", "Sell"];
-    return {};
+    return {
+      listStock: []
+    };
+  },
+  created() {
+    const self = this;
+    fnStoreAllStock().then((res) => {
+      if (res && res.success) {
+        self.listStock = res.data;
+      }
+    });
   },
   // mounted() {
   //   this.currentItem = {
