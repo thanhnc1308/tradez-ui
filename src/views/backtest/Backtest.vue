@@ -422,75 +422,70 @@ export default {
         description: "Parabolic SAR Strategy will execute a buy transaction when the PSAR dot goes below price and a sell transaction when the PSAR dot goes above price",
       },
       //#endregion DONE
-      {
-        id: "JapaneseCandlestickStrategy",
-        label: "Japanese Candlestick Strategy",
-        description: "Japanese Candlestick will execute a buy transaction when price formed a bullish pin bar/engufling/maruboru and a sell transaction when formed a bearish pin bar/engufling/maruboru",
-      },
-      {
-        id: "AroonUpAndDownStrategy",
-        label: "Aroon Up And Down Strategy",
-        description: "Aroon Up And Down Strategy will execute a buy transaction when Aroon Up goes above Aroon Down and a sell transaction when Aroon Up goes below Aroon Down",
-      },
-      {
-        id: "CCIStrategy",
-        label: "Commodity Channel Index Strategy",
-        description: "Commodity Channel Index Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
-      },
-      {
-        id: "MFIStrategy",
-        label: "Money Flow Index Strategy",
-        description: "Money Flow Index Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
-      },
-      {
-        id: "ROCStrategy",
-        label: "Rate of change Strategy",
-        description: "Rate of change Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
-      },
-      {
-        id: "StochasticStrategy",
-        label: "Stochastic Strategy",
-        description: "Stochastic Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
-      },
-      {
-        id: "TRIXStrategy",
-        label: "TRIX Strategy",
-        description: "TRIX Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
-      },
-      {
-        id: "MassIndexStrategy",
-        label: "Mass Index Strategy",
-        description: "Mass Index Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
-      },
-      {
-        id: "KSTOscillatorStrategy",
-        label: "KST Oscillator Strategy",
-        description: "KST Oscillator Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
-      },
-      {
-        id: "WilliamsPercentRStrategy",
-        label: "Williams' %R Strategy",
-        description: "Williams' %R Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
-      },
-      {
-        id: "UltimateOscillatorStrategy",
-        label: "Ultimate Oscillator Strategy",
-        description: "Ultimate Oscillator Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
-      },
-      {
-        id: "ChaikinOscillatorStrategy",
-        label: "Chaikin A/D Oscillator Strategy",
-        description: "Chaikin A/D Oscillator Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
-      },
-      {
-        id: "OnBalanceVolumeStrategy",
-        label: "On Balance Volume Strategy",
-        description: "On Balance Volume Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
-      },
+      // {
+      //   id: "JapaneseCandlestickStrategy",
+      //   label: "Japanese Candlestick Strategy",
+      //   description: "Japanese Candlestick will execute a buy transaction when price formed a bullish pin bar/engufling/maruboru and a sell transaction when formed a bearish pin bar/engufling/maruboru",
+      // },
+      // {
+      //   id: "AroonUpAndDownStrategy",
+      //   label: "Aroon Up And Down Strategy",
+      //   description: "Aroon Up And Down Strategy will execute a buy transaction when Aroon Up goes above Aroon Down and a sell transaction when Aroon Up goes below Aroon Down",
+      // },
+      // {
+      //   id: "CCIStrategy",
+      //   label: "Commodity Channel Index Strategy",
+      //   description: "Commodity Channel Index Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
+      // },
+      // {
+      //   id: "MFIStrategy",
+      //   label: "Money Flow Index Strategy",
+      //   description: "Money Flow Index Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
+      // },
+      // {
+      //   id: "ROCStrategy",
+      //   label: "Rate of change Strategy",
+      //   description: "Rate of change Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
+      // },
+      // {
+      //   id: "StochasticStrategy",
+      //   label: "Stochastic Strategy",
+      //   description: "Stochastic Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
+      // },
+      // {
+      //   id: "TRIXStrategy",
+      //   label: "TRIX Strategy",
+      //   description: "TRIX Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
+      // },
+      // {
+      //   id: "MassIndexStrategy",
+      //   label: "Mass Index Strategy",
+      //   description: "Mass Index Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
+      // },
+      // {
+      //   id: "KSTOscillatorStrategy",
+      //   label: "KST Oscillator Strategy",
+      //   description: "KST Oscillator Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
+      // },
+      // {
+      //   id: "WilliamsPercentRStrategy",
+      //   label: "Williams' %R Strategy",
+      //   description: "Williams' %R Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
+      // },
       // {
       //   id: "UltimateOscillatorStrategy",
       //   label: "Ultimate Oscillator Strategy",
       //   description: "Ultimate Oscillator Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
+      // },
+      // {
+      //   id: "ChaikinOscillatorStrategy",
+      //   label: "Chaikin A/D Oscillator Strategy",
+      //   description: "Chaikin A/D Oscillator Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
+      // },
+      // {
+      //   id: "OnBalanceVolumeStrategy",
+      //   label: "On Balance Volume Strategy",
+      //   description: "On Balance Volume Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
       // },
     ];
     return {
