@@ -71,6 +71,9 @@ const actions = {
             reject("Verification failed, please Login again.");
           }
 
+          data.name = data.username;
+          data.roles = ['admin'];
+
           const { roles, name, avatar, introduction } = data;
 
           // roles must be a non-empty array
