@@ -1,8 +1,8 @@
 /**
  * Some function utility
  */
- import { parseTime, formatTime } from "@/utils";
-
+import { parseTime, formatTime } from "@/utils";
+import router from '@/router/router.js';
 class Utility {
   formatDate(sDate, format = "{d}-{m}-{y}") {
     if (sDate) {
@@ -60,6 +60,13 @@ class Utility {
       return input;
     }
     return null;
+  }
+
+  /**
+   * Go to a url
+   */
+  redirectTo(url) {
+    router.push(url);
   }
 }
 

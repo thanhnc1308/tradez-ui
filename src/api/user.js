@@ -22,6 +22,14 @@ export function login(data) {
   })
 }
 
+export function signup(data) {
+  return HttpClient.request({
+    url: '/auth/register',
+    method: 'post',
+    data
+  })
+}
+
 export function getInfo(token) {
   return new Promise((resolve, reject) => {
     resolve({

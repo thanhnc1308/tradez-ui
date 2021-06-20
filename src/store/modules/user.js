@@ -1,4 +1,4 @@
-import { login, getInfo } from "@/api/user";
+import { login, signup, getInfo } from "@/api/user";
 import { getToken, setToken, removeToken } from "@/utils/auth";
 import router, { resetRouter } from "@/router/router";
 
@@ -44,6 +44,20 @@ const actions = {
           reject(error);
         });
     });
+  },
+
+  signup({ commit }, userInfo) {
+    const { email, username, password } = userInfo;
+    return new Promise((resolve, reject) => {
+      signup({ email: email.trim(), username: username.trim(), password: password })
+      .then(response => {
+        console.log(response);
+        resolve();
+      })
+      .catch(error => {
+        reject(error);
+      });
+    })
   },
 
   // get user info
