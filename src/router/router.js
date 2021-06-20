@@ -84,7 +84,7 @@ export const constantRoutes = [
         path: "technical-analysis",
         component: () => import("@/views/charts/CandlestickCharts.vue"),
         name: "CandlestickCharts",
-        meta: { title: "Candlestick Charts", icon: "clipboard" }
+        meta: { title: "Candlestick Charts", icon: "chart" }
         // component: () => import('@/views/dashboard/Dashboard'),
         // name: 'Dashboard',
         // meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
@@ -159,7 +159,7 @@ export const asyncRoutes = [
         path: "",
         component: () => import("@/views/stock-screener/StockScreener.vue"),
         name: "StockScreener",
-        meta: { title: "Stock Screener", icon: "clipboard" }
+        meta: { title: "Stock Screener", icon: "search" }
       }
     ]
   },
@@ -171,7 +171,7 @@ export const asyncRoutes = [
         path: "",
         component: () => import("@/views/backtest/Backtest.vue"),
         name: "Backtest",
-        meta: { title: "Backtest", icon: "clipboard" }
+        meta: { title: "Backtest", icon: "skill" }
       }
     ]
   },
@@ -195,7 +195,7 @@ export const asyncRoutes = [
         path: "",
         component: () => import("@/views/notification/ListNotification.vue"),
         name: "Notification",
-        meta: { title: "Notification", icon: "clipboard" }
+        meta: { title: "Notification", icon: "guide" }
       }
     ]
   },
@@ -207,7 +207,7 @@ export const asyncRoutes = [
         path: "",
         component: () => import("@/views/investing-journal/ListJournal.vue"),
         name: "ListJournal",
-        meta: { title: "Investing Journal", icon: "clipboard" }
+        meta: { title: "Investing Journal", icon: "form" }
       }
     ]
   },
