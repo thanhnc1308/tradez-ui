@@ -5,6 +5,7 @@ import router, { resetRouter } from "@/router/router";
 const state = {
   token: getToken(),
   name: "",
+  email: "",
   avatar: "",
   introduction: "",
   roles: []
@@ -19,6 +20,9 @@ const mutations = {
   },
   SET_NAME: (state, name) => {
     state.name = name;
+  },
+  SET_EMAIL: (state, email) => {
+    state.email = email;
   },
   SET_AVATAR: (state, avatar) => {
     state.avatar = avatar;
@@ -74,7 +78,7 @@ const actions = {
           data.name = data.username;
           data.roles = ['admin'];
 
-          const { roles, name, avatar, introduction } = data;
+          const { roles, name, avatar, introduction, email } = data;
 
           // roles must be a non-empty array
           if (!roles || roles.length <= 0) {
@@ -83,6 +87,7 @@ const actions = {
 
           commit("SET_ROLES", roles);
           commit("SET_NAME", name);
+          commit("SET_EMAIL", email);
           commit("SET_AVATAR", avatar);
           commit("SET_INTRODUCTION", introduction);
           resolve(data);

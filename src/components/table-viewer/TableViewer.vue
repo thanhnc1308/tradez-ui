@@ -176,6 +176,8 @@ export default {
           this.listLoading = false;
         } catch (e) {
           this.listLoading = false;
+        } finally {
+          this.forceUpdate();
         }
       }
     },

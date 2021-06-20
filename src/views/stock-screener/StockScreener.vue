@@ -8,10 +8,10 @@
         <base-button type="primary" @click="refresh">Refresh</base-button>
         <!-- <base-button type="primary" @click="saveFilters"
           >Save filters</base-button
-        >
+        > -->
         <base-button type="primary" @click="saveAsNotification"
           >Save as notification</base-button
-        > -->
+        >
       </div>
     </template>
     <template slot="table">
@@ -43,6 +43,9 @@ import { columnsStockScreener } from "@/common/columnConfig";
 import TableStore from "@/common/TableStore";
 import { EnumColumnType, EnumFormatType } from "@/common/enum";
 import showTradingViewChart from "@/views/charts/TradingViewChartViewer.js";
+import NotificationAPI from "@/api/NotificationAPI";
+import StockFilter from "@/views/stock-screener/StockFilter.js";
+import { mapGetters } from 'vuex'
 
 export default {
   name: "StockScreener",
@@ -67,6 +70,9 @@ export default {
     };
   },
   computed: {
+    ...mapGetters([
+      'email'
+    ]),
     title() {
       if (this.stockDate) {
         let options = {
@@ -191,8 +197,64 @@ export default {
     saveFilters() {
       alert("saveFilters");
     },
-    saveAsNotification() {
-      alert("saveAsNotification");
+    async saveAsNotification() {
+      if (this.currentParams.stockFilters && this.currentParams.stockFilters.length > 0) {
+        if (!this.notificationAPI) {
+          this.notificationAPI = new NotificationAPI();
+        }
+        let description = this.buildConditionDescription(this.currentParams.stockFilters);
+        let payload = {
+          description: description,
+          gmail: this.email,
+          send_gmail: true,
+          tg_chat_id: "",
+          send_telegram: false,
+          condition_key: JSON.stringify(this.currentParams.stockFilters),
+          condition_description: description
+        };
+        let response = await this.notificationAPI.post(payload);
+          if (response && response.success) {
+            this.$notify({
+              title: "Success",
+              message: "Success",
+              type: "success",
+              duration: 2000,
+            });
+          } else if (response && response.message) {
+            this.$notify({
+              title: "Error",
+              message: response.message || "An error has occured",
+              type: "error",
+              duration: 2000,
+            });
+          }
+      } else {
+        this.$notify({
+          title: "Error",
+          message: "You must choose conditions first",
+          type: "error",
+          duration: 2000,
+        });
+      }
+    },
+    buildConditionDescription(condition_key) {
+      let filterSymbol = '',
+        arrFilter = [];
+      condition_key.forEach(item => {
+        if (item.type !== 'stock_date') {
+          if (item.type === 'symbol') {
+            filterSymbol = item.value;
+          } else {
+            let filterText = StockFilter.buildSingleFilterDescription(item);
+            arrFilter.push(filterText);
+          }
+        }
+      })
+      if (filterSymbol) {
+        return `Symbol ${filterSymbol}: ${arrFilter.join(', ')}`;
+      } else {
+        return `All symbol: ${arrFilter.join(', ')}`;
+      }
     },
     showChart(row) {
       let toDate = this.stockDate,
