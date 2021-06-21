@@ -1,6 +1,8 @@
 <template>
   <base-dialog
+    ref="chooseStockFilters"
     title="Choose stock filters"
+    class="choose-stock-filters"
     v-shortkey="{ Save: ['ctrl', 's'], Close: ['esc'] }"
     @shortkey="handleShortkeyAction"
     :visible.sync="isShow"
@@ -27,9 +29,9 @@
         >
           <el-option
             v-for="symbol in listStock"
-            :key="symbol"
-            :label="symbol"
-            :value="symbol"
+            :key="symbol.id"
+            :label="symbol.symbol"
+            :value="symbol.symbol"
           />
         </el-select>
         </div>
@@ -187,6 +189,7 @@ import BaseFormDialog from "@/views/base/BaseFormDialog.vue";
 import { listFilters, listOperation } from "@/data/StockFilterData";
 import StockFilter from "@/views/stock-screener/StockFilter.js";
 import BaseInputNumberRange from "@/components/BaseComponent/input-number/BaseInputNumberRange.vue";
+import { fnStoreAllStock } from "@/api/storeConfig.js";
 
 export default {
   name: "ChooseStockFilters",
@@ -205,10 +208,14 @@ export default {
     }
   },
   mounted() {
-    this.$el.click();
+    this.$nextTick(() => {
+      let el = this.$refs.chooseStockFilters.$el;
+      let titleEl = el.querySelector('.el-dialog__title')
+      titleEl.click();
+      titleEl.click();
+    })
   },
   data() {
-    this.listStock = ["RAL", "HPG", "VIC"];
     this.listFilters = listFilters.clone();
     this.listOperations = listOperation.clone();
     this.titleParam = [];
@@ -217,12 +224,19 @@ export default {
        * object stores all filters emitted to form list
        */
       filters: [],
+      listStock: [],
       selectedFilter: null,
       symbol: null,
       stockDate: new Date('2021-01-28')
     };
   },
   created() {
+    const self = this;
+    fnStoreAllStock().then((res) => {
+      if (res && res.success) {
+        self.listStock = res.data;
+      }
+    });
     this._stockFilter = new StockFilter(this.filters);
   },
   methods: {
@@ -279,3 +293,9 @@ export default {
   }
 }
 </style>
+
+<style>
+.el-select-dropdown {
+  z-index: 2500 !important;
+}
+</style=>
