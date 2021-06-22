@@ -307,11 +307,11 @@
         <!-- end KSTOscillatorStrategy -->
       </div>
       <div class="row horizontal-center">
-        <base-button :loading="false" @click="showResult"
+        <base-button :loading="loading" @click="showResult"
           >Show Result</base-button
         >
       </div>
-        <base-button v-if="hasData" type="primary" class="export-result" :loading="false" @click="exportResult"
+        <base-button v-if="hasData" type="primary" class="export-result" :loading="loadingExportResult" @click="exportResult"
           >Export Result</base-button
         >
     </template>
@@ -493,6 +493,7 @@ export default {
       // },
     ];
     return {
+      loadingExportResult: false,
       loading: false,
       hasData: false,
       listStock: [],
@@ -758,6 +759,7 @@ export default {
      * @author NCThanh 20.06.2021
      */
     exportResult() {
+      this.loadingExportResult = true;
       /* create new workbook */
       let workbook = XLSX.utils.book_new();
       let aHeader = [
@@ -770,6 +772,7 @@ export default {
         let result = this.results[i];
         let symbol = result.symbol;
         let title = result.title;
+        result.data.forEach(item => delete item.style);
         let data = result.data;
         let ws = XLSX.utils.json_to_sheet(data, { header : aHeader });
         XLSX.utils.book_append_sheet(workbook, ws, symbol);
@@ -777,6 +780,7 @@ export default {
 
       /* generate file and send to client */
       XLSX.writeFile(workbook, `backtest_${new Date()}.xlsx`);
+      this.loadingExportResult = false;
     }
   },
 };
