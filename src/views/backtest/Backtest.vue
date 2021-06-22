@@ -311,11 +311,9 @@
           >Show Result</base-button
         >
       </div>
-      <div v-if="hasData" class="row horizontal-center">
-        <base-button :loading="false" @click="exportResult"
+        <base-button v-if="hasData" type="primary" class="export-result" :loading="false" @click="exportResult"
           >Export Result</base-button
         >
-      </div>
     </template>
     <template slot="table">
       <div v-if="hasData">
@@ -790,5 +788,11 @@ export default {
 }
 .result-item {
   margin-bottom: 2rem;
+}
+.export-result {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  z-index: 10;
 }
 </style>
