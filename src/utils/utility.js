@@ -3,6 +3,7 @@
  */
 import { parseTime, formatTime } from "@/utils";
 import router from '@/router/router.js';
+import store from "@/store";
 class Utility {
   formatDate(sDate, format = "{d}-{m}-{y}") {
     if (sDate) {
@@ -67,6 +68,14 @@ class Utility {
    */
   redirectTo(url) {
     router.push(url);
+  }
+
+  mask() {
+    store.dispatch('app/showLoading');
+  }
+
+  unmask() {
+    store.dispatch('app/hideLoading');
   }
 }
 

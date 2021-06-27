@@ -41,6 +41,7 @@
     "vue": "2.6.10",
     "vue-apexcharts": "^1.6.0",
     "vue-count-to": "^1.0.13",
+    "vue-element-loading": "^2.0.2",
     "vue-router": "3.0.2",
     "vue-shortkey": "^3.1.7",
     "vue-splitpane": "1.0.4",

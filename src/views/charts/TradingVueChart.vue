@@ -80,6 +80,7 @@ export default {
         fromDate = formatDate(this.daterange[0]),
         toDate = formatDate(this.daterange[1]);
       if (symbol) {
+        this.$utility.mask();
         let url = `/historical_price/all?symbol=${this.symbol}${
           fromDate ? `&from_date=${fromDate}` : ""
         }${toDate ? `&to_date=${toDate}` : ""}`;
@@ -87,7 +88,10 @@ export default {
         if (res && res.success) {
           setTimeout(() => {
             this.chart.chart.data = this.processChartData(res.data);
+            this.$utility.unmask();
           }, 500);
+        } else {
+          this.$utility.unmask();
         }
       }
     },

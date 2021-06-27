@@ -6,10 +6,17 @@ const state = {
     withoutAnimation: false
   },
   device: 'desktop',
+  loading: false,
   size: Cookies.get('size') || 'medium'
 }
 
 const mutations = {
+  SHOW_LOADING: state => {
+    state.loading = true;
+  },
+  HIDE_LOADING: state => {
+    state.loading = false;
+  },
   TOGGLE_SIDEBAR: state => {
     state.sidebar.opened = !state.sidebar.opened
     state.sidebar.withoutAnimation = false
@@ -34,6 +41,12 @@ const mutations = {
 }
 
 const actions = {
+  showLoading({ commit }) {
+    commit('SHOW_LOADING')
+  },
+  hideLoading({ commit }) {
+    commit('HIDE_LOADING')
+  },
   toggleSideBar({ commit }) {
     commit('TOGGLE_SIDEBAR')
   },
