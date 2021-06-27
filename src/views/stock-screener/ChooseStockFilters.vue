@@ -12,11 +12,16 @@
       <div v-if="caller === 'stock_screener'" class="filter-item flex mb-1">
         <div class="filter-type mr-1">Transaction Date</div>
         <div class="filter-operation">
-          <base-date-picker
+          <!-- <base-date-picker
             v-model="stockDate"
             type="date"
             placeholder="Pick a day"
-          />
+          /> -->
+          <el-date-picker
+            v-model="stockDate"
+            type="date"
+            placeholder="Pick a day">
+          </el-date-picker>
         </div>
       </div>
       <div v-if="caller === 'dialog_notification'" class="filter-item flex mb-1">
