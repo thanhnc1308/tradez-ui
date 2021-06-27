@@ -29,15 +29,15 @@ export const columnsJournal = [
     columnType: EnumColumnType.Text,
     formatType: EnumFormatType.Text
   },
-  {
-    dataField: "quantity",
-    label: "Quantity",
-    columnAlign: "center",
-    dataAlign: "center",
-    width: "80",
-    columnType: EnumColumnType.Number,
-    formatType: EnumFormatType.Number
-  },
+  // {
+  //   dataField: "quantity",
+  //   label: "Quantity",
+  //   columnAlign: "center",
+  //   dataAlign: "center",
+  //   width: "80",
+  //   columnType: EnumColumnType.Number,
+  //   formatType: EnumFormatType.Number
+  // },
   {
     dataField: "entry",
     label: "Entry price",
@@ -56,15 +56,15 @@ export const columnsJournal = [
     columnType: EnumColumnType.Number,
     formatType: EnumFormatType.Number
   },
-  {
-    dataField: "total_value",
-    label: "Total value",
-    columnAlign: "center",
-    dataAlign: "center",
-    width: "100",
-    columnType: EnumColumnType.Number,
-    formatType: EnumFormatType.Number
-  },
+  // {
+  //   dataField: "total_value",
+  //   label: "Total value",
+  //   columnAlign: "center",
+  //   dataAlign: "center",
+  //   width: "100",
+  //   columnType: EnumColumnType.Number,
+  //   formatType: EnumFormatType.Number
+  // },
   {
     dataField: "pnl",
     label: "PnL",
@@ -81,15 +81,15 @@ export const columnsJournal = [
     columnType: EnumColumnType.SignedTag,
     formatType: EnumFormatType.AbsPercentage
   },
-  {
-    dataField: "screenshot",
-    label: "Screenshot",
-    columnAlign: "center",
-    dataAlign: "center",
-    width: "150",
-    columnType: EnumColumnType.Image,
-    formatType: EnumFormatType.Text
-  },
+  // {
+  //   dataField: "screenshot",
+  //   label: "Screenshot",
+  //   columnAlign: "center",
+  //   dataAlign: "center",
+  //   width: "150",
+  //   columnType: EnumColumnType.Image,
+  //   formatType: EnumFormatType.Text
+  // },
   {
     dataField: "comments",
     label: "Comments",

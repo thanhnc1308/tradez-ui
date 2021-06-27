@@ -2,6 +2,7 @@
   <base-dialog
     :title="title"
     :visible.sync="isShow"
+    width="55%"
     @shortkey="handleShortkeyAction"
     :before-close="handleClose"
   >
@@ -23,7 +24,7 @@
         />
       </base-form-item>
       <base-form-item label="Entry" prop="entry">
-        <base-input-number :disabled="isViewing" v-model="currentItem.entry" />
+        <base-input-number @change="calculatePnL" :disabled="isViewing" v-model="currentItem.entry" />
       </base-form-item>
       <base-form-item label="Symbol" prop="symbol">
         <el-select
@@ -41,7 +42,7 @@
         </el-select>
       </base-form-item>
       <base-form-item label="Exit" prop="exit">
-        <base-input-number :disabled="isViewing" v-model="currentItem.exit" />
+        <base-input-number @change="calculatePnL" :disabled="isViewing" v-model="currentItem.exit" />
       </base-form-item>
       <base-form-item label="Type" prop="transaction_type">
         <el-select
@@ -188,9 +189,12 @@ export default {
         status: "win",
         entry: 100000,
         exit: 100000,
-        pnl: 100000,
+        pnl: 0,
         comments: "comments",
       };
+    },
+    calculatePnL() {
+      this.currentItem.pnl = (this.currentItem.exit - this.currentItem.entry) / this.currentItem.entry * 100;
     },
     getPayloadForSave() {
       let result = {...this.currentItem};

@@ -188,7 +188,8 @@ export default {
      * Open _blank tab to get telegram chat id
      */
     getTelegramChatID() {
-      window.open('https://web.telegram.org/#/im?p=@ncthanh_bot', '_blank');
+      // window.open('https://web.telegram.org/#/im?p=@ncthanh_bot', '_blank');
+      window.open('https://t.me/ncthanh_bot', '_blank');
     }
   },
 };
