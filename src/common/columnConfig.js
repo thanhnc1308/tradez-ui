@@ -139,24 +139,24 @@ export const columnsNotification = [
     columnType: EnumColumnType.Boolean,
     formatType: EnumFormatType.Text
   },
-  {
-    dataField: "tg_chat_id",
-    label: "Telegram Chat",
-    columnAlign: "center",
-    dataAlign: "center",
-    Width: "150",
-    columnType: EnumColumnType.Text,
-    formatType: EnumFormatType.Text
-  },
-  {
-    dataField: "send_telegram",
-    label: "Send Telegram",
-    columnAlign: "center",
-    dataAlign: "center",
-    width: "130",
-    columnType: EnumColumnType.Boolean,
-    formatType: EnumFormatType.Text
-  }
+  // {
+  //   dataField: "tg_chat_id",
+  //   label: "Telegram Chat",
+  //   columnAlign: "center",
+  //   dataAlign: "center",
+  //   Width: "150",
+  //   columnType: EnumColumnType.Text,
+  //   formatType: EnumFormatType.Text
+  // },
+  // {
+  //   dataField: "send_telegram",
+  //   label: "Send Telegram",
+  //   columnAlign: "center",
+  //   dataAlign: "center",
+  //   width: "130",
+  //   columnType: EnumColumnType.Boolean,
+  //   formatType: EnumFormatType.Text
+  // }
 ];
 
 export const columnsStockPrice = [
