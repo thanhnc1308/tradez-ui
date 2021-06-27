@@ -1,6 +1,6 @@
 <template>
-  <base-dialog :title="title" :visible.sync="isShow" width="75%">
-    <div>
+  <base-dialog class="stock-viewer" :title="title" :visible.sync="isShow" width="75%" height="75%">
+    <!-- <div> -->
       <table-viewer
         ref="tableData"
         :store="storeHistoricalPrice"
@@ -8,7 +8,7 @@
         :columns="columnsHistoricalPrice"
       >
       </table-viewer>
-    </div>
+    <!-- </div> -->
     <span slot="footer" class="dialog-footer flex flex-end">
       <base-button @click="cancel">Cancel</base-button>
     </span>
@@ -76,8 +76,26 @@ export default {
       this.$refs.tableData.doQuery();
     },
     getCompanyName() {
-      this.companyName = 'companyName'
+      // this.companyName = 'companyName'
     },
   },
 };
 </script>
+
+<style lang="scss" scoped>
+// .stock-viewer {
+//   >>> .el-dialog__body {
+//     height: 100%;
+//     >>> .table-viewer {
+//       height: 100%;
+//       >>> .el-table {
+//         height: 100%;
+//         >>> .el-table__body-wrapper {
+//           height: 100%;
+//           overflow: overlay;
+//         }
+//       }
+//     }
+//   }
+// }
+</style>
