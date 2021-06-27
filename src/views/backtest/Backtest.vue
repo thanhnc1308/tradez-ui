@@ -502,7 +502,7 @@ export default {
         atr_stop_loss: 1.5,
         atr_scale_out: 1,
       },
-      symbol: ["HPG", "RAL"],
+      symbol: ["HPG", "VIC"],
       pickerOptions: {
         shortcuts: [
           {
