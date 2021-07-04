@@ -425,16 +425,16 @@ export default {
         label: "Parabolic SAR Strategy",
         description: "Parabolic SAR Strategy will execute a buy transaction when the PSAR dot goes below price and a sell transaction when the PSAR dot goes above price",
       },
+      {
+        id: "AroonUpAndDownStrategy",
+        label: "Aroon Up And Down Strategy",
+        description: "Aroon Up And Down Strategy will execute a buy transaction when Aroon Up goes above Aroon Down and a sell transaction when Aroon Up goes below Aroon Down",
+      },
       //#endregion DONE
       // {
       //   id: "JapaneseCandlestickStrategy",
       //   label: "Japanese Candlestick Strategy",
       //   description: "Japanese Candlestick will execute a buy transaction when price formed a bullish pin bar/engufling/maruboru and a sell transaction when formed a bearish pin bar/engufling/maruboru",
-      // },
-      // {
-      //   id: "AroonUpAndDownStrategy",
-      //   label: "Aroon Up And Down Strategy",
-      //   description: "Aroon Up And Down Strategy will execute a buy transaction when Aroon Up goes above Aroon Down and a sell transaction when Aroon Up goes below Aroon Down",
       // },
       // {
       //   id: "CCIStrategy",
@@ -534,7 +534,7 @@ export default {
           },
         ],
       },
-      daterange: [new Date('2020-02-01'), new Date('2020-07-01')],
+      daterange: [new Date('2021-02-01'), new Date('2021-07-04')],
       results: []
       // commission: 0.001,
       // cash: 100000,
