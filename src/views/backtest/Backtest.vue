@@ -98,6 +98,16 @@
           </div>
         </div>
         <!-- end TrixStrategy -->
+        <!-- VortexStrategy -->
+        <div v-if="strategy.id === 'VortexStrategy'" class="stategy-parameters">
+          <div class="row">
+            <div class="param-label">Period</div>
+            <base-input-number
+              v-model="strategy_params.period"
+            ></base-input-number>
+          </div>
+        </div>
+        <!-- end VortexStrategy -->
         <!-- BollingerBandsAndRSIStrategy -->
         <div
           v-if="strategy.id === 'BollingerBandsAndRSIStrategy'"
@@ -460,6 +470,11 @@ export default {
         label: "Trix Strategy",
         description: "Trix Strategy will execute a buy transaction when TRIX goes above zero line and a sell transaction when TRIX goes below zero line",
       },
+      {
+        id: "VortexStrategy",
+        label: "Vortex Strategy",
+        description: "Vortex Strategy will execute a buy transaction when VI+ crosses above VI- and a sell transaction when VI+ crosses below VI-",
+      },
       //#endregion DONE
       // {
       //   id: "AccelerationDecelerationOscillatorStrategy",
@@ -504,11 +519,6 @@ export default {
       // {
       //   id: "UltimateOscillatorStrategy",
       //   label: "Ultimate Oscillator Strategy",
-      //   // description: "Commodity Channel Index Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
-      // },
-      // {
-      //   id: "VortexStrategy",
-      //   label: "Vortex Strategy",
       //   // description: "Commodity Channel Index Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
       // },
       // {
@@ -604,6 +614,11 @@ export default {
         case "TrixStrategy":
           this.strategy_params = {
             period: 18,
+          };
+          break;
+        case "VortexStrategy":
+          this.strategy_params = {
+            period: 14,
           };
           break;
         case "BollingerBandsAndRSIStrategy":
