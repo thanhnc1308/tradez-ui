@@ -88,6 +88,16 @@
           </div>
         </div>
         <!-- end CCIStrategy -->
+        <!-- TrixStrategy -->
+        <div v-if="strategy.id === 'TrixStrategy'" class="stategy-parameters">
+          <div class="row">
+            <div class="param-label">Period</div>
+            <base-input-number
+              v-model="strategy_params.period"
+            ></base-input-number>
+          </div>
+        </div>
+        <!-- end TrixStrategy -->
         <!-- BollingerBandsAndRSIStrategy -->
         <div
           v-if="strategy.id === 'BollingerBandsAndRSIStrategy'"
@@ -317,7 +327,7 @@
         <!-- end KSTOscillatorStrategy -->
       </div>
       <div class="row horizontal-center">
-        <base-button :loading="loading" @click="showResult"
+        <base-button :loading="false" @click="showResult"
           >Show Result</base-button
         >
       </div>
@@ -445,6 +455,11 @@ export default {
         label: "Commodity Channel Index Strategy",
         // description: "Commodity Channel Index Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
       },
+      {
+        id: "TrixStrategy",
+        label: "Trix Strategy",
+        description: "Trix Strategy will execute a buy transaction when TRIX goes above zero line and a sell transaction when TRIX goes below zero line",
+      },
       //#endregion DONE
       // {
       //   id: "AccelerationDecelerationOscillatorStrategy",
@@ -479,11 +494,6 @@ export default {
       // {
       //   id: "StochasticStrategy",
       //   label: "Stochastic Strategy",
-      //   // description: "Commodity Channel Index Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
-      // },
-      // {
-      //   id: "TrixStrategy",
-      //   label: "Trix Strategy",
       //   // description: "Commodity Channel Index Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
       // },
       // {
@@ -589,6 +599,11 @@ export default {
         case "CCIStrategy":
           this.strategy_params = {
             period: 14,
+          };
+          break;
+        case "TrixStrategy":
+          this.strategy_params = {
+            period: 18,
           };
           break;
         case "BollingerBandsAndRSIStrategy":
