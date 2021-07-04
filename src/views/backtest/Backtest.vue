@@ -3,7 +3,12 @@
     <template slot="utility">
       <div class="row select-stock">
         <div class="param-label">Choose a stock symbol</div>
-        <el-select v-model="symbol" multiple filterable placeholder="Please select">
+        <el-select
+          v-model="symbol"
+          multiple
+          filterable
+          placeholder="Please select"
+        >
           <el-option
             v-for="stock in listStock"
             :key="stock.id"
@@ -28,11 +33,15 @@
       </div>
       <div class="row">
         <div class="param-label">Stop loss ATR factor</div>
-        <base-input-number v-model="strategy_params.atr_stop_loss"></base-input-number>
+        <base-input-number
+          v-model="strategy_params.atr_stop_loss"
+        ></base-input-number>
       </div>
       <div class="row">
         <div class="param-label">Scale out ATR factor</div>
-        <base-input-number v-model="strategy_params.atr_scale_out"></base-input-number>
+        <base-input-number
+          v-model="strategy_params.atr_scale_out"
+        ></base-input-number>
       </div>
       <div class="row select-strategy">
         <div class="param-label">Choose a strategy</div>
@@ -78,6 +87,37 @@
           </div>
         </div>
         <!-- end RSIStrategy -->
+        <!-- UltimateOscillatorStrategy -->
+        <div
+          v-if="strategy.id === 'UltimateOscillatorStrategy'"
+          class="stategy-parameters"
+        >
+          <div class="row">
+            <div class="param-label">Fast Period</div>
+            <base-input-number v-model="strategy_params.p1"></base-input-number>
+          </div>
+          <div class="row">
+            <div class="param-label">Middle Period</div>
+            <base-input-number v-model="strategy_params.p2"></base-input-number>
+          </div>
+          <div class="row">
+            <div class="param-label">Slow Period</div>
+            <base-input-number v-model="strategy_params.p3"></base-input-number>
+          </div>
+          <div class="row">
+            <div class="param-label">Buy when UltimateOscillator at</div>
+            <base-input-number
+              v-model="strategy_params.upper"
+            ></base-input-number>
+          </div>
+          <div class="row">
+            <div class="param-label">Sell when UltimateOscillator at</div>
+            <base-input-number
+              v-model="strategy_params.lower"
+            ></base-input-number>
+          </div>
+        </div>
+        <!-- end UltimateOscillatorStrategy -->
         <!-- CCIStrategy -->
         <div v-if="strategy.id === 'CCIStrategy'" class="stategy-parameters">
           <div class="row">
@@ -147,7 +187,10 @@
         <!-- end BollingerBandsAndRSIStrategy -->
         <!-- BollingerBandsSidewayStrategy -->
         <div
-          v-if="strategy.id === 'BollingerBandsSidewayStrategy' || strategy.id === 'BollingerBandsStrategy'"
+          v-if="
+            strategy.id === 'BollingerBandsSidewayStrategy' ||
+            strategy.id === 'BollingerBandsStrategy'
+          "
           class="stategy-parameters"
         >
           <div class="row">
@@ -165,10 +208,7 @@
         </div>
         <!-- end BollingerBandsSidewayStrategy -->
         <!-- MACDStrategy -->
-        <div
-          v-if="strategy.id === 'MACDStrategy'"
-          class="stategy-parameters"
-        >
+        <div v-if="strategy.id === 'MACDStrategy'" class="stategy-parameters">
           <div class="row">
             <div class="param-label">Fast EMA Period</div>
             <base-input-number
@@ -222,10 +262,7 @@
         </div>
         <!-- end AroonUpAndDownStrategy -->
         <!-- TRIXStrategy -->
-        <div
-          v-if="strategy.id === 'TRIXStrategy'"
-          class="stategy-parameters"
-        >
+        <div v-if="strategy.id === 'TRIXStrategy'" class="stategy-parameters">
           <div class="row">
             <div class="param-label">Period</div>
             <base-input-number
@@ -254,10 +291,7 @@
         </div>
         <!-- end ADXDMICrossStrategy -->
         <!-- PSARStrategy -->
-        <div
-          v-if="strategy.id === 'PSARStrategy'"
-          class="stategy-parameters"
-        >
+        <div v-if="strategy.id === 'PSARStrategy'" class="stategy-parameters">
           <div class="row">
             <div class="param-label">Period</div>
             <base-input-number
@@ -266,9 +300,7 @@
           </div>
           <div class="row">
             <div class="param-label">Increment</div>
-            <base-input-number
-              v-model="strategy_params.af"
-            ></base-input-number>
+            <base-input-number v-model="strategy_params.af"></base-input-number>
           </div>
           <div class="row">
             <div class="param-label">Max value</div>
@@ -285,15 +317,11 @@
         >
           <div class="row">
             <div class="param-label">Buy pattern</div>
-            <base-input
-              v-model="strategy_params.buy_pattern"
-            ></base-input>
+            <base-input v-model="strategy_params.buy_pattern"></base-input>
           </div>
           <div class="row">
             <div class="param-label">Sell pattern</div>
-            <base-input
-              v-model="strategy_params.sell_pattern"
-            ></base-input>
+            <base-input v-model="strategy_params.sell_pattern"></base-input>
           </div>
         </div>
         <!-- end JapaneseCandlestickStrategy -->
@@ -341,48 +369,57 @@
           >Show Result</base-button
         >
       </div>
-        <base-button v-if="hasData" type="primary" class="export-result" :loading="loadingExportResult" @click="exportResult"
-          >Export Result</base-button
-        >
+      <base-button
+        v-if="hasData"
+        type="primary"
+        class="export-result"
+        :loading="loadingExportResult"
+        @click="exportResult"
+        >Export Result</base-button
+      >
     </template>
     <template slot="table">
       <div v-if="hasData">
-        <div v-for="(result, index) in results" :key="result.symbol" class="result-item">
-        <div style="font-size: 20px" class="title text-center bold mb-1">
-          {{ result.title }}
-        </div>
-        <div class="title text-center italic mb-1">
-          Total trades: {{ result.total_trades | formatData(EnumFormatType.Number) }}
-        </div>
-        <!-- <div class="title text-center italic mb-1">
+        <div
+          v-for="(result, index) in results"
+          :key="result.symbol"
+          class="result-item"
+        >
+          <div style="font-size: 20px" class="title text-center bold mb-1">
+            {{ result.title }}
+          </div>
+          <div class="title text-center italic mb-1">
+            Total trades:
+            {{ result.total_trades | formatData(EnumFormatType.Number) }}
+          </div>
+          <!-- <div class="title text-center italic mb-1">
           PnL: {{ result.pnl | formatData(EnumFormatType.Number) }}
         </div>
         <div class="title text-center italic mb-1">
           % PnL: {{ result.percent_pnl || 0 }}%
         </div> -->
-        <div class="title text-center italic mb-1">
-          Total wins: {{ result.total_won || 0 }}
-        </div>
-        <div class="title text-center italic mb-1">
-          Total losses: {{ result.total_lost || 0 }}
-        </div>
-        <div class="title text-center italic mb-1">
-          Win rate: {{ result.win_rate || 0 }}%
-        </div>
-        <!-- <div class="title text-center italic mb-1">
+          <div class="title text-center italic mb-1">
+            Total wins: {{ result.total_won || 0 }}
+          </div>
+          <div class="title text-center italic mb-1">
+            Total losses: {{ result.total_lost || 0 }}
+          </div>
+          <div class="title text-center italic mb-1">
+            Win rate: {{ result.win_rate || 0 }}%
+          </div>
+          <!-- <div class="title text-center italic mb-1">
           Final portfolio:
           {{ finalPortfolio | formatData(EnumFormatType.Number) }}
         </div> -->
-        <div class="table-result">
-          <table-viewer
-            :pagination="false"
-            :ref="`tableResult${index}`"
-            :data="result.data"
-            :columns="columnsBacktestResult"
-          >
-          </table-viewer>
-        </div>
-
+          <div class="table-result">
+            <table-viewer
+              :pagination="false"
+              :ref="`tableResult${index}`"
+              :data="result.data"
+              :columns="columnsBacktestResult"
+            >
+            </table-viewer>
+          </div>
         </div>
       </div>
     </template>
@@ -418,7 +455,8 @@ export default {
       {
         id: "RSIStrategy",
         label: "RSI Strategy",
-        description: "RSI Strategy will execute a buy transaction when RSI goes oversold and a sell transaction when RSI goes overbought",
+        description:
+          "RSI Strategy will execute a buy transaction when RSI goes oversold and a sell transaction when RSI goes overbought",
       },
       // {
       //   id: "BollingerBandsAndRSIStrategy",
@@ -433,32 +471,38 @@ export default {
       {
         id: "BollingerBandsStrategy",
         label: "Bollinger Bands Strategy",
-        description: "Bollinger Bands Strategy will execute a buy transaction when price closes below the bottom band and a sell transaction when price close above the top band",
+        description:
+          "Bollinger Bands Strategy will execute a buy transaction when price closes below the bottom band and a sell transaction when price close above the top band",
       },
       {
         id: "MACDStrategy",
         label: "MACD Strategy",
-        description: "MACD Strategy will execute a buy transaction when histogram goes from negative to positive and a sell transaction when histogram goes from positive to negative",
+        description:
+          "MACD Strategy will execute a buy transaction when histogram goes from negative to positive and a sell transaction when histogram goes from positive to negative",
       },
       {
         id: "MaCrossoverStrategy",
         label: "Moving Average Crossover Strategy",
-        description: "Moving Average Crossover Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
+        description:
+          "Moving Average Crossover Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
       },
       {
         id: "ADXDMICrossStrategy",
         label: "ADX-DMI Cross Strategy",
-        description: "ADX-DMI Cross Strategy will execute a buy transaction when DMI+ goes above DMI- and a sell transaction when DMI+ goes below DMI- and both with ADX is above strong trend level",
+        description:
+          "ADX-DMI Cross Strategy will execute a buy transaction when DMI+ goes above DMI- and a sell transaction when DMI+ goes below DMI- and both with ADX is above strong trend level",
       },
       {
         id: "PSARStrategy",
         label: "Parabolic SAR Strategy",
-        description: "Parabolic SAR Strategy will execute a buy transaction when the PSAR dot goes below price and a sell transaction when the PSAR dot goes above price",
+        description:
+          "Parabolic SAR Strategy will execute a buy transaction when the PSAR dot goes below price and a sell transaction when the PSAR dot goes above price",
       },
       {
         id: "AroonUpAndDownStrategy",
         label: "Aroon Up And Down Strategy",
-        description: "Aroon Up And Down Strategy will execute a buy transaction when Aroon Up goes above Aroon Down and a sell transaction when Aroon Up goes below Aroon Down",
+        description:
+          "Aroon Up And Down Strategy will execute a buy transaction when Aroon Up goes above Aroon Down and a sell transaction when Aroon Up goes below Aroon Down",
       },
       {
         id: "CCIStrategy",
@@ -468,12 +512,20 @@ export default {
       {
         id: "TrixStrategy",
         label: "Trix Strategy",
-        description: "Trix Strategy will execute a buy transaction when TRIX goes above zero line and a sell transaction when TRIX goes below zero line",
+        description:
+          "Trix Strategy will execute a buy transaction when TRIX goes above zero line and a sell transaction when TRIX goes below zero line",
       },
       {
         id: "VortexStrategy",
         label: "Vortex Strategy",
-        description: "Vortex Strategy will execute a buy transaction when VI+ crosses above VI- and a sell transaction when VI+ crosses below VI-",
+        description:
+          "Vortex Strategy will execute a buy transaction when VI+ crosses above VI- and a sell transaction when VI+ crosses below VI-",
+      },
+      {
+        id: "UltimateOscillatorStrategy",
+        label: "Ultimate Oscillator Strategy",
+        description:
+          "Ultimate Oscillator Strategy will execute a buy transaction when Ultimate Oscillator goes oversold and a sell transaction when Ultimate Oscillator goes overbought",
       },
       //#endregion DONE
       // {
@@ -514,11 +566,6 @@ export default {
       // {
       //   id: "TrueStrengthIndicatorStrategy",
       //   label: "True Strength Indicator Strategy",
-      //   // description: "Commodity Channel Index Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
-      // },
-      // {
-      //   id: "UltimateOscillatorStrategy",
-      //   label: "Ultimate Oscillator Strategy",
       //   // description: "Commodity Channel Index Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
       // },
       // {
@@ -574,8 +621,8 @@ export default {
           },
         ],
       },
-      daterange: [new Date('2021-02-01'), new Date('2021-07-04')],
-      results: []
+      daterange: [new Date("2021-02-01"), new Date("2021-07-04")],
+      results: [],
       // commission: 0.001,
       // cash: 100000,
       // winRate: 0,
@@ -603,7 +650,16 @@ export default {
           this.strategy_params = {
             period: 14,
             upper: 70,
-            lower: 30
+            lower: 30,
+          };
+          break;
+        case "UltimateOscillatorStrategy":
+          this.strategy_params = {
+            p1: 7,
+            p2: 14,
+            p3: 28,
+            upper: 70,
+            lower: 30,
           };
           break;
         case "CCIStrategy":
@@ -627,19 +683,19 @@ export default {
             devfactor: 2,
             rsi_period: 14,
             upper: 70,
-            lower: 30
+            lower: 30,
           };
           break;
         case "BollingerBandsSidewayStrategy":
           this.strategy_params = {
             period: 20,
-            devfactor: 2
+            devfactor: 2,
           };
           break;
         case "BollingerBandsStrategy":
           this.strategy_params = {
             period: 20,
-            devfactor: 2
+            devfactor: 2,
           };
           break;
         case "MACDStrategy":
@@ -652,7 +708,7 @@ export default {
         case "MaCrossoverStrategy":
           this.strategy_params = {
             pfast: 30,
-            pslow: 50
+            pslow: 50,
           };
           break;
         case "ADXDMICrossStrategy":
@@ -665,15 +721,14 @@ export default {
           this.strategy_params = {
             period: 2,
             af: 0.02,
-            afmax: 0.2
+            afmax: 0.2,
           };
           break;
         case "AroonUpAndDownStrategy":
           this.strategy_params = {
-            period: 14
+            period: 14,
           };
           break;
-
       }
       this.strategy_params.atr_stop_loss = 1.5;
       this.strategy_params.atr_scale_out = 1;
@@ -732,14 +787,13 @@ export default {
       let results = [];
       for (let item of data) {
         let result = {
-          ...item
+          ...item,
         };
         result.title = this.buildBacktestTitle(item);
         result.data = this.prepareDisplayData(item.result);
         results.push(result);
       }
       return results;
-
     },
     buildBacktestTitle(item) {
       let fromDate = this.$utility.formatDate(this.daterange[0]),
@@ -752,16 +806,16 @@ export default {
           transaction_date: this.$utility.formatDate(item.transaction_date),
           transaction_type: item.transaction_type,
           description: this.getDescription(item),
-          style: this.getRowStyle(item)
+          style: this.getRowStyle(item),
         };
       });
     },
     getRowStyle(row) {
       switch (row.transaction_type) {
         case "SCALE OUT CREATE":
-          return "color: green;"
+          return "color: green;";
         case "STOP LOSS CREATE":
-          return "color: red;"
+          return "color: red;";
       }
     },
     getDescription(item) {
@@ -817,26 +871,22 @@ export default {
       this.loadingExportResult = true;
       /* create new workbook */
       let workbook = XLSX.utils.book_new();
-      let aHeader = [
-        "transaction_date",
-        "transaction_type",
-        "description"
-      ]
+      let aHeader = ["transaction_date", "transaction_type", "description"];
 
       for (let i = 0, len = this.results.length; i < len; i++) {
         let result = this.results[i];
         let symbol = result.symbol;
         let title = result.title;
-        result.data.forEach(item => delete item.style);
+        result.data.forEach((item) => delete item.style);
         let data = result.data;
-        let ws = XLSX.utils.json_to_sheet(data, { header : aHeader });
+        let ws = XLSX.utils.json_to_sheet(data, { header: aHeader });
         XLSX.utils.book_append_sheet(workbook, ws, symbol);
       }
 
       /* generate file and send to client */
       XLSX.writeFile(workbook, `backtest_${new Date()}.xlsx`);
       this.loadingExportResult = false;
-    }
+    },
   },
 };
 </script>
