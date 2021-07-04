@@ -87,6 +87,28 @@
           </div>
         </div>
         <!-- end RSIStrategy -->
+        <!-- WilliamsRStrategy -->
+        <div v-if="strategy.id === 'WilliamsRStrategy'" class="stategy-parameters">
+          <div class="row">
+            <div class="param-label">Period</div>
+            <base-input-number
+              v-model="strategy_params.period"
+            ></base-input-number>
+          </div>
+          <div class="row">
+            <div class="param-label">Buy when WilliamsRStrategy at</div>
+            <base-input-number
+              v-model="strategy_params.upper"
+            ></base-input-number>
+          </div>
+          <div class="row">
+            <div class="param-label">Sell when WilliamsRStrategy at</div>
+            <base-input-number
+              v-model="strategy_params.lower"
+            ></base-input-number>
+          </div>
+        </div>
+        <!-- end WilliamsRStrategy -->
         <!-- RateOfChangeStrategy -->
         <div v-if="strategy.id === 'RateOfChangeStrategy'" class="stategy-parameters">
           <div class="row">
@@ -385,7 +407,7 @@
         <!-- end KSTOscillatorStrategy -->
       </div>
       <div class="row horizontal-center">
-        <base-button :loading="false" @click="showResult"
+        <base-button :loading="loading" @click="showResult"
           >Show Result</base-button
         >
       </div>
@@ -557,6 +579,11 @@ export default {
         label: "Rate Of Change Strategy",
         description: "Rate Of Change Strategy will execute a buy transaction when Rate Of Change goes above zero line and a sell transaction when Rate Of Change goes below zero line",
       },
+      {
+        id: "WilliamsRStrategy",
+        label: "Williams %R Strategy",
+        description: "Williams %R Strategy will execute a buy transaction when Williams %R goes oversold and a sell transaction when Williams %R goes overbought",
+      },
       //#endregion DONE
       // {
       //   id: "AccelerationDecelerationOscillatorStrategy",
@@ -586,11 +613,6 @@ export default {
       // {
       //   id: "TrueStrengthIndicatorStrategy",
       //   label: "True Strength Indicator Strategy",
-      //   // description: "Commodity Channel Index Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
-      // },
-      // {
-      //   id: "WilliamsRStrategy",
-      //   label: "Williams %R Strategy",
       //   // description: "Commodity Channel Index Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
       // },
       // {
@@ -671,6 +693,13 @@ export default {
             period: 14,
             upper: 70,
             lower: 30,
+          };
+          break;
+        case "WilliamsRStrategy":
+          this.strategy_params = {
+            period: 14,
+            upper: -20,
+            lower: -80,
           };
           break;
         case "RateOfChangeStrategy":
