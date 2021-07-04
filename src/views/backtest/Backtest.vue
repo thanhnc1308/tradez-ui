@@ -87,6 +87,16 @@
           </div>
         </div>
         <!-- end RSIStrategy -->
+        <!-- RateOfChangeStrategy -->
+        <div v-if="strategy.id === 'RateOfChangeStrategy'" class="stategy-parameters">
+          <div class="row">
+            <div class="param-label">Period</div>
+            <base-input-number
+              v-model="strategy_params.period"
+            ></base-input-number>
+          </div>
+        </div>
+        <!-- end RateOfChangeStrategy -->
         <!-- EnvelopeStrategy -->
         <div v-if="strategy.id === 'EnvelopeStrategy'" class="stategy-parameters">
           <div class="row">
@@ -542,6 +552,11 @@ export default {
         label: "Envelope Strategy",
         description: "Envelope Strategy will execute a buy transaction when he price moved below the lower range and a sell transaction when when the price moved beyond the upper range",
       },
+      {
+        id: "RateOfChangeStrategy",
+        label: "Rate Of Change Strategy",
+        description: "Rate Of Change Strategy will execute a buy transaction when Rate Of Change goes above zero line and a sell transaction when Rate Of Change goes below zero line",
+      },
       //#endregion DONE
       // {
       //   id: "AccelerationDecelerationOscillatorStrategy",
@@ -556,11 +571,6 @@ export default {
       // {
       //   id: "IchimokuStrategy",
       //   label: "Ichimoku Strategy",
-      //   // description: "Commodity Channel Index Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
-      // },
-      // {
-      //   id: "RateOfChangeStrategy",
-      //   label: "Rate Of Change Strategy",
       //   // description: "Commodity Channel Index Strategy will execute a buy transaction when fast EMA goes above slow EMA and a sell transaction when fast EMA goes below slow EMA",
       // },
       // {
@@ -661,6 +671,11 @@ export default {
             period: 14,
             upper: 70,
             lower: 30,
+          };
+          break;
+        case "RateOfChangeStrategy":
+          this.strategy_params = {
+            period: 9,
           };
           break;
         case "EnvelopeStrategy":
