@@ -23,8 +23,11 @@
           v-model="currentItem.description"
         />
       </base-form-item>
-      <base-form-item class="w-2/3" label="Gmail" prop="gmail">
+      <base-form-item class="w-1/2" label="Gmail" prop="gmail">
         <base-input :disabled="isViewing" v-model="currentItem.gmail" />
+      </base-form-item>
+      <base-form-item class="w-1/3" label="Test Gmail">
+        <base-button @click="sendTestEmail">Test</base-button>
       </base-form-item>
       <base-form-item label="Send Gmail" prop="send_gmail">
         <base-checkbox :disabled="isViewing" v-model="currentItem.send_gmail" />
@@ -190,6 +193,21 @@ export default {
     getTelegramChatID() {
       // window.open('https://web.telegram.org/#/im?p=@ncthanh_bot', '_blank');
       window.open('https://t.me/ncthanh_bot', '_blank');
+    },
+    async sendTestEmail() {
+      let api = new NotificationAPI();
+      let url = '/test_gmail';
+      let payload = {...this.currentItem};
+      payload.condition_key = JSON.parse(payload.condition_key);
+      let res = await api.request(url, 'post', payload);
+      if (res && res.success) {
+        this.$notify({
+          title: "Success",
+          message: "Success",
+          type: "success",
+          duration: 2000,
+        });
+      }
     }
   },
 };
