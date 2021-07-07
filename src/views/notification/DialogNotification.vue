@@ -23,12 +23,12 @@
           v-model="currentItem.description"
         />
       </base-form-item>
-      <base-form-item class="w-1/2" label="Gmail" prop="gmail">
+      <base-form-item class="w-2/3" label="Gmail" prop="gmail">
         <base-input :disabled="isViewing" v-model="currentItem.gmail" />
       </base-form-item>
-      <base-form-item class="w-1/3" label="Test Gmail">
+      <!-- <base-form-item class="w-1/3" label="Test Gmail">
         <base-button @click="sendTestEmail">Test</base-button>
-      </base-form-item>
+      </base-form-item> -->
       <base-form-item label="Send Gmail" prop="send_gmail">
         <base-checkbox :disabled="isViewing" v-model="currentItem.send_gmail" />
       </base-form-item>
